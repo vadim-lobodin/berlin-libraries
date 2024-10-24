@@ -11,13 +11,16 @@
     "format:check": "pnpm prettier ./src --check"
   },
   "dependencies": {
+    "@radix-ui/react-accordion": "^1.2.1",
     "@radix-ui/react-dropdown-menu": "^2.0.6",
     "@radix-ui/react-slot": "^1.0.2",
     "@t3-oss/env-nextjs": "^0.9.2",
+    "@types/mapbox-gl": "^3.4.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.330.0",
-    "next": "14.1.1",
+    "mapbox-gl": "^3.7.0",
+    "next": "^14.2.16",
     "next-themes": "^0.2.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

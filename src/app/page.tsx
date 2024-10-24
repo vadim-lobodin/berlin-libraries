@@ -1,32 +1,24 @@
-import Link from "next/link"
+"use client"
 
-import { siteConfig } from "@/config/site"
-import { cn } from "@/lib/utils"
-import { buttonVariants } from "@/components/ui/button"
-import { Icons } from "@/components/icons"
-import { ModeToggle } from "@/components/mode-toggle"
+import LibraryList from "../components/LibraryList"
+import dynamic from 'next/dynamic'
+import { useState } from 'react'
+
+const LibraryMap = dynamic(() => import('../components/LibraryMap'), {
+  ssr: false,
+  loading: () => <p>Loading Map...</p>
+})
 
 export default function Home() {
+  const [libraryCoordinates, setLibraryCoordinates] = useState<[number, number] | null>(null)
+
   return (
-    <main className="flex h-screen items-center justify-center">
-      <div className="container flex max-w-[64rem] flex-col items-center gap-4 text-center">
-        <Icons.logo className="h-16 w-16" />
-        <h1 className="text-4xl font-semibold sm:text-5xl md:text-6xl lg:text-7xl">
-          {siteConfig.name}
-        </h1>
-        <p className="max-w-[42rem] leading-normal text-muted-foreground sm:text-xl sm:leading-8">
-          {siteConfig.description}
-        </p>
-        <div className="flex gap-2">
-          <Link
-            href={siteConfig.links.github}
-            target="_blank"
-            className={cn(buttonVariants({ size: "default" }))}
-          >
-            Get Started
-          </Link>
-          <ModeToggle />
-        </div>
+    <main className="relative h-screen w-screen">
+      <div className="absolute inset-0">
+        <LibraryMap libraryCoordinates={libraryCoordinates} />
+      </div>
+      <div className="absolute left-2 top-2 bottom-2 w-1/3 max-w-md bg-background/80 backdrop-blur-sm overflow-y-auto rounded-lg shadow-lg">
+        <LibraryList setLibraryCoordinates={setLibraryCoordinates} />
       </div>
     </main>
   )
