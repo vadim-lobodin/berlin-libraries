@@ -7,6 +7,7 @@ import { Library } from "@/types/library"
 import LogoSVG from "@/media/logotype.svg"
 import Image from "next/image"
 import Indicator from './Indicator'
+import { cn } from "@/lib/utils"
 
 // Function to calculate distance between two points
 function calculateDistance(lat1: number, lon1: number, lat2: number, lon2: number): number {
@@ -23,7 +24,13 @@ function calculateDistance(lat1: number, lon1: number, lat2: number, lon2: numbe
 // Berlin center coordinates
 const BERLIN_CENTER: [number, number] = [52.520008, 13.404954];
 
-export default function LibraryList({ setLibraryCoordinates }: { setLibraryCoordinates: (coordinates: [number, number]) => void }) {
+export default function LibraryList({ 
+  setLibraryCoordinates,
+  setSelectedLibraryId
+}: { 
+  setLibraryCoordinates: (coordinates: [number, number]) => void,
+  setSelectedLibraryId: (id: number | null) => void
+}) {
   const [hoveredLibrary, setHoveredLibrary] = useState<number | null>(null)
   const [sortedLibraries, setSortedLibraries] = useState<Library[]>([])
 
@@ -46,7 +53,7 @@ export default function LibraryList({ setLibraryCoordinates }: { setLibraryCoord
           height={46}
         />
       </div>
-      <div className="mt-2 flex-grow overflow-y-auto">
+      <div className={cn("mt-2 flex-grow overflow-y-auto", "scrollbar-hide")}>
         <Accordion type="single" collapsible className="w-full">
           {sortedLibraries.map((library: Library) => (
             <AccordionItem
@@ -54,7 +61,10 @@ export default function LibraryList({ setLibraryCoordinates }: { setLibraryCoord
               value={`item-${library.id}`}
               onMouseEnter={() => setHoveredLibrary(library.id)}
               onMouseLeave={() => setHoveredLibrary(null)}
-              onClick={() => setLibraryCoordinates(library.coordinates as [number, number])}
+              onClick={() => {
+                setLibraryCoordinates(library.coordinates as [number, number])
+                setSelectedLibraryId(library.id)
+              }}
               className="border-b border-border"
             >
               <AccordionTrigger className="px-4 py-2 md:py-4 hover:bg-accent hover:text-accent-foreground font-light flex justify-between items-start no-chevron">

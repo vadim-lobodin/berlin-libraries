@@ -44,7 +44,13 @@ function calculateDistance(lat1: number, lon1: number, lat2: number, lon2: numbe
 // Berlin center coordinates
 const BERLIN_CENTER: [number, number] = [13.404954, 52.520008];
 
-export default function LibraryMap({ libraryCoordinates }: { libraryCoordinates: [number, number] | null }) {
+export default function LibraryMap({ 
+  libraryCoordinates, 
+  selectedLibraryId 
+}: { 
+  libraryCoordinates: [number, number] | null,
+  selectedLibraryId: number | null
+}) {
   const mapContainer = useRef<HTMLDivElement>(null)
   const map = useRef<mapboxgl.Map | null>(null)
   const [error, setError] = useState<string | null>(null)
@@ -127,8 +133,9 @@ export default function LibraryMap({ libraryCoordinates }: { libraryCoordinates:
           libraries.forEach((library) => {
             const isOpen = isLibraryOpen(library.workingHours)
             const color = isOpen ? "#13DE83" : "#8D8D8D"
+            const isSelected = library.id === selectedLibraryId
 
-            new mapboxgl.Marker(createCircleMarker(color))
+            new mapboxgl.Marker(createCircleMarker(color, isSelected))
               .setLngLat(library.coordinates as [number, number])
               .setPopup(new mapboxgl.Popup().setHTML(`
                 <div class="text-white">
@@ -175,14 +182,48 @@ export default function LibraryMap({ libraryCoordinates }: { libraryCoordinates:
     }
   }, [libraryCoordinates]);
 
+  const markersRef = useRef<{ [key: number]: mapboxgl.Marker }>({})
+
+  useEffect(() => {
+    if (map.current && mapLoaded) {
+      // Remove existing markers
+      Object.values(markersRef.current).forEach(marker => marker.remove())
+      markersRef.current = {}
+
+      // Add library markers
+      libraries.forEach((library) => {
+        const isOpen = isLibraryOpen(library.workingHours)
+        const color = isOpen ? "#13DE83" : "#8D8D8D"
+        const isSelected = library.id === selectedLibraryId
+
+        const marker = new mapboxgl.Marker(createCircleMarker(color, isSelected))
+          .setLngLat(library.coordinates as [number, number])
+          .setPopup(new mapboxgl.Popup().setHTML(`
+            <div class="text-white">
+              <h3 class="font-bold">${library.name}</h3>
+              <p>${library.address}</p>
+              <p class="${isOpen ? 'text-[#13DE83]' : 'text-gray-400'}">${isOpen ? 'Open' : 'Closed'}</p>
+            </div>
+          `))
+          .addTo(map.current!)
+
+        markersRef.current[library.id] = marker
+      })
+    }
+  }, [mapLoaded, selectedLibraryId])
+
   // Function to create a circular marker
-  const createCircleMarker = (color: string) => {
+  const createCircleMarker = (color: string, isSelected: boolean) => {
     const el = document.createElement('div');
     el.className = 'marker';
     el.style.backgroundColor = color;
-    el.style.width = '10px';
-    el.style.height = '10px';
+    el.style.width = isSelected ? '12px' : '10px';
+    el.style.height = isSelected ? '12px' : '10px';
     el.style.borderRadius = '50%';
+    if (isSelected) {
+      el.style.border = '3px solid white';
+      el.style.boxSizing = 'content-box';
+    }
     return el;
   }
 
