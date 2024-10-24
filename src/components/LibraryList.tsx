@@ -8,6 +8,7 @@ import LogoSVG from "@/media/logotype.svg"
 import Image from "next/image"
 import Indicator from './Indicator'
 import { cn } from "@/lib/utils"
+import { format, parse, isWithinInterval, addHours } from 'date-fns'
 
 // Function to calculate distance between two points
 function calculateDistance(lat1: number, lon1: number, lat2: number, lon2: number): number {
@@ -23,6 +24,29 @@ function calculateDistance(lat1: number, lon1: number, lat2: number, lon2: numbe
 
 // Berlin center coordinates
 const BERLIN_CENTER: [number, number] = [52.520008, 13.404954];
+
+const getLibraryStatus = (workingHours: { [key: string]: string }): string => {
+  const now = new Date()
+  const dayOfWeek = format(now, 'EEEE').toLowerCase()
+  const currentTime = format(now, 'HH:mm')
+
+  const todayHours = workingHours[dayOfWeek]
+  if (todayHours === "Closed") return "Closed"
+
+  const [openTime, closeTime] = todayHours.split(" - ")
+  const openDateTime = parse(openTime, 'HH:mm', now)
+  const closeDateTime = parse(closeTime, 'HH:mm', now)
+
+  if (isWithinInterval(now, { start: openDateTime, end: closeDateTime })) {
+    return "Open"
+  }
+
+  if (isWithinInterval(now, { start: addHours(openDateTime, -1), end: openDateTime })) {
+    return "Opens Soon"
+  }
+
+  return "Closed"
+}
 
 export default function LibraryList({ 
   setLibraryCoordinates,
@@ -78,6 +102,8 @@ export default function LibraryList({
                   <div className="w-1/2 pr-2">
                     <h3 className="font-normal text-gray-400 mt-4 leading-relaxed">Address:</h3>
                     <p className="mb-4">{library.address}</p>
+                    <h3 className="font-normal text-gray-400 mt-4 leading-relaxed">Status:</h3>
+                    <p className="mb-4">{getLibraryStatus(library.workingHours)}</p>
                     <h3 className="font-normal text-gray-400 mt-4 leading-relaxed">Conference Areas:</h3>
                     <p className="mb-4">{library.conferenceAreas}</p>
                     <h3 className="font-normal text-gray-400 mt-4 leading-relaxed">Cafe:</h3>

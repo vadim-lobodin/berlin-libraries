@@ -137,13 +137,6 @@ export default function LibraryMap({
 
             new mapboxgl.Marker(createCircleMarker(color, isSelected))
               .setLngLat(library.coordinates as [number, number])
-              .setPopup(new mapboxgl.Popup().setHTML(`
-                <div class="text-white">
-                  <h3 class="font-bold">${library.name}</h3>
-                  <p>${library.address}</p>
-                  <p class="${isOpen ? 'text-[#13DE83]' : 'text-gray-400'}">${isOpen ? 'Open' : 'Closed'}</p>
-                </div>
-              `))
               .addTo(map.current!)
           })
         })
@@ -198,13 +191,6 @@ export default function LibraryMap({
 
         const marker = new mapboxgl.Marker(createCircleMarker(color, isSelected))
           .setLngLat(library.coordinates as [number, number])
-          .setPopup(new mapboxgl.Popup().setHTML(`
-            <div class="text-white">
-              <h3 class="font-bold">${library.name}</h3>
-              <p>${library.address}</p>
-              <p class="${isOpen ? 'text-[#13DE83]' : 'text-gray-400'}">${isOpen ? 'Open' : 'Closed'}</p>
-            </div>
-          `))
           .addTo(map.current!)
 
         markersRef.current[library.id] = marker
