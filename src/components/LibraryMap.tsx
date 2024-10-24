@@ -123,7 +123,7 @@ export default function LibraryMap({
           
           // Add blue circle marker for Berlin center
           new mapboxgl.Marker({
-            element: createCircleMarker('#0000FF'),
+            element: createCircleMarker('#0000FF', false), // Add the second argument
             anchor: 'center'
           })
             .setLngLat(BERLIN_CENTER)
