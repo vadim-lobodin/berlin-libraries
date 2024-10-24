@@ -20,33 +20,25 @@ function calculateDistance(lat1: number, lon1: number, lat2: number, lon2: numbe
   return R * c; // Distance in km
 }
 
+// Berlin center coordinates
+const BERLIN_CENTER: [number, number] = [52.520008, 13.404954];
+
 export default function LibraryList({ setLibraryCoordinates }: { setLibraryCoordinates: (coordinates: [number, number]) => void }) {
   const [hoveredLibrary, setHoveredLibrary] = useState<number | null>(null)
   const [sortedLibraries, setSortedLibraries] = useState<Library[]>([])
-  const [userLocation, setUserLocation] = useState<[number, number] | null>(null)
 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const { latitude, longitude } = position.coords;
-        setUserLocation([latitude, longitude]);
-        const sorted = [...libraries].sort((a, b) => {
-          const distA = calculateDistance(latitude, longitude, a.coordinates[1], a.coordinates[0]);
-          const distB = calculateDistance(latitude, longitude, b.coordinates[1], b.coordinates[0]);
-          return distA - distB; // Sort in ascending order
-        });
-        setSortedLibraries(sorted as Library[]); // Ensure this is treated as a Library[]
-      },
-      () => {
-        console.error("Unable to retrieve location");
-        setSortedLibraries(libraries as Library[]); // Ensure this is treated as a Library[]
-      }
-    );
+    const sorted = [...libraries].sort((a, b) => {
+      const distA = calculateDistance(BERLIN_CENTER[0], BERLIN_CENTER[1], a.coordinates[1], a.coordinates[0]);
+      const distB = calculateDistance(BERLIN_CENTER[0], BERLIN_CENTER[1], b.coordinates[1], b.coordinates[0]);
+      return distA - distB; // Sort in ascending order
+    });
+    setSortedLibraries(sorted as Library[]); // Ensure this is treated as a Library[]
   }, []);
 
   return (
     <div className="w-full h-full bg-background/80 text-foreground overflow-y-auto flex flex-col">
-      <div className="p-4">
+      <div className="p-4 hidden md:block">
         <Image 
           src={LogoSVG} 
           alt="Logo" 
@@ -65,13 +57,11 @@ export default function LibraryList({ setLibraryCoordinates }: { setLibraryCoord
               onClick={() => setLibraryCoordinates(library.coordinates as [number, number])}
               className="border-b border-border"
             >
-              <AccordionTrigger className="px-4 py-4 hover:bg-accent hover:text-accent-foreground font-light flex justify-between items-start no-chevron">
-                <span className="text-left">{library.name}</span>
-                {userLocation && (
-                  <span className="text-gray-500 text-sm ml-2 flex-shrink-0">
-                    {calculateDistance(userLocation[0], userLocation[1], library.coordinates[1], library.coordinates[0]).toFixed(1)} km
-                  </span>
-                )}
+              <AccordionTrigger className="px-4 py-2 md:py-4 hover:bg-accent hover:text-accent-foreground font-light flex justify-between items-start no-chevron">
+                <span className="text-left text-sm md:text-base">{library.name}</span>
+                <span className="text-gray-500 text-xs md:text-sm ml-2 flex-shrink-0">
+                  {calculateDistance(BERLIN_CENTER[0], BERLIN_CENTER[1], library.coordinates[1], library.coordinates[0]).toFixed(1)} km
+                </span>
               </AccordionTrigger>
               <AccordionContent className="px-4 py-2 bg-card text-card-foreground">
                 <div className="flex flex-wrap">
@@ -88,8 +78,6 @@ export default function LibraryList({ setLibraryCoordinates }: { setLibraryCoord
                     <p className="mb-4">{library.lockers}</p>
                     <h3 className="font-normal text-gray-400 mt-4 leading-relaxed">Meeting Rooms:</h3>
                     <p className="mb-4">{library.meetingRooms}</p>
-                    <h3 className="font-normal text-gray-400 mt-4 leading-relaxed">Time Limits:</h3>
-                    <p className="mb-4">{library.timeLimits}</p>
                     <h3 className="font-normal text-gray-400 mt-4 leading-relaxed">Phone Call Policy:</h3>
                     <p className="mb-4">{library.phoneCallPolicy}</p>
                   </div>
@@ -102,7 +90,7 @@ export default function LibraryList({ setLibraryCoordinates }: { setLibraryCoord
                     <Indicator value={library.ventilation} max={5} />
                     <h3 className="font-normal text-gray-400 mt-4 leading-relaxed">Wifi Quality:</h3>
                     <Indicator value={library.wifiQuality} max={5} />
-                    <h3 className="font-normal text-gray-400 mt-4 leading-relaxed">Professional Atmosphere:</h3>
+                    <h3 className="font-normal text-gray-400 mt-4 leading-relaxed">Atmosphere:</h3>
                     <Indicator value={library.professionalAtmosphere} max={5} />
                     <h3 className="font-normal text-gray-400 mt-4 leading-relaxed">Cell Reception:</h3>
                     <Indicator value={library.cellReception} max={5} />

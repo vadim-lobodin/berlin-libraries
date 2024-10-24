@@ -61,10 +61,7 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "white" },
-    { media: "(prefers-color-scheme: dark)", color: "black" },
-  ],
+  themeColor: "black",
 }
 
 export default function RootLayout({ children }: RootLayoutProps) {
@@ -74,12 +71,14 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
+          "dark" // Add this class to force dark mode
         )}
       >
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
           enableSystem={false}
+          forcedTheme="dark" // Add this prop to force dark theme
           disableTransitionOnChange
         >
           {children}

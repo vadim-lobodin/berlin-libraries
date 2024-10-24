@@ -17,7 +17,7 @@ export default function Home() {
       <div className="absolute inset-0">
         <LibraryMap libraryCoordinates={libraryCoordinates} />
       </div>
-      <div className="absolute left-2 top-2 bottom-2 w-1/3 max-w-md bg-background/80 backdrop-blur-sm overflow-y-auto rounded-lg shadow-lg">
+      <div className="absolute left-0 right-0 bottom-0 md:left-2 md:top-2 md:bottom-2 w-full md:w-1/3 md:max-w-md bg-background/80 backdrop-blur-sm overflow-y-auto rounded-t-lg md:rounded-lg shadow-lg h-1/3 md:h-auto">
         <LibraryList setLibraryCoordinates={setLibraryCoordinates} />
       </div>
     </main>

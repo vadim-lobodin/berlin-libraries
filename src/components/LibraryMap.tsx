@@ -41,12 +41,14 @@ function calculateDistance(lat1: number, lon1: number, lat2: number, lon2: numbe
   return R * c; // Distance in km
 }
 
+// Berlin center coordinates
+const BERLIN_CENTER: [number, number] = [13.404954, 52.520008];
+
 export default function LibraryMap({ libraryCoordinates }: { libraryCoordinates: [number, number] | null }) {
   const mapContainer = useRef<HTMLDivElement>(null)
   const map = useRef<mapboxgl.Map | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [mapLoaded, setMapLoaded] = useState(false)
-  const [userLocation, setUserLocation] = useState<[number, number] | null>(null)
 
   useEffect(() => {
     if (map.current) return // Initialize map only once
@@ -70,8 +72,8 @@ export default function LibraryMap({ libraryCoordinates }: { libraryCoordinates:
         map.current = new mapboxgl.Map({
           container: mapContainer.current!,
           style: mapStyle,
-          center: [13.404954, 52.520008], // Berlin coordinates
-          zoom: 14, // Adjusted initial zoom level
+          center: BERLIN_CENTER, // Use Berlin center
+          zoom: 11, // Adjusted initial zoom level
           pitch: 45,
           bearing: -17.6,
           antialias: true
@@ -113,47 +115,30 @@ export default function LibraryMap({ libraryCoordinates }: { libraryCoordinates:
           console.log("Map loaded successfully")
           setMapLoaded(true)
           
-          // Get user's location
-          navigator.geolocation.getCurrentPosition(
-            (position) => {
-              const { latitude, longitude } = position.coords;
-              setUserLocation([longitude, latitude]);
-              
-              // Add blue circle marker for user's location
-              new mapboxgl.Marker({
-                element: createCircleMarker('#0000FF'),
-                anchor: 'center'
-              })
-                .setLngLat([longitude, latitude])
-                .addTo(map.current!);
+          // Add blue circle marker for Berlin center
+          new mapboxgl.Marker({
+            element: createCircleMarker('#0000FF'),
+            anchor: 'center'
+          })
+            .setLngLat(BERLIN_CENTER)
+            .addTo(map.current!)
 
-              // Center map on user's location
-              map.current!.flyTo({
-                center: [longitude, latitude],
-                zoom: 14 // Adjusted zoom level
-              });
+          // Add library markers
+          libraries.forEach((library) => {
+            const isOpen = isLibraryOpen(library.workingHours)
+            const color = isOpen ? "#13DE83" : "#8D8D8D"
 
-              // Add library markers
-              libraries.forEach((library) => {
-                const isOpen = isLibraryOpen(library.workingHours)
-                const color = isOpen ? "#13DE83" : "#8D8D8D"
-
-                new mapboxgl.Marker(createCircleMarker(color))
-                  .setLngLat(library.coordinates as [number, number]) // Ensure this is treated as a tuple
-                  .setPopup(new mapboxgl.Popup().setHTML(`
-                    <div class="text-white">
-                      <h3 class="font-bold">${library.name}</h3>
-                      <p>${library.address}</p>
-                      <p class="${isOpen ? 'text-[#13DE83]' : 'text-gray-400'}">${isOpen ? 'Open' : 'Closed'}</p>
-                    </div>
-                  `))
-                  .addTo(map.current!)
-              })
-            },
-            () => {
-              setError("Unable to retrieve your location");
-            }
-          );
+            new mapboxgl.Marker(createCircleMarker(color))
+              .setLngLat(library.coordinates as [number, number])
+              .setPopup(new mapboxgl.Popup().setHTML(`
+                <div class="text-white">
+                  <h3 class="font-bold">${library.name}</h3>
+                  <p>${library.address}</p>
+                  <p class="${isOpen ? 'text-[#13DE83]' : 'text-gray-400'}">${isOpen ? 'Open' : 'Closed'}</p>
+                </div>
+              `))
+              .addTo(map.current!)
+          })
         })
 
         map.current.on("error", (e) => {
