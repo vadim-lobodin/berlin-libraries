@@ -1,8 +1,8 @@
 [
   {
     "id": 1,
-    "name": "Staatsbibliothek zu Berlin",
-    "address": "Potsdamer Straße 33, 10785 Berlin",
+    "name": "Staatsbibliothek zu ",
+    "address": "Potsdamer Straße 33, 10785 ",
     "workingHours": {
       "monday": "9:00 - 21:00",
       "tuesday": "9:00 - 21:00",
@@ -30,7 +30,7 @@
   {
     "id": 2,
     "name": "Amerika-Gedenkbibliothek",
-    "address": "Blücherpl. 1, 10961 Berlin",
+    "address": "Blücherpl. 1, 10961 ",
     "workingHours": {
       "monday": "10:00 - 22:00",
       "tuesday": "10:00 - 22:00",
@@ -57,8 +57,8 @@
   },
   {
     "id": 3,
-    "name": "Zentral- und Landesbibliothek Berlin",
-    "address": "Breite Str. 30-36, 10178 Berlin",
+    "name": "Zentral- und Landesbibliothek ",
+    "address": "Breite Str. 30-36, 10178 ",
     "workingHours": {
       "monday": "10:00 - 21:00",
       "tuesday": "10:00 - 21:00",
@@ -86,7 +86,7 @@
   {
     "id": 4,
     "name": "Universitätsbibliothek der Humboldt-Universität",
-    "address": "Unter den Linden 6, 10099 Berlin",
+    "address": "Unter den Linden 6, 10099 ",
     "workingHours": {
       "monday": "8:00 - 24:00",
       "tuesday": "8:00 - 24:00",
@@ -113,8 +113,8 @@
   },
   {
     "id": 5,
-    "name": "Philologische Bibliothek der Freien Universität Berlin",
-    "address": "Habelschwerdter Allee 45, 14195 Berlin",
+    "name": "Philologische Bibliothek der Freien Universität ",
+    "address": "Habelschwerdter Allee 45, 14195 ",
     "workingHours": {
       "monday": "9:00 - 22:00",
       "tuesday": "9:00 - 22:00",
@@ -142,7 +142,7 @@
   {
     "id": 6,
     "name": "Stadtbibliothek Friedrichshain-Kreuzberg",
-    "address": "Grünberger Str. 54, 10245 Berlin",
+    "address": "Grünberger Str. 54, 10245 ",
     "workingHours": {
       "monday": "13:00 - 19:00",
       "tuesday": "13:00 - 19:00",
@@ -170,7 +170,7 @@
   {
     "id": 7,
     "name": "Stadtbibliothek Mitte - Philipp-Schaeffer-Bibliothek",
-    "address": "Brunnenstraße 181, 10119 Berlin",
+    "address": "Brunnenstraße 181, 10119 ",
     "workingHours": {
       "monday": "12:00 - 19:30",
       "tuesday": "10:00 - 17:30",
@@ -198,7 +198,7 @@
   {
     "id": 8,
     "name": "Stadtbibliothek Pankow",
-    "address": "Berliner Allee 15, 13088 Berlin",
+    "address": "er Allee 15, 13088 ",
     "workingHours": {
       "monday": "13:00 - 19:00",
       "tuesday": "13:00 - 19:00",
@@ -226,7 +226,7 @@
   {
     "id": 9,
     "name": "Stadtbibliothek Charlottenburg-Wilmersdorf",
-    "address": "Otto-Suhr-Allee 96, 10585 Berlin",
+    "address": "Otto-Suhr-Allee 96, 10585 ",
     "workingHours": {
       "monday": "11:00 - 19:30",
       "tuesday": "11:00 - 19:30",
@@ -254,7 +254,7 @@
   {
     "id": 10,
     "name": "Stadtbibliothek Spandau",
-    "address": "Carl-Schurz-Straße 13, 13597 Berlin",
+    "address": "Carl-Schurz-Straße 13, 13597 ",
     "workingHours": {
       "monday": "11:00 - 19:00",
       "tuesday": "11:00 - 19:00",
@@ -282,7 +282,7 @@
   {
     "id": 11,
     "name": "Philipp-Schaeffer-Bibliothek",
-    "address": "Brunnenstraße 181, 10119 Berlin",
+    "address": "Brunnenstraße 181, 10119 ",
     "workingHours": {
       "monday": "12:00 - 19:30",
       "tuesday": "10:00 - 17:30",
@@ -310,7 +310,7 @@
   {
     "id": 12,
     "name": "Bruno-Lösche-Bibliothek",
-    "address": "Perleberger Str. 33, 10559 Berlin",
+    "address": "Perleberger Str. 33, 10559 ",
     "workingHours": {
       "monday": "13:00 - 19:00",
       "tuesday": "13:00 - 19:00",
@@ -338,7 +338,7 @@
   {
     "id": 13,
     "name": "Bibliothek am Luisenbad",
-    "address": "Badstraße 39, 13357 Berlin",
+    "address": "Badstraße 39, 13357 ",
     "workingHours": {
       "monday": "13:00 - 19:00",
       "tuesday": "13:00 - 19:00",
@@ -366,7 +366,7 @@
   {
     "id": 14,
     "name": "Bezirkszentralbibliothek Pablo Neruda",
-    "address": "Frankfurter Allee 14A, 10247 Berlin",
+    "address": "Frankfurter Allee 14A, 10247 ",
     "workingHours": {
       "monday": "10:00 - 19:30",
       "tuesday": "10:00 - 19:30",
@@ -394,7 +394,7 @@
   {
     "id": 15,
     "name": "Heinrich-Böll-Bibliothek",
-    "address": "Greifswalder Str. 87, 10409 Berlin",
+    "address": "Greifswalder Str. 87, 10409 ",
     "workingHours": {
       "monday": "13:00 - 19:00",
       "tuesday": "13:00 - 19:00",
@@ -422,7 +422,7 @@
   {
     "id": 16,
     "name": "Kurt-Tucholsky-Bibliothek",
-    "address": "Esmarchstraße 18, 10407 Berlin",
+    "address": "Esmarchstraße 18, 10407 ",
     "workingHours": {
       "monday": "13:00 - 19:00",
       "tuesday": "13:00 - 19:00",
@@ -450,7 +450,7 @@
   {
     "id": 17,
     "name": "Hansabibliothek",
-    "address": "Altonaer Str. 15, 10557 Berlin",
+    "address": "Altonaer Str. 15, 10557 ",
     "workingHours": {
       "monday": "13:00 - 19:00",
       "tuesday": "13:00 - 19:00",
@@ -478,7 +478,7 @@
   {
     "id": 18,
     "name": "Tiergarten-Bibliothek",
-    "address": "Turmstraße 75, 10551 Berlin",
+    "address": "Turmstraße 75, 10551 ",
     "workingHours": {
       "monday": "13:00 - 19:00",
       "tuesday": "13:00 - 19:00",
@@ -506,7 +506,7 @@
   {
     "id": 19,
     "name": "Bibliothek am Frankfurter Tor",
-    "address": "Frankfurter Allee 14A, 10247 Berlin",
+    "address": "Frankfurter Allee 14A, 10247 ",
     "workingHours": {
       "monday": "10:00 - 19:30",
       "tuesday": "10:00 - 19:30",
@@ -534,7 +534,7 @@
   {
     "id": 20,
     "name": "Familienbibliothek am Kotti",
-    "address": "Adalbertstraße 2, 10999 Berlin",
+    "address": "Adalbertstraße 2, 10999 ",
     "workingHours": {
       "monday": "13:00 - 19:00",
       "tuesday": "13:00 - 19:00",
@@ -562,7 +562,7 @@
   {
     "id": 21,
     "name": "Heinrich-Heine-Bibliothek",
-    "address": "Grünberger Str. 54, 10245 Berlin",
+    "address": "Grünberger Str. 54, 10245 ",
     "workingHours": {
       "monday": "13:00 - 19:00",
       "tuesday": "13:00 - 19:00",
@@ -590,7 +590,7 @@
   {
     "id": 22,
     "name": "Janusz-Korczak-Bibliothek",
-    "address": "Berliner Allee 15, 13088 Berlin",
+    "address": "er Allee 15, 13088 ",
     "workingHours": {
       "monday": "13:00 - 19:00",
       "tuesday": "13:00 - 19:00",
@@ -618,7 +618,7 @@
   {
     "id": 23,
     "name": "Bibliothek am Wasserturm",
-    "address": "Prenzlauer Allee 227/228, 10405 Berlin",
+    "address": "Prenzlauer Allee 227/228, 10405 ",
     "workingHours": {
       "monday": "13:00 - 19:00",
       "tuesday": "13:00 - 19:00",
@@ -646,7 +646,7 @@
   {
     "id": 25,
     "name": "Wolfdietrich-Schnurre-Bibliothek",
-    "address": "Bizetstraße 41, 13088 Berlin",
+    "address": "Bizetstraße 41, 13088 ",
     "workingHours": {
       "monday": "13:00 - 19:00",
       "tuesday": "13:00 - 19:00",
@@ -674,7 +674,7 @@
   {
     "id": 26,
     "name": "Dietrich-Bonhoeffer-Bibliothek",
-    "address": "Brandenburgische Str. 2, 10713 Berlin",
+    "address": "Brandenburgische Str. 2, 10713 ",
     "workingHours": {
       "monday": "13:00 - 19:00",
       "tuesday": "13:00 - 19:00",
@@ -702,7 +702,7 @@
   {
     "id": 27,
     "name": "Heinrich-Schulz-Bibliothek",
-    "address": "Hauptstraße 40, 10827 Berlin",
+    "address": "Hauptstraße 40, 10827 ",
     "workingHours": {
       "monday": "13:00 - 19:00",
       "tuesday": "13:00 - 19:00",
@@ -730,7 +730,7 @@
   {
     "id": 28,
     "name": "Stadtteilbibliothek Halemweg",
-    "address": "Halemweg 18, 13627 Berlin",
+    "address": "Halemweg 18, 13627 ",
     "workingHours": {
       "monday": "13:00 - 19:00",
       "tuesday": "13:00 - 19:00",
@@ -758,7 +758,7 @@
   {
     "id": 29,
     "name": "Bezirkszentralbibliothek Spandau",
-    "address": "Carl-Schurz-Straße 13, 13597 Berlin",
+    "address": "Carl-Schurz-Straße 13, 13597 ",
     "workingHours": {
       "monday": "11:00 - 19:00",
       "tuesday": "11:00 - 19:00",
@@ -786,7 +786,7 @@
   {
     "id": 30,
     "name": "Stadtteilbibliothek Falkenhagener Feld",
-    "address": "Westerwaldstraße 9, 13589 Berlin",
+    "address": "Westerwaldstraße 9, 13589 ",
     "workingHours": {
       "monday": "13:00 - 19:00",
       "tuesday": "13:00 - 19:00",
@@ -814,7 +814,7 @@
   {
     "id": 31,
     "name": "Stadtteilbibliothek Heerstraße",
-    "address": "Obstallee 22 F, 13593 Berlin",
+    "address": "Obstallee 22 F, 13593 ",
     "workingHours": {
       "monday": "13:00 - 19:00",
       "tuesday": "13:00 - 19:00",
@@ -842,7 +842,7 @@
   {
     "id": 32,
     "name": "Bibliothek Kladow",
-    "address": "Sakrower Landstraße 2, 14089 Berlin",
+    "address": "Sakrower Landstraße 2, 14089 ",
     "workingHours": {
       "monday": "13:00 - 19:00",
       "tuesday": "13:00 - 19:00",
@@ -870,7 +870,7 @@
   {
     "id": 33,
     "name": "Ingeborg-Drewitz-Bibliothek",
-    "address": "Grunewaldstraße 3, 12165 Berlin",
+    "address": "Grunewaldstraße 3, 12165 ",
     "workingHours": {
       "monday": "11:00 - 19:00",
       "tuesday": "11:00 - 19:00",
@@ -898,7 +898,7 @@
   {
     "id": 34,
     "name": "Gottfried-Benn-Bibliothek",
-    "address": "Konarskistraße 6, 12163 Berlin",
+    "address": "Konarskistraße 6, 12163 ",
     "workingHours": {
       "monday": "13:00 - 19:00",
       "tuesday": "13:00 - 19:00",
@@ -926,7 +926,7 @@
   {
     "id": 35,
     "name": "Bezirksbibliothek Steglitz",
-    "address": "Grunewaldstraße 3, 12165 Berlin",
+    "address": "Grunewaldstraße 3, 12165 ",
     "workingHours": {
       "monday": "11:00 - 19:00",
       "tuesday": "11:00 - 19:00",
@@ -954,7 +954,7 @@
   {
     "id": 36,
     "name": "Stadtteilbibliothek Lankwitz",
-    "address": "Bruchwitzstraße 37, 12247 Berlin",
+    "address": "Bruchwitzstraße 37, 12247 ",
     "workingHours": {
       "monday": "13:00 - 19:00",
       "tuesday": "13:00 - 19:00",
@@ -982,7 +982,7 @@
   {
     "id": 37,
     "name": "Eva-Maria-Buch-Haus",
-    "address": "Götzstraße 8/10/12, 12099 Berlin",
+    "address": "Götzstraße 8/10/12, 12099 ",
     "workingHours": {
       "monday": "10:00 - 19:30",
       "tuesday": "10:00 - 19:30",
@@ -1010,7 +1010,7 @@
   {
     "id": 38,
     "name": "Gertrud-Kolmar-Bibliothek",
-    "address": "Pallasstraße 27, 10781 Berlin",
+    "address": "Pallasstraße 27, 10781 ",
     "workingHours": {
       "monday": "13:00 - 19:00",
       "tuesday": "13:00 - 19:00",
@@ -1038,7 +1038,7 @@
   {
     "id": 39,
     "name": "Stadtteilbibliothek Friedenau",
-    "address": "Niedstraße 1-2, 12159 Berlin",
+    "address": "Niedstraße 1-2, 12159 ",
     "workingHours": {
       "monday": "13:00 - 19:00",
       "tuesday": "13:00 - 19:00",
@@ -1066,7 +1066,7 @@
   {
     "id": 40,
     "name": "Bibliothek am Bundesplatz",
-    "address": "Bundesallee 87, 12161 Berlin",
+    "address": "Bundesallee 87, 12161 ",
     "workingHours": {
       "monday": "13:00 - 19:00",
       "tuesday": "13:00 - 19:00",
@@ -1094,7 +1094,7 @@
   {
     "id": 41,
     "name": "Helene-Nathan-Bibliothek",
-    "address": "Karl-Marx-Straße 66, 12043 Berlin",
+    "address": "Karl-Marx-Straße 66, 12043 ",
     "workingHours": {
       "monday": "10:00 - 20:00",
       "tuesday": "10:00 - 20:00",
@@ -1122,7 +1122,7 @@
   {
     "id": 42,
     "name": "Bibliothek am Sandberg",
-    "address": "Sandstraße 6, 13593 Berlin",
+    "address": "Sandstraße 6, 13593 ",
     "workingHours": {
       "monday": "13:00 - 19:00",
       "tuesday": "13:00 - 19:00",
@@ -1150,7 +1150,7 @@
   {
     "id": 43,
     "name": "Stadtteilbibliothek Britz",
-    "address": "Gutschmidtstraße 33, 12359 Berlin",
+    "address": "Gutschmidtstraße 33, 12359 ",
     "workingHours": {
       "monday": "13:00 - 19:00",
       "tuesday": "13:00 - 19:00",
@@ -1178,7 +1178,7 @@
   {
     "id": 44,
     "name": "Mittelpunktbibliothek Köpenick",
-    "address": "Alter Markt 2, 12555 Berlin",
+    "address": "Alter Markt 2, 12555 ",
     "workingHours": {
       "monday": "10:00 - 19:00",
       "tuesday": "10:00 - 19:00",
@@ -1206,7 +1206,7 @@
   {
     "id": 45,
     "name": "Stadtbibliothek Friedrichshagen",
-    "address": "Bölschestraße 87, 12587 Berlin",
+    "address": "Bölschestraße 87, 12587 ",
     "workingHours": {
       "monday": "13:00 - 19:00",
       "tuesday": "13:00 - 19:00",
@@ -1234,7 +1234,7 @@
   {
     "id": 46,
     "name": "Stadt- und Regionalbibliothek Treptow",
-    "address": "Michael-Brückner-Straße 9, 12439 Berlin",
+    "address": "Michael-Brückner-Straße 9, 12439 ",
     "workingHours": {
       "monday": "10:00 - 19:00",
       "tuesday": "10:00 - 19:00",
@@ -1262,7 +1262,7 @@
   {
     "id": 47,
     "name": "Bibliothek Baumschulenweg",
-    "address": "Kiefholzstraße 275, 12437 Berlin",
+    "address": "Kiefholzstraße 275, 12437 ",
     "workingHours": {
       "monday": "13:00 - 19:00",
       "tuesday": "13:00 - 19:00",
@@ -1290,7 +1290,7 @@
   {
     "id": 48,
     "name": "Mark-Twain-Bibliothek",
-    "address": "Marzahner Promenade 52-54, 12679 Berlin",
+    "address": "Marzahner Promenade 52-54, 12679 ",
     "workingHours": {
       "monday": "10:00 - 19:30",
       "tuesday": "10:00 - 19:30",
@@ -1318,7 +1318,7 @@
   {
     "id": 49,
     "name": "Heinrich-von-Kleist-Bibliothek",
-    "address": "Havemannstraße 17B, 12689 Berlin",
+    "address": "Havemannstraße 17B, 12689 ",
     "workingHours": {
       "monday": "13:00 - 19:00",
       "tuesday": "13:00 - 19:00",
@@ -1346,7 +1346,7 @@
   {
     "id": 50,
     "name": "Biesdorf-Bibliothek",
-    "address": "Alt-Biesdorf 55, 12683 Berlin",
+    "address": "Alt-Biesdorf 55, 12683 ",
     "workingHours": {
       "monday": "13:00 - 19:00",
       "tuesday": "13:00 - 19:00",
@@ -1374,7 +1374,7 @@
   {
     "id": 51,
     "name": "Kaulsdorf-Bibliothek",
-    "address": "Cecilienstraße 232, 12619 Berlin",
+    "address": "Cecilienstraße 232, 12619 ",
     "workingHours": {
       "monday": "13:00 - 19:00",
       "tuesday": "13:00 - 19:00",
@@ -1402,7 +1402,7 @@
   {
     "id": 52,
     "name": "Anna-Seghers-Bibliothek",
-    "address": "Prerower Platz 2, 13051 Berlin",
+    "address": "Prerower Platz 2, 13051 ",
     "workingHours": {
       "monday": "10:00 - 19:30",
       "tuesday": "10:00 - 19:30",
@@ -1430,7 +1430,7 @@
   {
     "id": 53,
     "name": "Bodo-Uhse-Bibliothek",
-    "address": "Erich-Kurz-Straße 9, 10319 Berlin",
+    "address": "Erich-Kurz-Straße 9, 10319 ",
     "workingHours": {
       "monday": "13:00 - 19:00",
       "tuesday": "13:00 - 19:00",
@@ -1458,7 +1458,7 @@
   {
     "id": 54,
     "name": "Anton-Saefkow-Bibliothek",
-    "address": "Anton-Saefkow-Platz 14, 10369 Berlin",
+    "address": "Anton-Saefkow-Platz 14, 10369 ",
     "workingHours": {
       "monday": "13:00 - 19:00",
       "tuesday": "13:00 - 19:00",
@@ -1486,7 +1486,7 @@
   {
     "id": 55,
     "name": "Bibliothek im Linden-Center",
-    "address": "Prerower Platz 2, 13051 Berlin",
+    "address": "Prerower Platz 2, 13051 ",
     "workingHours": {
       "monday": "10:00 - 19:30",
       "tuesday": "10:00 - 19:30",
@@ -1514,7 +1514,7 @@
   {
     "id": 56,
     "name": "Humboldt-Bibliothek",
-    "address": "Karolinenstraße 19, 13507 Berlin",
+    "address": "Karolinenstraße 19, 13507 ",
     "workingHours": {
       "monday": "13:00 - 19:00",
       "tuesday": "13:00 - 19:00",
@@ -1542,7 +1542,7 @@
   {
     "id": 57,
     "name": "Stadtteilbibliothek Reinickendorf-Ost",
-    "address": "Schönholzer Straße 9, 13187 Berlin",
+    "address": "Schönholzer Straße 9, 13187 ",
     "workingHours": {
       "monday": "13:00 - 19:00",
       "tuesday": "13:00 - 19:00",
@@ -1570,7 +1570,7 @@
   {
     "id": 58,
     "name": "Stadtteilbibliothek Märkisches Viertel",
-    "address": "Wilhelmsruher Damm 142 C, 13439 Berlin",
+    "address": "Wilhelmsruher Damm 142 C, 13439 ",
     "workingHours": {
       "monday": "13:00 - 19:00",
       "tuesday": "13:00 - 19:00",
@@ -1598,7 +1598,7 @@
   {
     "id": 59,
     "name": "Bibliothek am Schäfersee",
-    "address": "Stargardtstraße 11-13, 13407 Berlin",
+    "address": "Stargardtstraße 11-13, 13407 ",
     "workingHours": {
       "monday": "13:00 - 19:00",
       "tuesday": "13:00 - 19:00",
@@ -1626,7 +1626,7 @@
   {
     "id": 60,
     "name": "Ibero-Amerikanisches Institut",
-    "address": "Potsdamer Straße 37, 10785 Berlin",
+    "address": "Potsdamer Straße 37, 10785 ",
     "workingHours": {
       "monday": "9:00 - 19:00",
       "tuesday": "9:00 - 19:00",
@@ -1654,7 +1654,7 @@
   {
     "id": 61,
     "name": "Bibliothek des Jüdischen Museums",
-    "address": "Lindenstraße 9-14, 10969 Berlin",
+    "address": "Lindenstraße 9-14, 10969 ",
     "workingHours": {
       "monday": "10:00 - 16:30",
       "tuesday": "10:00 - 16:30",
@@ -1681,8 +1681,8 @@
 },
 {
 "id": 62,
-"name": "Stiftung Neue Synagoge Berlin - Centrum Judaicum Library",
-"address": "Oranienburger Straße 28-30, 10117 Berlin",
+"name": "Stiftung Neue Synagoge Berlin- Centrum Judaicum Library",
+"address": "Oranienburger Straße 28-30, 10117 ",
 "workingHours": {
   "monday": "10:00 - 18:00",
   "tuesday": "10:00 - 18:00",
@@ -1710,7 +1710,7 @@
 {
 "id": 63,
 "name": "Amerika-Haus Bibliothek",
-"address": "Hardenbergstraße 22-24, 10623 Berlin",
+"address": "Hardenbergstraße 22-24, 10623 ",
 "workingHours": {
   "monday": "Closed",
   "tuesday": "11:00 - 18:00",
@@ -1738,7 +1738,7 @@
 {
 "id": 64,
 "name": "Goethe-Institut Library",
-"address": "Neue Schönhauser Straße 20, 10178 Berlin",
+"address": "Neue Schönhauser Straße 20, 10178 ",
 "workingHours": {
   "monday": "13:00 - 19:00",
   "tuesday": "13:00 - 19:00",

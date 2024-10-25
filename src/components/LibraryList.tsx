@@ -48,6 +48,13 @@ const getLibraryStatus = (workingHours: { [key: string]: string }): string => {
   return "Closed"
 }
 
+const renderInfoItem = (label: string, value: string | number | React.ReactNode) => (
+  <>
+    <h3 className="font-normal text-gray-400 mt-4 mb-1 leading-5">{label}:</h3>
+    <p className="mb-4 leading-4">{value}</p>
+  </>
+);
+
 export default function LibraryList({ 
   setLibraryCoordinates,
   setSelectedLibraryId
@@ -100,44 +107,31 @@ export default function LibraryList({
               <AccordionContent className="px-4 py-2 bg-card text-card-foreground">
                 <div className="flex flex-wrap">
                   <div className="w-1/2 pr-2">
-                    <h3 className="font-normal text-gray-400 mt-4 leading-relaxed">Address:</h3>
-                    <p className="mb-4">{library.address}</p>
-                    <h3 className="font-normal text-gray-400 mt-4 leading-relaxed">Status:</h3>
-                    <p className="mb-4">{getLibraryStatus(library.workingHours)}</p>
-                    <h3 className="font-normal text-gray-400 mt-4 leading-relaxed">Conference Areas:</h3>
-                    <p className="mb-4">{library.conferenceAreas}</p>
-                    <h3 className="font-normal text-gray-400 mt-4 leading-relaxed">Cafe:</h3>
-                    <p className="mb-4">{library.cafe}</p>
-                    <h3 className="font-normal text-gray-400 mt-4 leading-relaxed">Food Options Nearby:</h3>
-                    <p className="mb-4">{library.foodOptionsNearby}</p>
-                    <h3 className="font-normal text-gray-400 mt-4 leading-relaxed">Lockers:</h3>
-                    <p className="mb-4">{library.lockers}</p>
-                    <h3 className="font-normal text-gray-400 mt-4 leading-relaxed">Meeting Rooms:</h3>
-                    <p className="mb-4">{library.meetingRooms}</p>
-                    <h3 className="font-normal text-gray-400 mt-4 leading-relaxed">Phone Call Policy:</h3>
-                    <p className="mb-4">{library.phoneCallPolicy}</p>
+                    {renderInfoItem("Address", library.address)}
+                    {renderInfoItem("Status", getLibraryStatus(library.workingHours))}
+                    {renderInfoItem("Conference Areas", library.conferenceAreas)}
+                    {renderInfoItem("Cafe", library.cafe)}
+                    {renderInfoItem("Food Options Nearby", library.foodOptionsNearby)}
+                    {renderInfoItem("Lockers", library.lockers)}
+                    {renderInfoItem("Meeting Rooms", library.meetingRooms)}
+                    {renderInfoItem("Phone Call Policy", library.phoneCallPolicy)}
                   </div>
                   <div className="w-1/2 pl-2">
-                    <h3 className="font-normal text-gray-400 mt-4 leading-relaxed">Workspace Setup:</h3>
-                    <Indicator value={library.workspaceSetup} max={5} />
-                    <h3 className="font-normal text-gray-400 mt-4 leading-relaxed">Power Outlets:</h3>
-                    <Indicator value={library.powerOutlets} max={5} />
-                    <h3 className="font-normal text-gray-400 mt-4 leading-relaxed">Ventilation:</h3>
-                    <Indicator value={library.ventilation} max={5} />
-                    <h3 className="font-normal text-gray-400 mt-4 leading-relaxed">Wifi Quality:</h3>
-                    <Indicator value={library.wifiQuality} max={5} />
-                    <h3 className="font-normal text-gray-400 mt-4 leading-relaxed">Atmosphere:</h3>
-                    <Indicator value={library.professionalAtmosphere} max={5} />
-                    <h3 className="font-normal text-gray-400 mt-4 leading-relaxed">Cell Reception:</h3>
-                    <Indicator value={library.cellReception} max={5} />
-                    <h3 className="font-normal text-gray-400 mt-4 leading-relaxed">Working Hours:</h3>
-                    <ul className="mb-4">
-                      {Object.entries(library.workingHours).map(([day, hours]) => (
-                        <li key={day} className="capitalize">
-                          {day}: {hours}
-                        </li>
-                      ))}
-                    </ul>
+                    {renderInfoItem("Workspace Setup", <Indicator value={library.workspaceSetup} max={5} />)}
+                    {renderInfoItem("Power Outlets", <Indicator value={library.powerOutlets} max={5} />)}
+                    {renderInfoItem("Ventilation", <Indicator value={library.ventilation} max={5} />)}
+                    {renderInfoItem("Wifi Quality", <Indicator value={library.wifiQuality} max={5} />)}
+                    {renderInfoItem("Atmosphere", <Indicator value={library.professionalAtmosphere} max={5} />)}
+                    {renderInfoItem("Cell Reception", <Indicator value={library.cellReception} max={5} />)}
+                    {renderInfoItem("Working Hours", (
+                      <ul className="space-y-1">
+                        {Object.entries(library.workingHours).map(([day, hours]) => (
+                          <li key={day} className="capitalize leading-5">
+                            {day}: {hours}
+                          </li>
+                        ))}
+                      </ul>
+                    ))}
                   </div>
                 </div>
               </AccordionContent>
