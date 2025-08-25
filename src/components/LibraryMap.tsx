@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState, useCallback } from "react"
 import mapboxgl from "mapbox-gl"
 import "mapbox-gl/dist/mapbox-gl.css"
 import libraries from "../data/libraries.json"
@@ -139,7 +139,7 @@ export default function LibraryMap({
     }
   }, [])
 
-  const addLibraryMarkers = () => {
+  const addLibraryMarkers = useCallback(() => {
     if (!map.current || !mapLoaded) return
 
     // Remove existing markers
@@ -166,11 +166,11 @@ export default function LibraryMap({
 
       markersRef.current[library.id] = marker
     })
-  }
+  }, [mapLoaded, selectedLibraryId, setLibraryCoordinates, setSelectedLibraryId, setOpenAccordionItem])
 
   useEffect(() => {
     addLibraryMarkers()
-  }, [mapLoaded, selectedLibraryId])
+  }, [addLibraryMarkers])
 
   useEffect(() => {
     if (map.current && libraryCoordinates) {
