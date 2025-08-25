@@ -100,25 +100,26 @@ export default function LibraryList({
     if (openAccordionItem && containerRef.current) {
       // Use a small delay to ensure the accordion has opened
       const timeoutId = setTimeout(() => {
-        const element = document.querySelector(`[data-value="${openAccordionItem}"]`);
-        if (element && containerRef.current) {
+        const accordionItem = document.querySelector(`[data-value="${openAccordionItem}"]`);
+        const trigger = accordionItem?.querySelector('[data-radix-collection-item]') || accordionItem?.querySelector('button');
+        
+        if (trigger && containerRef.current) {
           const container = containerRef.current;
           
-          // Get element position relative to container
-          const elementRect = element.getBoundingClientRect();
+          // Get trigger position relative to container
+          const triggerRect = trigger.getBoundingClientRect();
           const containerRect = container.getBoundingClientRect();
           
-          // Calculate if element is visible
-          const elementTop = elementRect.top - containerRect.top;
-          const elementBottom = elementRect.bottom - containerRect.top;
-          const containerHeight = container.clientHeight;
+          // Calculate trigger position
+          const triggerTop = triggerRect.top - containerRect.top;
+          const triggerHeight = triggerRect.height;
           
-          // Check if element is fully visible
-          const isVisible = elementTop >= 0 && elementBottom <= containerHeight;
+          // Check if trigger (library name) is visible at the top
+          const isHeaderVisible = triggerTop >= 0 && triggerTop <= 100; // Allow some buffer at top
           
-          if (!isVisible) {
-            // Scroll to position the element at the top with some padding
-            const targetScrollTop = container.scrollTop + elementTop - 20;
+          if (!isHeaderVisible) {
+            // Always scroll to show the trigger at the top with padding
+            const targetScrollTop = container.scrollTop + triggerTop - 10;
             
             container.scrollTo({
               top: Math.max(0, targetScrollTop),
@@ -126,7 +127,7 @@ export default function LibraryList({
             });
           }
         }
-      }, 50); // Small delay to ensure DOM is updated
+      }, 100); // Slightly longer delay to ensure accordion animation completes
       
       return () => clearTimeout(timeoutId);
     }
