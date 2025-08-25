@@ -100,26 +100,43 @@ export default function LibraryList({
     if (openAccordionItem && containerRef.current) {
       // Use a small delay to ensure the accordion has opened
       const timeoutId = setTimeout(() => {
-        const accordionItem = document.querySelector(`[data-value="${openAccordionItem}"]`);
-        const trigger = accordionItem?.querySelector('[data-radix-collection-item]') || accordionItem?.querySelector('button');
+        const container = containerRef.current;
+        if (!container) return;
+
+        // Try multiple selector strategies to find the accordion item
+        let accordionItem = document.querySelector(`[data-value="${openAccordionItem}"]`);
         
-        if (trigger && containerRef.current) {
-          const container = containerRef.current;
+        // Fallback: look within our container specifically
+        if (!accordionItem) {
+          accordionItem = container.querySelector(`[data-value="${openAccordionItem}"]`);
+        }
+        
+        if (accordionItem) {
+          // Try multiple strategies to find the trigger (header)
+          let trigger = accordionItem.querySelector('[data-radix-collection-item]') || 
+                       accordionItem.querySelector('button') ||
+                       accordionItem.querySelector('[data-state]') ||
+                       accordionItem.children[0]; // Fallback to first child
           
-          // Get trigger position relative to container
-          const triggerRect = trigger.getBoundingClientRect();
-          const containerRect = container.getBoundingClientRect();
-          
-          // Calculate trigger position
-          const triggerTop = triggerRect.top - containerRect.top;
-          const triggerHeight = triggerRect.height;
-          
-          // Check if trigger (library name) is visible at the top
-          const isHeaderVisible = triggerTop >= 0 && triggerTop <= 100; // Allow some buffer at top
-          
-          if (!isHeaderVisible) {
-            // Always scroll to show the trigger at the top with padding
-            const targetScrollTop = container.scrollTop + triggerTop - 10;
+          if (trigger) {
+            const triggerRect = trigger.getBoundingClientRect();
+            const containerRect = container.getBoundingClientRect();
+            const triggerTop = triggerRect.top - containerRect.top;
+            
+            // Always scroll to ensure header is at the top, regardless of current position
+            // This prevents the issue where subsequent clicks don't scroll properly
+            const targetScrollTop = container.scrollTop + triggerTop - 15;
+            
+            container.scrollTo({
+              top: Math.max(0, targetScrollTop),
+              behavior: 'smooth'
+            });
+          } else {
+            // Fallback: scroll to the accordion item itself
+            const itemRect = accordionItem.getBoundingClientRect();
+            const containerRect = container.getBoundingClientRect();
+            const itemTop = itemRect.top - containerRect.top;
+            const targetScrollTop = container.scrollTop + itemTop - 15;
             
             container.scrollTo({
               top: Math.max(0, targetScrollTop),
@@ -127,7 +144,7 @@ export default function LibraryList({
             });
           }
         }
-      }, 100); // Slightly longer delay to ensure accordion animation completes
+      }, 150); // Increased delay for more reliable DOM updates
       
       return () => clearTimeout(timeoutId);
     }
