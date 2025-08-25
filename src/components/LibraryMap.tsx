@@ -3,42 +3,47 @@
 import { useEffect, useRef, useState } from "react"
 import mapboxgl from "mapbox-gl"
 import "mapbox-gl/dist/mapbox-gl.css"
-import libraries from "@/data/libraries.json"
-import { Library } from "@/types/library"
+import libraries from "../data/libraries.json"
+import { Library } from "../types/library"
+import { format, parse, isWithinInterval, addHours, subHours } from 'date-fns'
 
 const mapboxToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN || ""
-console.log("Mapbox Token:", mapboxToken)
 
 mapboxgl.accessToken = mapboxToken
 
-const isLibraryOpen = (workingHours: { [key: string]: string }): boolean => {
-  const now = new Date()
-  const dayOfWeek = now.toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase()
-  const currentTime = now.getHours() * 60 + now.getMinutes()
-
-  const todayHours = workingHours[dayOfWeek]
-  if (todayHours === "Closed") return false
-
-  const [openTime, closeTime] = todayHours.split(" - ")
-  const [openHour, openMinute] = openTime.split(":").map(Number)
-  const [closeHour, closeMinute] = closeTime.split(":").map(Number)
-
-  const openMinutes = openHour * 60 + openMinute
-  const closeMinutes = closeHour * 60 + closeMinute
-
-  return currentTime >= openMinutes && currentTime < closeMinutes
+interface LibraryMapProps {
+  libraryCoordinates: [number, number] | null
+  selectedLibraryId: number | null
+  userLocation: [number, number] | null
+  setLibraryCoordinates: (coordinates: [number, number]) => void
+  setSelectedLibraryId: (id: number | null) => void
+  setOpenAccordionItem: (value: string | null) => void
 }
 
-// Function to calculate distance between two points
-function calculateDistance(lat1: number, lon1: number, lat2: number, lon2: number): number {
-  const R = 6371; // Radius of the Earth in km
-  const dLat = (lat2 - lat1) * Math.PI / 180;
-  const dLon = (lon2 - lon1) * Math.PI / 180;
-  const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
-    Math.sin(dLon/2) * Math.sin(dLon/2);
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-  return R * c; // Distance in km
+const getLibraryStatus = (workingHours: { [key: string]: string }): 'Open' | 'Closed' | 'Opens Soon' | 'Closes Soon' => {
+  const now = new Date()
+  const dayOfWeek = format(now, 'EEEE').toLowerCase()
+  const currentTime = format(now, 'HH:mm')
+
+  const todayHours = workingHours[dayOfWeek]
+  if (todayHours === "Closed") return "Closed"
+
+  const [openTime, closeTime] = todayHours.split(" - ")
+  const openDateTime = parse(openTime, 'HH:mm', now)
+  const closeDateTime = parse(closeTime, 'HH:mm', now)
+
+  if (isWithinInterval(now, { start: openDateTime, end: closeDateTime })) {
+    if (isWithinInterval(now, { start: subHours(closeDateTime, 1), end: closeDateTime })) {
+      return "Closes Soon"
+    }
+    return "Open"
+  }
+
+  if (isWithinInterval(now, { start: subHours(openDateTime, 1), end: openDateTime })) {
+    return "Opens Soon"
+  }
+
+  return "Closed"
 }
 
 // Berlin center coordinates
@@ -46,15 +51,18 @@ const BERLIN_CENTER: [number, number] = [13.404954, 52.520008];
 
 export default function LibraryMap({ 
   libraryCoordinates, 
-  selectedLibraryId 
-}: { 
-  libraryCoordinates: [number, number] | null,
-  selectedLibraryId: number | null
-}) {
+  selectedLibraryId,
+  userLocation,
+  setLibraryCoordinates,
+  setSelectedLibraryId,
+  setOpenAccordionItem
+}: LibraryMapProps) {
   const mapContainer = useRef<HTMLDivElement>(null)
   const map = useRef<mapboxgl.Map | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [mapLoaded, setMapLoaded] = useState(false)
+  const userMarkerRef = useRef<mapboxgl.Marker | null>(null)
+  const markersRef = useRef<{ [key: number]: mapboxgl.Marker }>({})
 
   useEffect(() => {
     if (map.current) return // Initialize map only once
@@ -69,26 +77,19 @@ export default function LibraryMap({
 
     const initializeMap = () => {
       try {
-        console.log("Initializing map...")
-        console.log("Container dimensions:", mapContainer.current?.offsetWidth, mapContainer.current?.offsetHeight)
-        
         const mapStyle = "mapbox://styles/mapbox/dark-v11"
-        console.log("Using map style:", mapStyle)
         
         map.current = new mapboxgl.Map({
           container: mapContainer.current!,
           style: mapStyle,
-          center: BERLIN_CENTER, // Use Berlin center
-          zoom: 11, // Adjusted initial zoom level
+          center: BERLIN_CENTER,
+          zoom: 11,
           pitch: 45,
           bearing: -17.6,
           antialias: true
         })
 
         map.current.on("style.load", () => {
-          console.log("Map style loaded")
-          
-          // Add 3D building layer
           if (map.current!.getLayer('building')) {
             map.current!.removeLayer('building');
           }
@@ -118,94 +119,116 @@ export default function LibraryMap({
         })
 
         map.current.on("load", () => {
-          console.log("Map loaded successfully")
           setMapLoaded(true)
-          
-          // Add blue circle marker for Berlin center
-          new mapboxgl.Marker({
-            element: createCircleMarker('#0000FF', false), // Add the second argument
-            anchor: 'center'
-          })
-            .setLngLat(BERLIN_CENTER)
-            .addTo(map.current!)
-
-          // Add library markers
-          libraries.forEach((library) => {
-            const isOpen = isLibraryOpen(library.workingHours)
-            const color = isOpen ? "#13DE83" : "#8D8D8D"
-            const isSelected = library.id === selectedLibraryId
-
-            new mapboxgl.Marker(createCircleMarker(color, isSelected))
-              .setLngLat(library.coordinates as [number, number])
-              .addTo(map.current!)
-          })
+          addLibraryMarkers()
         })
 
-        map.current.on("error", (e) => {
-          console.error("Mapbox error:", e)
-          setError(`An error occurred while loading the map: ${e.error.message}`)
-        })
-
-        console.log("Map object:", map.current)
       } catch (err) {
         console.error("Error initializing map:", err)
         setError(`Failed to initialize the map: ${err instanceof Error ? err.message : String(err)}`)
       }
     }
 
-    // Delay map initialization
     const timer = setTimeout(initializeMap, 100)
 
-    // Cleanup function
     return () => {
       clearTimeout(timer)
       if (map.current) {
-        console.log("Removing map")
         map.current.remove()
       }
     }
-  }, []) // Empty dependency array to run only once
+  }, [])
+
+  const addLibraryMarkers = () => {
+    if (!map.current || !mapLoaded) return
+
+    // Remove existing markers
+    Object.values(markersRef.current).forEach(marker => marker.remove())
+    markersRef.current = {}
+
+    // Add library markers
+    libraries.forEach((library) => {
+      const status = getLibraryStatus(library.workingHours)
+      const isSelected = library.id === selectedLibraryId
+
+      const el = createCircleMarker(status, isSelected)
+      
+      // Add click handler to marker element
+      el.addEventListener('click', () => {
+        setLibraryCoordinates(library.coordinates as [number, number])
+        setSelectedLibraryId(library.id)
+        setOpenAccordionItem(`item-${library.id}`)
+      })
+
+      const marker = new mapboxgl.Marker({ element: el })
+        .setLngLat(library.coordinates as [number, number])
+        .addTo(map.current!)
+
+      markersRef.current[library.id] = marker
+    })
+  }
+
+  useEffect(() => {
+    addLibraryMarkers()
+  }, [mapLoaded, selectedLibraryId])
 
   useEffect(() => {
     if (map.current && libraryCoordinates) {
       map.current.flyTo({
         center: libraryCoordinates,
-        zoom: 14 // Adjusted zoom level
+        zoom: 14
       });
     }
   }, [libraryCoordinates]);
 
-  const markersRef = useRef<{ [key: number]: mapboxgl.Marker }>({})
-
   useEffect(() => {
-    if (map.current && mapLoaded) {
-      // Remove existing markers
-      Object.values(markersRef.current).forEach(marker => marker.remove())
-      markersRef.current = {}
+    if (map.current && mapLoaded && userLocation) {
+      if (userMarkerRef.current) {
+        userMarkerRef.current.remove()
+      }
 
-      // Add library markers
-      libraries.forEach((library) => {
-        const isOpen = isLibraryOpen(library.workingHours)
-        const color = isOpen ? "#13DE83" : "#8D8D8D"
-        const isSelected = library.id === selectedLibraryId
-
-        const marker = new mapboxgl.Marker(createCircleMarker(color, isSelected))
-          .setLngLat(library.coordinates as [number, number])
-          .addTo(map.current!)
-
-        markersRef.current[library.id] = marker
+      userMarkerRef.current = new mapboxgl.Marker({
+        element: createCircleMarker('#0000FF', false),
+        anchor: 'center'
       })
+        .setLngLat(userLocation)
+        .addTo(map.current);
+
+      map.current.flyTo({
+        center: userLocation,
+        zoom: 11
+      });
     }
-  }, [mapLoaded, selectedLibraryId])
+  }, [mapLoaded, userLocation]);
 
   // Function to create a circular marker
-  const createCircleMarker = (color: string, isSelected: boolean) => {
+  const createCircleMarker = (status: 'Open' | 'Closed' | 'Opens Soon' | 'Closes Soon' | string, isSelected: boolean) => {
     const el = document.createElement('div');
     el.className = 'marker';
-    el.style.backgroundColor = color;
     el.style.width = isSelected ? '12px' : '10px';
     el.style.height = isSelected ? '12px' : '10px';
     el.style.borderRadius = '50%';
+    el.style.cursor = 'pointer';
+    
+    if (typeof status === 'string' && status.startsWith('#')) {
+      el.style.backgroundColor = status;
+    } else {
+      switch (status) {
+        case 'Open':
+          el.style.backgroundColor = '#13DE83';
+          break;
+        case 'Closed':
+          el.style.backgroundColor = '#8D8D8D';
+          break;
+        case 'Opens Soon':
+          el.style.background = 'linear-gradient(to right, #8D8D8D 50%, #13DE83 50%)';
+          break;
+        case 'Closes Soon':
+          el.style.backgroundColor = '#FFA500';
+          break;
+      }
+    }
+
     if (isSelected) {
       el.style.border = '3px solid white';
       el.style.boxSizing = 'content-box';

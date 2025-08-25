@@ -70,15 +70,13 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <head />
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased",
-          "dark" // Add this class to force dark mode
+          "min-h-screen bg-background font-sans antialiased"
         )}
       >
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
+          defaultTheme="light"
           enableSystem={false}
-          forcedTheme="dark" // Add this prop to force dark theme
           disableTransitionOnChange
         >
           {children}
