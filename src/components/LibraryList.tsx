@@ -97,35 +97,38 @@ export default function LibraryList({
 
   // Function to scroll to the open accordion item
   useEffect(() => {
-    if (openAccordionItem && containerRef.current && logoRef.current) {
-      const element = document.querySelector(`[data-value="${openAccordionItem}"]`);
-      if (element) {
-        const container = containerRef.current;
-        const logo = logoRef.current;
-        
-        // Get the dimensions
-        const elementRect = element.getBoundingClientRect();
-        const containerRect = container.getBoundingClientRect();
-        const logoHeight = logo.offsetHeight;
-        
-        // Calculate the ideal position (logo height + padding)
-        const targetPosition = logoHeight + 20;
-        
-        // Calculate how far we need to scroll
-        const currentPosition = elementRect.top - containerRect.top;
-        const scrollAmount = container.scrollTop + (currentPosition - targetPosition);
-        
-        // Calculate the maximum scroll position
-        const maxScroll = container.scrollHeight - container.clientHeight;
-        
-        // Ensure we don't scroll beyond bounds
-        const finalScrollPosition = Math.max(0, Math.min(scrollAmount, maxScroll));
-        
-        container.scrollTo({
-          top: finalScrollPosition,
-          behavior: 'smooth'
-        });
-      }
+    if (openAccordionItem && containerRef.current) {
+      // Use a small delay to ensure the accordion has opened
+      const timeoutId = setTimeout(() => {
+        const element = document.querySelector(`[data-value="${openAccordionItem}"]`);
+        if (element && containerRef.current) {
+          const container = containerRef.current;
+          
+          // Get element position relative to container
+          const elementRect = element.getBoundingClientRect();
+          const containerRect = container.getBoundingClientRect();
+          
+          // Calculate if element is visible
+          const elementTop = elementRect.top - containerRect.top;
+          const elementBottom = elementRect.bottom - containerRect.top;
+          const containerHeight = container.clientHeight;
+          
+          // Check if element is fully visible
+          const isVisible = elementTop >= 0 && elementBottom <= containerHeight;
+          
+          if (!isVisible) {
+            // Scroll to position the element at the top with some padding
+            const targetScrollTop = container.scrollTop + elementTop - 20;
+            
+            container.scrollTo({
+              top: Math.max(0, targetScrollTop),
+              behavior: 'smooth'
+            });
+          }
+        }
+      }, 50); // Small delay to ensure DOM is updated
+      
+      return () => clearTimeout(timeoutId);
     }
   }, [openAccordionItem]);
 
