@@ -25,4 +25,5 @@ export interface Library {
   professionalAtmosphere: number
   ventilation: number
   cellReception: number
+  googlemaps?: string
 }
