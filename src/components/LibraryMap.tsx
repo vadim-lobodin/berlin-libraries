@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react"
 import mapboxgl from "mapbox-gl"
 import "mapbox-gl/dist/mapbox-gl.css"
 import libraries from "../data/libraries.json"
-import { getLibraryStatus, BERLIN_CENTER, type LibraryStatus } from "../lib/library-utils"
+import { getLibraryStatus, type LibraryStatus } from "../lib/library-utils"
 
 const mapboxToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN || ""
 
@@ -97,6 +97,7 @@ export default function LibraryMap({
 
   useEffect(() => {
     if (map.current) return // Initialize map only once
+    if (!userLocation) return // Wait for user location before initializing
 
     if (!mapboxgl.accessToken) {
       console.error("Mapbox access token is missing")
@@ -111,7 +112,7 @@ export default function LibraryMap({
         map.current = new mapboxgl.Map({
           container: mapContainer.current!,
           style: "mapbox://styles/mapbox/dark-v11",
-          center: BERLIN_CENTER,
+          center: userLocation,
           zoom: 11,
           pitch: 45,
           bearing: -17.6,
@@ -165,7 +166,7 @@ export default function LibraryMap({
         map.current.remove()
       }
     }
-  }, [])
+  }, [userLocation])
 
   // Create markers once when map is loaded
   useEffect(() => {
@@ -177,6 +178,7 @@ export default function LibraryMap({
     libraries.forEach((library) => {
       const status = getLibraryStatus(library.workingHours)
       const el = createCircleMarker(status, false)
+      el.style.animation = `markerFadeIn 1.4s ease-out both`
 
       el.addEventListener('click', () => {
         callbacksRef.current.setLibraryCoordinates(library.coordinates as [number, number])
@@ -238,11 +240,6 @@ export default function LibraryMap({
       })
         .setLngLat(userLocation)
         .addTo(map.current);
-
-      map.current.flyTo({
-        center: userLocation,
-        zoom: 11
-      });
     }
   }, [mapLoaded, userLocation]);
 

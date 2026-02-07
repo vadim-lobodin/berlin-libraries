@@ -7,6 +7,7 @@ import { Library } from "../types/library"
 import LogoSVG from "../media/logotype.svg"
 import Image from "next/image"
 import Indicator from './Indicator'
+import { motion } from 'motion/react'
 import { getLibraryStatus, calculateDistance, BERLIN_CENTER } from "../lib/library-utils"
 
 interface LibraryListProps {
@@ -20,6 +21,25 @@ interface LibraryListProps {
 interface SortedLibraryEntry {
   library: Library
   distance: number
+}
+
+const listVariants = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.5
+    }
+  }
+}
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] as const }
+  }
 }
 
 const renderInfoItem = (label: string, value: string | number | React.ReactNode) => (
@@ -94,68 +114,70 @@ export default function LibraryList({
           height={46}
         />
       </div>
-      <div>
-        <Accordion
-          type="single"
-          collapsible
-          className="w-full"
-          value={openAccordionItem || undefined}
-          onValueChange={setOpenAccordionItem}
-        >
+      <Accordion
+        type="single"
+        collapsible
+        className="w-full"
+        value={openAccordionItem || undefined}
+        onValueChange={setOpenAccordionItem}
+        asChild
+      >
+        <motion.div variants={listVariants} initial="hidden" animate="show">
           {sortedLibraries.map(({ library, distance }) => (
-            <AccordionItem
-              key={library.id}
-              value={`item-${library.id}`}
-              data-value={`item-${library.id}`}
-              onClick={() => {
-                setLibraryCoordinates(library.coordinates as [number, number])
-                setSelectedLibraryId(library.id)
-                setOpenAccordionItem(`item-${library.id}`)
-              }}
-              className="border-b border-border"
-            >
-              <AccordionTrigger className="px-4 py-2 md:py-4 hover:bg-accent hover:text-accent-foreground font-light flex justify-between items-start no-chevron">
-                <span className="text-left text-sm md:text-base">{library.name}</span>
-                <span className="text-gray-500 text-xs md:text-sm ml-2 flex-shrink-0">
-                  {distance.toFixed(1)} km
-                </span>
-              </AccordionTrigger>
-              <AccordionContent className="px-4 py-2 bg-card text-card-foreground">
-                <div className="flex flex-wrap">
-                  <div className="w-1/2 pr-2">
-                    {renderInfoItem("Address", library.address)}
-                    {renderInfoItem("Status", getLibraryStatus(library.workingHours))}
-                    {renderInfoItem("Conference Areas", library.conferenceAreas)}
-                    {renderInfoItem("Cafe", library.cafe)}
-                    {renderInfoItem("Food Options Nearby", library.foodOptionsNearby)}
-                    {renderInfoItem("Lockers", library.lockers)}
-                    {renderInfoItem("Meeting Rooms", library.meetingRooms)}
-                    {renderInfoItem("Phone Call Policy", library.phoneCallPolicy)}
-                    {library.timeLimits && renderInfoItem("Time Limits", library.timeLimits)}
+            <motion.div key={library.id} variants={itemVariants}>
+              <AccordionItem
+                value={`item-${library.id}`}
+                data-value={`item-${library.id}`}
+                onClick={() => {
+                  setLibraryCoordinates(library.coordinates as [number, number])
+                  setSelectedLibraryId(library.id)
+                  setOpenAccordionItem(`item-${library.id}`)
+                }}
+                className="border-b border-border"
+              >
+                <AccordionTrigger className="px-4 py-2 md:py-4 hover:bg-accent hover:text-accent-foreground font-light flex justify-between items-start no-chevron">
+                  <span className="text-left text-sm md:text-base">{library.name}</span>
+                  <span className="text-gray-500 text-xs md:text-sm ml-2 flex-shrink-0">
+                    {distance.toFixed(1)} km
+                  </span>
+                </AccordionTrigger>
+                <AccordionContent className="px-4 py-2 bg-card text-card-foreground">
+                  <div className="flex flex-wrap">
+                    <div className="w-1/2 pr-2">
+                      {renderInfoItem("Address", library.address)}
+                      {renderInfoItem("Status", getLibraryStatus(library.workingHours))}
+                      {renderInfoItem("Conference Areas", library.conferenceAreas)}
+                      {renderInfoItem("Cafe", library.cafe)}
+                      {renderInfoItem("Food Options Nearby", library.foodOptionsNearby)}
+                      {renderInfoItem("Lockers", library.lockers)}
+                      {renderInfoItem("Meeting Rooms", library.meetingRooms)}
+                      {renderInfoItem("Phone Call Policy", library.phoneCallPolicy)}
+                      {library.timeLimits && renderInfoItem("Time Limits", library.timeLimits)}
+                    </div>
+                    <div className="w-1/2 pl-2">
+                      {renderInfoItem("Workspace Setup", <Indicator value={library.workspaceSetup} max={5} />)}
+                      {renderInfoItem("Power Outlets", <Indicator value={library.powerOutlets} max={5} />)}
+                      {renderInfoItem("Ventilation", <Indicator value={library.ventilation} max={5} />)}
+                      {renderInfoItem("Wifi Quality", <Indicator value={library.wifiQuality} max={5} />)}
+                      {renderInfoItem("Atmosphere", <Indicator value={library.professionalAtmosphere} max={5} />)}
+                      {renderInfoItem("Cell Reception", <Indicator value={library.cellReception} max={5} />)}
+                      {renderInfoItem("Working Hours", (
+                        <ul className="space-y-1">
+                          {Object.entries(library.workingHours).map(([day, hours]) => (
+                            <li key={day} className="capitalize leading-5">
+                              {day}: {hours}
+                            </li>
+                          ))}
+                        </ul>
+                      ))}
+                    </div>
                   </div>
-                  <div className="w-1/2 pl-2">
-                    {renderInfoItem("Workspace Setup", <Indicator value={library.workspaceSetup} max={5} />)}
-                    {renderInfoItem("Power Outlets", <Indicator value={library.powerOutlets} max={5} />)}
-                    {renderInfoItem("Ventilation", <Indicator value={library.ventilation} max={5} />)}
-                    {renderInfoItem("Wifi Quality", <Indicator value={library.wifiQuality} max={5} />)}
-                    {renderInfoItem("Atmosphere", <Indicator value={library.professionalAtmosphere} max={5} />)}
-                    {renderInfoItem("Cell Reception", <Indicator value={library.cellReception} max={5} />)}
-                    {renderInfoItem("Working Hours", (
-                      <ul className="space-y-1">
-                        {Object.entries(library.workingHours).map(([day, hours]) => (
-                          <li key={day} className="capitalize leading-5">
-                            {day}: {hours}
-                          </li>
-                        ))}
-                      </ul>
-                    ))}
-                  </div>
-                </div>
-              </AccordionContent>
-            </AccordionItem>
+                </AccordionContent>
+              </AccordionItem>
+            </motion.div>
           ))}
-        </Accordion>
-      </div>
+        </motion.div>
+      </Accordion>
     </div>
   )
 }

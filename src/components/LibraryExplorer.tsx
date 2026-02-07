@@ -4,6 +4,7 @@ import LibraryList from "./LibraryList"
 import dynamic from 'next/dynamic'
 import { useState, useEffect } from 'react'
 import { useUserLocation } from '../hooks/useUserLocation'
+import { motion } from 'motion/react'
 
 const LibraryMap = dynamic(() => import('./LibraryMap'), {
   ssr: false,
@@ -27,7 +28,12 @@ export default function LibraryExplorer() {
 
   return (
     <>
-      <div className="absolute inset-0">
+      <motion.div
+        className="absolute inset-0"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.4, ease: "easeOut" }}
+      >
         <LibraryMap
           libraryCoordinates={libraryCoordinates}
           selectedLibraryId={selectedLibraryId}
@@ -37,8 +43,18 @@ export default function LibraryExplorer() {
           setOpenAccordionItem={setOpenAccordionItem}
           statusTick={statusTick}
         />
-      </div>
-      <div className="absolute left-1 right-1 bottom-1 md:left-2 md:top-2 md:bottom-2 w-[calc(100%-8px)] md:w-1/3 md:max-w-md bg-background/80 backdrop-blur-sm overflow-hidden rounded-t-lg md:rounded-lg shadow-lg h-1/2 md:h-auto">
+      </motion.div>
+      <motion.div
+        className="absolute left-1 right-1 bottom-1 md:left-2 md:top-2 md:bottom-2 w-[calc(100%-8px)] md:w-1/3 md:max-w-md bg-background/80 backdrop-blur-sm overflow-hidden rounded-t-lg md:rounded-lg shadow-lg h-1/2 md:h-auto"
+        initial={{ opacity: 0, scale: 0.95, y: 30 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{
+          duration: 0.8,
+          ease: [0.25, 0.1, 0.25, 1],
+          scale: { type: "spring", visualDuration: 0.8, bounce: 0.2 },
+          y: { type: "spring", visualDuration: 0.8, bounce: 0.15 },
+        }}
+      >
         <LibraryList
           setLibraryCoordinates={setLibraryCoordinates}
           setSelectedLibraryId={setSelectedLibraryId}
@@ -46,11 +62,16 @@ export default function LibraryExplorer() {
           openAccordionItem={openAccordionItem}
           setOpenAccordionItem={setOpenAccordionItem}
         />
-      </div>
+      </motion.div>
       {error && (
-        <div className="absolute top-0 left-0 right-0 bg-red-500 text-white p-2 text-center">
+        <motion.div
+          className="absolute top-0 left-0 right-0 bg-red-500 text-white p-2 text-center"
+          initial={{ y: -50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ type: "spring", damping: 20 }}
+        >
           {error}
-        </div>
+        </motion.div>
       )}
     </>
   )
