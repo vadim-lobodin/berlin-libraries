@@ -7,8 +7,7 @@ import { Library } from "../types/library"
 import LogoSVG from "../media/logotype.svg"
 import Image from "next/image"
 import Indicator from './Indicator'
-import { cn } from "../lib/utils"
-import { format, parse, isWithinInterval, addHours, subHours } from 'date-fns'
+import { getLibraryStatus, calculateDistance, BERLIN_CENTER } from "../lib/library-utils"
 
 interface LibraryListProps {
   setLibraryCoordinates: (coordinates: [number, number]) => void
@@ -18,52 +17,9 @@ interface LibraryListProps {
   setOpenAccordionItem: (value: string | null) => void
 }
 
-// Berlin center coordinates
-const BERLIN_CENTER: [number, number] = [52.520008, 13.404954];
-
-// Function to calculate distance between two points
-function calculateDistance(lat1: number, lon1: number, lat2: number, lon2: number): number {
-  const R = 6371; // Radius of the Earth in km
-  const dLat = deg2rad(lat2 - lat1);
-  const dLon = deg2rad(lon2 - lon1);
-  const a = 
-    Math.sin(dLat/2) * Math.sin(dLat/2) +
-    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
-    Math.sin(dLon/2) * Math.sin(dLon/2)
-  ; 
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
-  const d = R * c; // Distance in km
-  return d;
-}
-
-function deg2rad(deg: number): number {
-  return deg * (Math.PI/180)
-}
-
-const getLibraryStatus = (workingHours: { [key: string]: string }): 'Open' | 'Closed' | 'Opens Soon' | 'Closes Soon' => {
-  const now = new Date()
-  const dayOfWeek = format(now, 'EEEE').toLowerCase()
-  const currentTime = format(now, 'HH:mm')
-
-  const todayHours = workingHours[dayOfWeek]
-  if (todayHours === "Closed") return "Closed"
-
-  const [openTime, closeTime] = todayHours.split(" - ")
-  const openDateTime = parse(openTime, 'HH:mm', now)
-  const closeDateTime = parse(closeTime, 'HH:mm', now)
-
-  if (isWithinInterval(now, { start: openDateTime, end: closeDateTime })) {
-    if (isWithinInterval(now, { start: subHours(closeDateTime, 1), end: closeDateTime })) {
-      return "Closes Soon"
-    }
-    return "Open"
-  }
-
-  if (isWithinInterval(now, { start: subHours(openDateTime, 1), end: openDateTime })) {
-    return "Opens Soon"
-  }
-
-  return "Closed"
+interface SortedLibraryEntry {
+  library: Library
+  distance: number
 }
 
 const renderInfoItem = (label: string, value: string | number | React.ReactNode) => (
@@ -73,108 +29,84 @@ const renderInfoItem = (label: string, value: string | number | React.ReactNode)
   </>
 );
 
-export default function LibraryList({ 
+export default function LibraryList({
   setLibraryCoordinates,
   setSelectedLibraryId,
   userLocation,
   openAccordionItem,
   setOpenAccordionItem
 }: LibraryListProps) {
-  const [hoveredLibrary, setHoveredLibrary] = useState<number | null>(null)
-  const [sortedLibraries, setSortedLibraries] = useState<Library[]>([])
+  const [sortedLibraries, setSortedLibraries] = useState<SortedLibraryEntry[]>([])
   const containerRef = useRef<HTMLDivElement>(null)
-  const logoRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const sorted = [...libraries].sort((a, b) => {
-      const referencePoint = userLocation || BERLIN_CENTER;
-      const distA = calculateDistance(referencePoint[0], referencePoint[1], a.coordinates[0], a.coordinates[1]);
-      const distB = calculateDistance(referencePoint[0], referencePoint[1], b.coordinates[0], b.coordinates[1]);
-      return distA - distB;
-    });
-    setSortedLibraries(sorted as Library[]);
+    const referencePoint = userLocation || BERLIN_CENTER;
+    const withDistance = libraries.map(lib => ({
+      library: lib as Library,
+      distance: calculateDistance(referencePoint[1], referencePoint[0], lib.coordinates[1], lib.coordinates[0])
+    }));
+    withDistance.sort((a, b) => a.distance - b.distance);
+    setSortedLibraries(withDistance);
   }, [userLocation]);
 
-  // Function to scroll to the open accordion item
+  // Scroll to the open accordion item after accordion animation completes
   useEffect(() => {
-    if (openAccordionItem && containerRef.current) {
-      // Use a small delay to ensure the accordion has opened
-      const timeoutId = setTimeout(() => {
-        const container = containerRef.current;
-        if (!container) return;
+    if (!openAccordionItem || !containerRef.current) return
 
-        // Try multiple selector strategies to find the accordion item
-        let accordionItem = document.querySelector(`[data-value="${openAccordionItem}"]`);
-        
-        // Fallback: look within our container specifically
-        if (!accordionItem) {
-          accordionItem = container.querySelector(`[data-value="${openAccordionItem}"]`);
-        }
-        
-        if (accordionItem) {
-          // Try multiple strategies to find the trigger (header)
-          let trigger = accordionItem.querySelector('[data-radix-collection-item]') || 
-                       accordionItem.querySelector('button') ||
-                       accordionItem.querySelector('[data-state]') ||
-                       accordionItem.children[0]; // Fallback to first child
-          
-          if (trigger) {
-            const triggerRect = trigger.getBoundingClientRect();
-            const containerRect = container.getBoundingClientRect();
-            const triggerTop = triggerRect.top - containerRect.top;
-            
-            // Always scroll to ensure header is at the top, regardless of current position
-            // This prevents the issue where subsequent clicks don't scroll properly
-            const targetScrollTop = container.scrollTop + triggerTop - 15;
-            
-            container.scrollTo({
-              top: Math.max(0, targetScrollTop),
-              behavior: 'smooth'
-            });
-          } else {
-            // Fallback: scroll to the accordion item itself
-            const itemRect = accordionItem.getBoundingClientRect();
-            const containerRect = container.getBoundingClientRect();
-            const itemTop = itemRect.top - containerRect.top;
-            const targetScrollTop = container.scrollTop + itemTop - 15;
-            
-            container.scrollTo({
-              top: Math.max(0, targetScrollTop),
-              behavior: 'smooth'
-            });
-          }
-        }
-      }, 150); // Increased delay for more reliable DOM updates
-      
-      return () => clearTimeout(timeoutId);
-    }
+    // Wait for accordion animation (200ms) to finish before measuring
+    const timer = setTimeout(() => {
+      const container = containerRef.current;
+      if (!container) return;
+
+      const accordionItem = container.querySelector(`[data-value="${openAccordionItem}"]`);
+      if (!accordionItem) return;
+
+      const trigger = accordionItem.querySelector('[data-radix-collection-item]') ||
+                     accordionItem.querySelector('button') ||
+                     accordionItem.children[0];
+
+      const target = trigger || accordionItem;
+      const targetRect = target.getBoundingClientRect();
+      const containerRect = container.getBoundingClientRect();
+
+      // Account for sticky logo header on desktop
+      const stickyHeader = container.querySelector(':scope > .sticky');
+      const stickyHeight = stickyHeader ? stickyHeader.getBoundingClientRect().height : 0;
+
+      const scrollTarget = container.scrollTop + targetRect.top - containerRect.top - stickyHeight - 8;
+
+      container.scrollTo({
+        top: Math.max(0, scrollTarget),
+        behavior: 'smooth'
+      });
+    }, 300);
+
+    return () => clearTimeout(timer);
   }, [openAccordionItem]);
 
   return (
-    <div className="w-full h-full bg-background/80 text-foreground overflow-y-auto flex flex-col">
-      <div ref={logoRef} className="p-4 hidden md:block sticky top-0 z-10 bg-background/80 backdrop-blur-sm">
-        <Image 
-          src={LogoSVG} 
-          alt="Logo" 
+    <div ref={containerRef} className="w-full h-full bg-background/80 text-foreground overflow-y-auto scrollbar-hide">
+      <div className="p-4 hidden md:block sticky top-0 z-10 bg-background/80 backdrop-blur-sm">
+        <Image
+          src={LogoSVG}
+          alt="Logo"
           width={140}
           height={46}
         />
       </div>
-      <div ref={containerRef} className={cn("flex-grow overflow-y-auto", "scrollbar-hide")}>
-        <Accordion 
-          type="single" 
-          collapsible 
+      <div>
+        <Accordion
+          type="single"
+          collapsible
           className="w-full"
           value={openAccordionItem || undefined}
           onValueChange={setOpenAccordionItem}
         >
-          {sortedLibraries.map((library: Library) => (
+          {sortedLibraries.map(({ library, distance }) => (
             <AccordionItem
               key={library.id}
               value={`item-${library.id}`}
               data-value={`item-${library.id}`}
-              onMouseEnter={() => setHoveredLibrary(library.id)}
-              onMouseLeave={() => setHoveredLibrary(null)}
               onClick={() => {
                 setLibraryCoordinates(library.coordinates as [number, number])
                 setSelectedLibraryId(library.id)
@@ -185,12 +117,7 @@ export default function LibraryList({
               <AccordionTrigger className="px-4 py-2 md:py-4 hover:bg-accent hover:text-accent-foreground font-light flex justify-between items-start no-chevron">
                 <span className="text-left text-sm md:text-base">{library.name}</span>
                 <span className="text-gray-500 text-xs md:text-sm ml-2 flex-shrink-0">
-                  {calculateDistance(
-                    userLocation ? userLocation[0] : BERLIN_CENTER[0],
-                    userLocation ? userLocation[1] : BERLIN_CENTER[1],
-                    library.coordinates[0],
-                    library.coordinates[1]
-                  ).toFixed(1)} km
+                  {distance.toFixed(1)} km
                 </span>
               </AccordionTrigger>
               <AccordionContent className="px-4 py-2 bg-card text-card-foreground">
@@ -204,6 +131,7 @@ export default function LibraryList({
                     {renderInfoItem("Lockers", library.lockers)}
                     {renderInfoItem("Meeting Rooms", library.meetingRooms)}
                     {renderInfoItem("Phone Call Policy", library.phoneCallPolicy)}
+                    {library.timeLimits && renderInfoItem("Time Limits", library.timeLimits)}
                   </div>
                   <div className="w-1/2 pl-2">
                     {renderInfoItem("Workspace Setup", <Indicator value={library.workspaceSetup} max={5} />)}

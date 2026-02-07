@@ -1,11 +1,10 @@
 "use client"
 
-import { useEffect, useRef, useState, useCallback } from "react"
+import { useEffect, useRef, useState } from "react"
 import mapboxgl from "mapbox-gl"
 import "mapbox-gl/dist/mapbox-gl.css"
 import libraries from "../data/libraries.json"
-import { Library } from "../types/library"
-import { format, parse, isWithinInterval, addHours, subHours } from 'date-fns'
+import { getLibraryStatus, BERLIN_CENTER, type LibraryStatus } from "../lib/library-utils"
 
 const mapboxToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN || ""
 
@@ -18,51 +17,83 @@ interface LibraryMapProps {
   setLibraryCoordinates: (coordinates: [number, number]) => void
   setSelectedLibraryId: (id: number | null) => void
   setOpenAccordionItem: (value: string | null) => void
+  statusTick: number
 }
 
-const getLibraryStatus = (workingHours: { [key: string]: string }): 'Open' | 'Closed' | 'Opens Soon' | 'Closes Soon' => {
-  const now = new Date()
-  const dayOfWeek = format(now, 'EEEE').toLowerCase()
-  const currentTime = format(now, 'HH:mm')
+function createCircleMarker(status: LibraryStatus | string, isSelected: boolean) {
+  const el = document.createElement('div');
+  el.className = 'marker';
+  el.style.width = isSelected ? '12px' : '10px';
+  el.style.height = isSelected ? '12px' : '10px';
+  el.style.borderRadius = '50%';
+  el.style.cursor = 'pointer';
 
-  const todayHours = workingHours[dayOfWeek]
-  if (todayHours === "Closed") return "Closed"
-
-  const [openTime, closeTime] = todayHours.split(" - ")
-  const openDateTime = parse(openTime, 'HH:mm', now)
-  const closeDateTime = parse(closeTime, 'HH:mm', now)
-
-  if (isWithinInterval(now, { start: openDateTime, end: closeDateTime })) {
-    if (isWithinInterval(now, { start: subHours(closeDateTime, 1), end: closeDateTime })) {
-      return "Closes Soon"
-    }
-    return "Open"
+  if (typeof status === 'string' && status.startsWith('#')) {
+    el.style.backgroundColor = status;
+  } else {
+    applyStatusColor(el, status as LibraryStatus);
   }
 
-  if (isWithinInterval(now, { start: subHours(openDateTime, 1), end: openDateTime })) {
-    return "Opens Soon"
+  if (isSelected) {
+    el.style.border = '3px solid white';
+    el.style.boxSizing = 'content-box';
   }
-
-  return "Closed"
+  return el;
 }
 
-// Berlin center coordinates
-const BERLIN_CENTER: [number, number] = [13.404954, 52.520008];
+function applyStatusColor(el: HTMLElement, status: LibraryStatus) {
+  el.style.background = '';
+  el.style.backgroundColor = '';
+  switch (status) {
+    case 'Open':
+      el.style.backgroundColor = '#13DE83';
+      break;
+    case 'Closed':
+      el.style.backgroundColor = '#8D8D8D';
+      break;
+    case 'Opens Soon':
+      el.style.background = 'linear-gradient(to right, #8D8D8D 50%, #13DE83 50%)';
+      break;
+    case 'Closes Soon':
+      el.style.backgroundColor = '#FFA500';
+      break;
+  }
+}
 
-export default function LibraryMap({ 
-  libraryCoordinates, 
+function applySelectionStyle(el: HTMLElement, isSelected: boolean) {
+  el.style.width = isSelected ? '12px' : '10px';
+  el.style.height = isSelected ? '12px' : '10px';
+  if (isSelected) {
+    el.style.border = '3px solid white';
+    el.style.boxSizing = 'content-box';
+  } else {
+    el.style.border = '';
+    el.style.boxSizing = '';
+  }
+}
+
+export default function LibraryMap({
+  libraryCoordinates,
   selectedLibraryId,
   userLocation,
   setLibraryCoordinates,
   setSelectedLibraryId,
-  setOpenAccordionItem
+  setOpenAccordionItem,
+  statusTick
 }: LibraryMapProps) {
   const mapContainer = useRef<HTMLDivElement>(null)
   const map = useRef<mapboxgl.Map | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [mapLoaded, setMapLoaded] = useState(false)
   const userMarkerRef = useRef<mapboxgl.Marker | null>(null)
-  const markersRef = useRef<{ [key: number]: mapboxgl.Marker }>({})
+  const markersRef = useRef<Record<number, mapboxgl.Marker>>({})
+  const prevSelectedIdRef = useRef<number | null>(null)
+
+  // Store callbacks in refs to avoid recreating markers when parent re-renders
+  const callbacksRef = useRef({ setLibraryCoordinates, setSelectedLibraryId, setOpenAccordionItem })
+  useEffect(() => {
+    callbacksRef.current = { setLibraryCoordinates, setSelectedLibraryId, setOpenAccordionItem }
+  })
 
   useEffect(() => {
     if (map.current) return // Initialize map only once
@@ -77,11 +108,9 @@ export default function LibraryMap({
 
     const initializeMap = () => {
       try {
-        const mapStyle = "mapbox://styles/mapbox/dark-v11"
-        
         map.current = new mapboxgl.Map({
           container: mapContainer.current!,
-          style: mapStyle,
+          style: "mapbox://styles/mapbox/dark-v11",
           center: BERLIN_CENTER,
           zoom: 11,
           pitch: 45,
@@ -93,7 +122,7 @@ export default function LibraryMap({
           if (map.current!.getLayer('building')) {
             map.current!.removeLayer('building');
           }
-          
+
           map.current!.addLayer({
             'id': '3d-buildings',
             'source': 'composite',
@@ -120,7 +149,6 @@ export default function LibraryMap({
 
         map.current.on("load", () => {
           setMapLoaded(true)
-          addLibraryMarkers()
         })
 
       } catch (err) {
@@ -139,25 +167,21 @@ export default function LibraryMap({
     }
   }, [])
 
-  const addLibraryMarkers = useCallback(() => {
+  // Create markers once when map is loaded
+  useEffect(() => {
     if (!map.current || !mapLoaded) return
 
-    // Remove existing markers
     Object.values(markersRef.current).forEach(marker => marker.remove())
     markersRef.current = {}
 
-    // Add library markers
     libraries.forEach((library) => {
       const status = getLibraryStatus(library.workingHours)
-      const isSelected = library.id === selectedLibraryId
+      const el = createCircleMarker(status, false)
 
-      const el = createCircleMarker(status, isSelected)
-      
-      // Add click handler to marker element
       el.addEventListener('click', () => {
-        setLibraryCoordinates(library.coordinates as [number, number])
-        setSelectedLibraryId(library.id)
-        setOpenAccordionItem(`item-${library.id}`)
+        callbacksRef.current.setLibraryCoordinates(library.coordinates as [number, number])
+        callbacksRef.current.setSelectedLibraryId(library.id)
+        callbacksRef.current.setOpenAccordionItem(`item-${library.id}`)
       })
 
       const marker = new mapboxgl.Marker({ element: el })
@@ -166,11 +190,32 @@ export default function LibraryMap({
 
       markersRef.current[library.id] = marker
     })
-  }, [mapLoaded, selectedLibraryId, setLibraryCoordinates, setSelectedLibraryId, setOpenAccordionItem])
+  }, [mapLoaded])
 
+  // Refresh marker colors when status changes over time
   useEffect(() => {
-    addLibraryMarkers()
-  }, [addLibraryMarkers])
+    if (!mapLoaded || statusTick === 0) return
+
+    libraries.forEach((library) => {
+      const marker = markersRef.current[library.id]
+      if (!marker) return
+      applyStatusColor(marker.getElement(), getLibraryStatus(library.workingHours))
+    })
+  }, [statusTick, mapLoaded])
+
+  // Update marker styles when selection changes (without recreating all markers)
+  useEffect(() => {
+    if (!mapLoaded) return
+
+    const prevId = prevSelectedIdRef.current
+    if (prevId !== null && markersRef.current[prevId]) {
+      applySelectionStyle(markersRef.current[prevId].getElement(), false)
+    }
+    if (selectedLibraryId !== null && markersRef.current[selectedLibraryId]) {
+      applySelectionStyle(markersRef.current[selectedLibraryId].getElement(), true)
+    }
+    prevSelectedIdRef.current = selectedLibraryId
+  }, [selectedLibraryId, mapLoaded])
 
   useEffect(() => {
     if (map.current && libraryCoordinates) {
@@ -201,41 +246,6 @@ export default function LibraryMap({
     }
   }, [mapLoaded, userLocation]);
 
-  // Function to create a circular marker
-  const createCircleMarker = (status: 'Open' | 'Closed' | 'Opens Soon' | 'Closes Soon' | string, isSelected: boolean) => {
-    const el = document.createElement('div');
-    el.className = 'marker';
-    el.style.width = isSelected ? '12px' : '10px';
-    el.style.height = isSelected ? '12px' : '10px';
-    el.style.borderRadius = '50%';
-    el.style.cursor = 'pointer';
-    
-    if (typeof status === 'string' && status.startsWith('#')) {
-      el.style.backgroundColor = status;
-    } else {
-      switch (status) {
-        case 'Open':
-          el.style.backgroundColor = '#13DE83';
-          break;
-        case 'Closed':
-          el.style.backgroundColor = '#8D8D8D';
-          break;
-        case 'Opens Soon':
-          el.style.background = 'linear-gradient(to right, #8D8D8D 50%, #13DE83 50%)';
-          break;
-        case 'Closes Soon':
-          el.style.backgroundColor = '#FFA500';
-          break;
-      }
-    }
-
-    if (isSelected) {
-      el.style.border = '3px solid white';
-      el.style.boxSizing = 'content-box';
-    }
-    return el;
-  }
-
   if (error) {
     return <div className="w-full h-full flex items-center justify-center text-red-500">{error}</div>
   }
@@ -243,11 +253,6 @@ export default function LibraryMap({
   return (
     <div className="w-full h-full">
       <div ref={mapContainer} className="w-full h-full" />
-      {!mapLoaded && (
-        <div className="absolute inset-0 flex items-center justify-center bg-gray-200">
-          Loading map...
-        </div>
-      )}
     </div>
   )
 }
