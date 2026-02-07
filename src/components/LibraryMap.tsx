@@ -16,7 +16,6 @@ interface LibraryMapProps {
   userLocation: [number, number] | null
   setLibraryCoordinates: (coordinates: [number, number]) => void
   setSelectedLibraryId: (id: number | null) => void
-  setOpenAccordionItem: (value: string | null) => void
   statusTick: number
 }
 
@@ -78,7 +77,6 @@ export default function LibraryMap({
   userLocation,
   setLibraryCoordinates,
   setSelectedLibraryId,
-  setOpenAccordionItem,
   statusTick
 }: LibraryMapProps) {
   const mapContainer = useRef<HTMLDivElement>(null)
@@ -90,9 +88,9 @@ export default function LibraryMap({
   const prevSelectedIdRef = useRef<number | null>(null)
 
   // Store callbacks in refs to avoid recreating markers when parent re-renders
-  const callbacksRef = useRef({ setLibraryCoordinates, setSelectedLibraryId, setOpenAccordionItem })
+  const callbacksRef = useRef({ setLibraryCoordinates, setSelectedLibraryId })
   useEffect(() => {
-    callbacksRef.current = { setLibraryCoordinates, setSelectedLibraryId, setOpenAccordionItem }
+    callbacksRef.current = { setLibraryCoordinates, setSelectedLibraryId }
   })
 
   useEffect(() => {
@@ -183,7 +181,6 @@ export default function LibraryMap({
       el.addEventListener('click', () => {
         callbacksRef.current.setLibraryCoordinates(library.coordinates as [number, number])
         callbacksRef.current.setSelectedLibraryId(library.id)
-        callbacksRef.current.setOpenAccordionItem(`item-${library.id}`)
       })
 
       const marker = new mapboxgl.Marker({ element: el })

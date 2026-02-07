@@ -28,7 +28,8 @@
     "phoneCallPolicy": "Designated areas",
     "professionalAtmosphere": 5,
     "ventilation": 4,
-    "cellReception": 4
+    "cellReception": 4,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Staatsbibliothek%20zu%2CPotsdamer%20Stra%C3%9Fe%2033%2C%2010785"
   },
   {
     "id": 2,
@@ -59,7 +60,8 @@
     "phoneCallPolicy": "Designated areas",
     "professionalAtmosphere": 4,
     "ventilation": 3,
-    "cellReception": 4
+    "cellReception": 4,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Amerika-Gedenkbibliothek%2CBl%C3%BCcherpl.%201%2C%2010961"
   },
   {
     "id": 3,
@@ -90,7 +92,8 @@
     "phoneCallPolicy": "Designated areas",
     "professionalAtmosphere": 5,
     "ventilation": 4,
-    "cellReception": 4
+    "cellReception": 4,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Zentral-%20und%20Landesbibliothek%2CBreite%20Str.%2030-36%2C%2010178"
   },
   {
     "id": 4,
@@ -121,7 +124,8 @@
     "phoneCallPolicy": "Designated areas",
     "professionalAtmosphere": 5,
     "ventilation": 4,
-    "cellReception": 4
+    "cellReception": 4,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Universit%C3%A4tsbibliothek%20der%20Humboldt-Universit%C3%A4t%2CUnter%20den%20Linden%206%2C%2010099"
   },
   {
     "id": 5,
@@ -152,7 +156,8 @@
     "phoneCallPolicy": "Designated areas",
     "professionalAtmosphere": 5,
     "ventilation": 4,
-    "cellReception": 4
+    "cellReception": 4,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Philologische%20Bibliothek%20der%20Freien%20Universit%C3%A4t%2CHabelschwerdter%20Allee%2045%2C%2014195"
   },
   {
     "id": 6,
@@ -183,7 +188,8 @@
     "phoneCallPolicy": "Designated areas",
     "professionalAtmosphere": 4,
     "ventilation": 3,
-    "cellReception": 4
+    "cellReception": 4,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Stadtbibliothek%20Friedrichshain-Kreuzberg%2CGr%C3%BCnberger%20Str.%2054%2C%2010245"
   },
   {
     "id": 7,
@@ -214,7 +220,8 @@
     "phoneCallPolicy": "Designated areas",
     "professionalAtmosphere": 4,
     "ventilation": 3,
-    "cellReception": 4
+    "cellReception": 4,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Stadtbibliothek%20Mitte%20-%20Philipp-Schaeffer-Bibliothek%2CBrunnenstra%C3%9Fe%20181%2C%2010119"
   },
   {
     "id": 8,
@@ -245,7 +252,8 @@
     "phoneCallPolicy": "No",
     "professionalAtmosphere": 3,
     "ventilation": 3,
-    "cellReception": 4
+    "cellReception": 4,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Stadtbibliothek%20Pankow%2Cer%20Allee%2015%2C%2013088"
   },
   {
     "id": 9,
@@ -276,7 +284,8 @@
     "phoneCallPolicy": "Designated areas",
     "professionalAtmosphere": 4,
     "ventilation": 3,
-    "cellReception": 4
+    "cellReception": 4,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Stadtbibliothek%20Charlottenburg-Wilmersdorf%2COtto-Suhr-Allee%2096%2C%2010585"
   },
   {
     "id": 12,
@@ -307,7 +316,8 @@
     "phoneCallPolicy": "No",
     "professionalAtmosphere": 3,
     "ventilation": 3,
-    "cellReception": 4
+    "cellReception": 4,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Bruno-L%C3%B6sche-Bibliothek%2CPerleberger%20Str.%2033%2C%2010559"
   },
   {
     "id": 13,
@@ -338,7 +348,8 @@
     "phoneCallPolicy": "No",
     "professionalAtmosphere": 3,
     "ventilation": 3,
-    "cellReception": 3
+    "cellReception": 3,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Bibliothek%20am%20Luisenbad%2CBadstra%C3%9Fe%2039%2C%2013357"
   },
   {
     "id": 14,
@@ -369,7 +380,8 @@
     "phoneCallPolicy": "Designated areas",
     "professionalAtmosphere": 4,
     "ventilation": 3,
-    "cellReception": 4
+    "cellReception": 4,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Bezirkszentralbibliothek%20Pablo%20Neruda%2CFrankfurter%20Allee%2014A%2C%2010247"
   },
   {
     "id": 15,
@@ -400,7 +412,8 @@
     "phoneCallPolicy": "No",
     "professionalAtmosphere": 3,
     "ventilation": 3,
-    "cellReception": 3
+    "cellReception": 3,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Heinrich-B%C3%B6ll-Bibliothek%2CGreifswalder%20Str.%2087%2C%2010409"
   },
   {
     "id": 16,
@@ -431,7 +444,8 @@
     "phoneCallPolicy": "No",
     "professionalAtmosphere": 3,
     "ventilation": 3,
-    "cellReception": 3
+    "cellReception": 3,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Kurt-Tucholsky-Bibliothek%2CEsmarchstra%C3%9Fe%2018%2C%2010407"
   },
   {
     "id": 17,
@@ -462,7 +476,8 @@
     "phoneCallPolicy": "No",
     "professionalAtmosphere": 3,
     "ventilation": 3,
-    "cellReception": 3
+    "cellReception": 3,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Hansabibliothek%2CAltonaer%20Str.%2015%2C%2010557"
   },
   {
     "id": 18,
@@ -493,7 +508,8 @@
     "phoneCallPolicy": "No",
     "professionalAtmosphere": 3,
     "ventilation": 3,
-    "cellReception": 3
+    "cellReception": 3,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Tiergarten-Bibliothek%2CTurmstra%C3%9Fe%2075%2C%2010551"
   },
   {
     "id": 20,
@@ -524,7 +540,8 @@
     "phoneCallPolicy": "No",
     "professionalAtmosphere": 3,
     "ventilation": 3,
-    "cellReception": 3
+    "cellReception": 3,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Familienbibliothek%20am%20Kotti%2CAdalbertstra%C3%9Fe%202%2C%2010999"
   },
   {
     "id": 23,
@@ -555,7 +572,8 @@
     "phoneCallPolicy": "No",
     "professionalAtmosphere": 3,
     "ventilation": 3,
-    "cellReception": 3
+    "cellReception": 3,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Bibliothek%20am%20Wasserturm%2CPrenzlauer%20Allee%20227/228%2C%2010405"
   },
   {
     "id": 25,
@@ -586,7 +604,8 @@
     "phoneCallPolicy": "No",
     "professionalAtmosphere": 3,
     "ventilation": 3,
-    "cellReception": 3
+    "cellReception": 3,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Wolfdietrich-Schnurre-Bibliothek%2CBizetstra%C3%9Fe%2041%2C%2013088"
   },
   {
     "id": 26,
@@ -617,7 +636,8 @@
     "phoneCallPolicy": "No",
     "professionalAtmosphere": 3,
     "ventilation": 3,
-    "cellReception": 3
+    "cellReception": 3,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Dietrich-Bonhoeffer-Bibliothek%2CBrandenburgische%20Str.%202%2C%2010713"
   },
   {
     "id": 27,
@@ -648,7 +668,8 @@
     "phoneCallPolicy": "No",
     "professionalAtmosphere": 3,
     "ventilation": 3,
-    "cellReception": 3
+    "cellReception": 3,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Heinrich-Schulz-Bibliothek%2CHauptstra%C3%9Fe%2040%2C%2010827"
   },
   {
     "id": 28,
@@ -679,7 +700,8 @@
     "phoneCallPolicy": "No",
     "professionalAtmosphere": 3,
     "ventilation": 3,
-    "cellReception": 3
+    "cellReception": 3,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Stadtteilbibliothek%20Halemweg%2CHalemweg%2018%2C%2013627"
   },
   {
     "id": 29,
@@ -710,7 +732,8 @@
     "phoneCallPolicy": "Designated areas",
     "professionalAtmosphere": 4,
     "ventilation": 3,
-    "cellReception": 4
+    "cellReception": 4,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Bezirkszentralbibliothek%20Spandau%2CCarl-Schurz-Stra%C3%9Fe%2013%2C%2013597"
   },
   {
     "id": 30,
@@ -741,7 +764,8 @@
     "phoneCallPolicy": "No",
     "professionalAtmosphere": 3,
     "ventilation": 3,
-    "cellReception": 3
+    "cellReception": 3,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Stadtteilbibliothek%20Falkenhagener%20Feld%2CWesterwaldstra%C3%9Fe%209%2C%2013589"
   },
   {
     "id": 31,
@@ -772,7 +796,8 @@
     "phoneCallPolicy": "No",
     "professionalAtmosphere": 3,
     "ventilation": 3,
-    "cellReception": 3
+    "cellReception": 3,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Stadtteilbibliothek%20Heerstra%C3%9Fe%2CObstallee%2022%20F%2C%2013593"
   },
   {
     "id": 32,
@@ -803,7 +828,8 @@
     "phoneCallPolicy": "No",
     "professionalAtmosphere": 3,
     "ventilation": 3,
-    "cellReception": 3
+    "cellReception": 3,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Bibliothek%20Kladow%2CSakrower%20Landstra%C3%9Fe%202%2C%2014089"
   },
   {
     "id": 33,
@@ -834,7 +860,8 @@
     "phoneCallPolicy": "Designated areas",
     "professionalAtmosphere": 4,
     "ventilation": 3,
-    "cellReception": 4
+    "cellReception": 4,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Ingeborg-Drewitz-Bibliothek%2CGrunewaldstra%C3%9Fe%203%2C%2012165"
   },
   {
     "id": 34,
@@ -865,7 +892,8 @@
     "phoneCallPolicy": "No",
     "professionalAtmosphere": 3,
     "ventilation": 3,
-    "cellReception": 3
+    "cellReception": 3,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Gottfried-Benn-Bibliothek%2CKonarskistra%C3%9Fe%206%2C%2012163"
   },
   {
     "id": 36,
@@ -896,7 +924,8 @@
     "phoneCallPolicy": "No",
     "professionalAtmosphere": 3,
     "ventilation": 3,
-    "cellReception": 3
+    "cellReception": 3,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Stadtteilbibliothek%20Lankwitz%2CBruchwitzstra%C3%9Fe%2037%2C%2012247"
   },
   {
     "id": 37,
@@ -927,7 +956,8 @@
     "phoneCallPolicy": "Designated areas",
     "professionalAtmosphere": 4,
     "ventilation": 3,
-    "cellReception": 4
+    "cellReception": 4,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Eva-Maria-Buch-Haus%2CG%C3%B6tzstra%C3%9Fe%208/10/12%2C%2012099"
   },
   {
     "id": 38,
@@ -958,7 +988,8 @@
     "phoneCallPolicy": "No",
     "professionalAtmosphere": 3,
     "ventilation": 3,
-    "cellReception": 3
+    "cellReception": 3,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Gertrud-Kolmar-Bibliothek%2CPallasstra%C3%9Fe%2027%2C%2010781"
   },
   {
     "id": 39,
@@ -989,7 +1020,8 @@
     "phoneCallPolicy": "No",
     "professionalAtmosphere": 3,
     "ventilation": 3,
-    "cellReception": 3
+    "cellReception": 3,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Stadtteilbibliothek%20Friedenau%2CNiedstra%C3%9Fe%201-2%2C%2012159"
   },
   {
     "id": 40,
@@ -1020,7 +1052,8 @@
     "phoneCallPolicy": "No",
     "professionalAtmosphere": 3,
     "ventilation": 3,
-    "cellReception": 3
+    "cellReception": 3,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Bibliothek%20am%20Bundesplatz%2CBundesallee%2087%2C%2012161"
   },
   {
     "id": 41,
@@ -1051,7 +1084,8 @@
     "phoneCallPolicy": "Designated areas",
     "professionalAtmosphere": 4,
     "ventilation": 3,
-    "cellReception": 4
+    "cellReception": 4,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Helene-Nathan-Bibliothek%2CKarl-Marx-Stra%C3%9Fe%2066%2C%2012043"
   },
   {
     "id": 43,
@@ -1082,7 +1116,8 @@
     "phoneCallPolicy": "No",
     "professionalAtmosphere": 3,
     "ventilation": 3,
-    "cellReception": 3
+    "cellReception": 3,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Stadtteilbibliothek%20Britz%2CGutschmidtstra%C3%9Fe%2033%2C%2012359"
   },
   {
     "id": 44,
@@ -1113,7 +1148,8 @@
     "phoneCallPolicy": "Designated areas",
     "professionalAtmosphere": 4,
     "ventilation": 3,
-    "cellReception": 4
+    "cellReception": 4,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Mittelpunktbibliothek%20K%C3%B6penick%2CAlter%20Markt%202%2C%2012555"
   },
   {
     "id": 45,
@@ -1144,7 +1180,8 @@
     "phoneCallPolicy": "No",
     "professionalAtmosphere": 3,
     "ventilation": 3,
-    "cellReception": 3
+    "cellReception": 3,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Stadtbibliothek%20Friedrichshagen%2CB%C3%B6lschestra%C3%9Fe%2087%2C%2012587"
   },
   {
     "id": 46,
@@ -1175,7 +1212,8 @@
     "phoneCallPolicy": "Designated areas",
     "professionalAtmosphere": 4,
     "ventilation": 3,
-    "cellReception": 4
+    "cellReception": 4,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Stadt-%20und%20Regionalbibliothek%20Treptow%2CMichael-Br%C3%BCckner-Stra%C3%9Fe%209%2C%2012439"
   },
   {
     "id": 47,
@@ -1206,7 +1244,8 @@
     "phoneCallPolicy": "No",
     "professionalAtmosphere": 3,
     "ventilation": 3,
-    "cellReception": 3
+    "cellReception": 3,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Bibliothek%20Baumschulenweg%2CKiefholzstra%C3%9Fe%20275%2C%2012437"
   },
   {
     "id": 48,
@@ -1237,7 +1276,8 @@
     "phoneCallPolicy": "No",
     "professionalAtmosphere": 3,
     "ventilation": 3,
-    "cellReception": 3
+    "cellReception": 3,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Mark-Twain-Bibliothek%2CMarzahner%20Promenade%2052-54%2C%2012679"
   },
   {
     "id": 49,
@@ -1268,7 +1308,8 @@
     "phoneCallPolicy": "No",
     "professionalAtmosphere": 3,
     "ventilation": 3,
-    "cellReception": 3
+    "cellReception": 3,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Heinrich-von-Kleist-Bibliothek%2CHavemannstra%C3%9Fe%2017B%2C%2012689"
   },
   {
     "id": 50,
@@ -1299,7 +1340,8 @@
     "phoneCallPolicy": "No",
     "professionalAtmosphere": 3,
     "ventilation": 3,
-    "cellReception": 3
+    "cellReception": 3,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Biesdorf-Bibliothek%2CAlt-Biesdorf%2055%2C%2012683"
   },
   {
     "id": 51,
@@ -1330,7 +1372,8 @@
     "phoneCallPolicy": "No",
     "professionalAtmosphere": 3,
     "ventilation": 3,
-    "cellReception": 3
+    "cellReception": 3,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Kaulsdorf-Bibliothek%2CCecilienstra%C3%9Fe%20232%2C%2012619"
   },
   {
     "id": 52,
@@ -1361,7 +1404,8 @@
     "phoneCallPolicy": "Designated areas",
     "professionalAtmosphere": 4,
     "ventilation": 3,
-    "cellReception": 4
+    "cellReception": 4,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Anna-Seghers-Bibliothek%2CPrerower%20Platz%202%2C%2013051"
   },
   {
     "id": 53,
@@ -1392,7 +1436,8 @@
     "phoneCallPolicy": "No",
     "professionalAtmosphere": 3,
     "ventilation": 3,
-    "cellReception": 3
+    "cellReception": 3,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Bodo-Uhse-Bibliothek%2CErich-Kurz-Stra%C3%9Fe%209%2C%2010319"
   },
   {
     "id": 54,
@@ -1423,7 +1468,8 @@
     "phoneCallPolicy": "No",
     "professionalAtmosphere": 3,
     "ventilation": 3,
-    "cellReception": 3
+    "cellReception": 3,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Anton-Saefkow-Bibliothek%2CAnton-Saefkow-Platz%2014%2C%2010369"
   },
   {
     "id": 56,
@@ -1454,7 +1500,8 @@
     "phoneCallPolicy": "Designated areas",
     "professionalAtmosphere": 4,
     "ventilation": 3,
-    "cellReception": 4
+    "cellReception": 4,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Humboldt-Bibliothek%2CKarolinenstra%C3%9Fe%2019%2C%2013507"
   },
   {
     "id": 57,
@@ -1485,7 +1532,8 @@
     "phoneCallPolicy": "No",
     "professionalAtmosphere": 3,
     "ventilation": 3,
-    "cellReception": 3
+    "cellReception": 3,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Stadtteilbibliothek%20Reinickendorf-Ost%2CSch%C3%B6nholzer%20Stra%C3%9Fe%209%2C%2013187"
   },
   {
     "id": 58,
@@ -1516,7 +1564,8 @@
     "phoneCallPolicy": "No",
     "professionalAtmosphere": 3,
     "ventilation": 3,
-    "cellReception": 3
+    "cellReception": 3,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Stadtteilbibliothek%20M%C3%A4rkisches%20Viertel%2CWilhelmsruher%20Damm%20142%20C%2C%2013439"
   },
   {
     "id": 59,
@@ -1547,7 +1596,8 @@
     "phoneCallPolicy": "No",
     "professionalAtmosphere": 3,
     "ventilation": 3,
-    "cellReception": 3
+    "cellReception": 3,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Bibliothek%20am%20Sch%C3%A4fersee%2CStargardtstra%C3%9Fe%2011-13%2C%2013407"
   },
   {
     "id": 60,
@@ -1578,7 +1628,8 @@
     "phoneCallPolicy": "Designated areas",
     "professionalAtmosphere": 4,
     "ventilation": 4,
-    "cellReception": 4
+    "cellReception": 4,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Ibero-Amerikanisches%20Institut%2CPotsdamer%20Stra%C3%9Fe%2037%2C%2010785"
   },
   {
     "id": 61,
@@ -1609,7 +1660,8 @@
     "phoneCallPolicy": "Designated areas",
     "professionalAtmosphere": 4,
     "ventilation": 4,
-    "cellReception": 4
+    "cellReception": 4,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Bibliothek%20des%20J%C3%BCdischen%20Museums%2CLindenstra%C3%9Fe%209-14%2C%2010969"
   },
   {
     "id": 62,
@@ -1640,7 +1692,8 @@
     "phoneCallPolicy": "Designated areas",
     "professionalAtmosphere": 4,
     "ventilation": 3,
-    "cellReception": 4
+    "cellReception": 4,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Stiftung%20Neue%20Synagoge%20Berlin-%20Centrum%20Judaicum%20Library%2COranienburger%20Stra%C3%9Fe%2028-30%2C%2010117"
   },
   {
     "id": 63,
@@ -1671,7 +1724,8 @@
     "phoneCallPolicy": "Designated areas",
     "professionalAtmosphere": 4,
     "ventilation": 4,
-    "cellReception": 4
+    "cellReception": 4,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Amerika-Haus%20Bibliothek%2CHardenbergstra%C3%9Fe%2022-24%2C%2010623"
   },
   {
     "id": 64,
@@ -1702,6 +1756,7 @@
     "phoneCallPolicy": "Designated areas",
     "professionalAtmosphere": 4,
     "ventilation": 4,
-    "cellReception": 4
+    "cellReception": 4,
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Goethe-Institut%20Library%2CNeue%20Sch%C3%B6nhauser%20Stra%C3%9Fe%2020%2C%2010178"
   }
 ]

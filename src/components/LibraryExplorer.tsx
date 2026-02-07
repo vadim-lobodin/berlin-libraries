@@ -1,10 +1,14 @@
 "use client"
 
 import LibraryList from "./LibraryList"
+import LibraryDetail from "./LibraryDetail"
 import dynamic from 'next/dynamic'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { useUserLocation } from '../hooks/useUserLocation'
 import { motion } from 'motion/react'
+import libraries from "../data/libraries.json"
+import { Library } from "../types/library"
+import { calculateDistance, BERLIN_CENTER } from "../lib/library-utils"
 
 const LibraryMap = dynamic(() => import('./LibraryMap'), {
   ssr: false,
@@ -14,7 +18,6 @@ const LibraryMap = dynamic(() => import('./LibraryMap'), {
 export default function LibraryExplorer() {
   const [libraryCoordinates, setLibraryCoordinates] = useState<[number, number] | null>(null)
   const [selectedLibraryId, setSelectedLibraryId] = useState<number | null>(null)
-  const [openAccordionItem, setOpenAccordionItem] = useState<string | null>(null)
   const [statusTick, setStatusTick] = useState(0)
   const { userLocation, error } = useUserLocation()
 
@@ -25,6 +28,25 @@ export default function LibraryExplorer() {
     }, 60_000)
     return () => clearInterval(interval)
   }, [])
+
+  // Pre-compute distances so we can pass to the detail view
+  const libraryDistances = useMemo(() => {
+    const ref = userLocation || BERLIN_CENTER
+    const map: Record<number, { library: Library; distance: number }> = {}
+    libraries.forEach(lib => {
+      map[lib.id] = {
+        library: lib as Library,
+        distance: calculateDistance(ref[1], ref[0], lib.coordinates[1], lib.coordinates[0])
+      }
+    })
+    return map
+  }, [userLocation])
+
+  const selectedEntry = selectedLibraryId !== null ? libraryDistances[selectedLibraryId] : null
+
+  const handleBack = () => {
+    setSelectedLibraryId(null)
+  }
 
   return (
     <>
@@ -40,7 +62,6 @@ export default function LibraryExplorer() {
           userLocation={userLocation}
           setLibraryCoordinates={setLibraryCoordinates}
           setSelectedLibraryId={setSelectedLibraryId}
-          setOpenAccordionItem={setOpenAccordionItem}
           statusTick={statusTick}
         />
       </motion.div>
@@ -55,13 +76,19 @@ export default function LibraryExplorer() {
           y: { type: "spring", visualDuration: 0.8, bounce: 0.15 },
         }}
       >
-        <LibraryList
-          setLibraryCoordinates={setLibraryCoordinates}
-          setSelectedLibraryId={setSelectedLibraryId}
-          userLocation={userLocation}
-          openAccordionItem={openAccordionItem}
-          setOpenAccordionItem={setOpenAccordionItem}
-        />
+        {selectedEntry ? (
+          <LibraryDetail
+            library={selectedEntry.library}
+            distance={selectedEntry.distance}
+            onBack={handleBack}
+          />
+        ) : (
+          <LibraryList
+            setLibraryCoordinates={setLibraryCoordinates}
+            setSelectedLibraryId={setSelectedLibraryId}
+            userLocation={userLocation}
+          />
+        )}
       </motion.div>
       {error && (
         <motion.div
