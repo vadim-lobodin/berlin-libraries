@@ -1,8 +1,7 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { motion } from "motion/react"
-import Image from "next/image"
 
 const PHOTO_COUNT = 5
 const OFFSET = 4       // % shift per card in the stack
@@ -13,12 +12,34 @@ interface PhotoCarouselProps {
   libraryId: number
 }
 
+function usePreloadImages(srcs: string[]) {
+  const [loaded, setLoaded] = useState(false)
+
+  useEffect(() => {
+    let cancelled = false
+    const promises = srcs.map(
+      src => new Promise<void>((resolve) => {
+        const img = new window.Image()
+        img.onload = () => resolve()
+        img.onerror = () => resolve() // don't block on missing images
+        img.src = src
+      })
+    )
+    Promise.all(promises).then(() => {
+      if (!cancelled) setLoaded(true)
+    })
+    return () => { cancelled = true }
+  }, [srcs])
+
+  return loaded
+}
+
 export default function PhotoCarousel({ libraryId }: PhotoCarouselProps) {
+  const photos = Array.from({ length: PHOTO_COUNT }, (_, i) => `/photos/${libraryId}_${i + 1}.jpg`)
+  const loaded = usePreloadImages(photos)
+
   const [cards, setCards] = useState(() =>
-    Array.from({ length: PHOTO_COUNT }, (_, i) => ({
-      id: i,
-      src: `/photos/${libraryId}_${i + 1}.jpg`,
-    }))
+    photos.map((src, i) => ({ id: i, src }))
   )
 
   const moveToEnd = (index: number) => {
@@ -28,6 +49,15 @@ export default function PhotoCarousel({ libraryId }: PhotoCarouselProps) {
       next.push(card)
       return next
     })
+  }
+
+  if (!loaded) {
+    return (
+      <div
+        className="relative w-full rounded-lg bg-muted/30 animate-pulse"
+        style={{ paddingBottom: `${75 + (PHOTO_COUNT - 1) * OFFSET}%` }}
+      />
+    )
   }
 
   return (
@@ -44,6 +74,7 @@ export default function PhotoCarousel({ libraryId }: PhotoCarouselProps) {
             className="absolute left-0 w-full overflow-hidden rounded-lg"
             style={{ aspectRatio: "4/3" }}
             layout
+            initial={false}
             animate={{
               top: `${cardIndex * OFFSET}%`,
               scale: 1 - cardIndex * SCALE_STEP,
@@ -59,12 +90,11 @@ export default function PhotoCarousel({ libraryId }: PhotoCarouselProps) {
             onTap={() => { if (isFront) moveToEnd(0) }}
             whileTap={isFront ? { cursor: "grabbing" } : undefined}
           >
-            <Image
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               src={card.src}
               alt={`Photo ${card.id + 1}`}
-              fill
-              className="object-cover pointer-events-none"
-              sizes="(max-width: 768px) 100vw, 400px"
+              className="absolute inset-0 w-full h-full object-cover pointer-events-none"
               draggable={false}
             />
             {isFront && (

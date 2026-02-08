@@ -5,7 +5,6 @@ import libraries from "../data/libraries.json"
 import { Library } from "../types/library"
 import LogoSVG from "../media/logotype.svg"
 import Image from "next/image"
-import { motion } from 'motion/react'
 import { calculateDistance, BERLIN_CENTER } from "../lib/library-utils"
 
 interface LibraryListProps {
@@ -17,25 +16,6 @@ interface LibraryListProps {
 export interface SortedLibraryEntry {
   library: Library
   distance: number
-}
-
-const listVariants = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.5
-    }
-  }
-}
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] as const }
-  }
 }
 
 export default function LibraryList({
@@ -65,11 +45,10 @@ export default function LibraryList({
           height={46}
         />
       </div>
-      <motion.div variants={listVariants} initial="hidden" animate="show">
+      <div>
         {sortedLibraries.map(({ library, distance }) => (
-          <motion.button
+          <button
             key={library.id}
-            variants={itemVariants}
             onClick={() => {
               setLibraryCoordinates(library.coordinates as [number, number])
               setSelectedLibraryId(library.id)
@@ -80,9 +59,9 @@ export default function LibraryList({
             <span className="text-gray-500 text-xs md:text-sm ml-2 flex-shrink-0">
               {distance.toFixed(1)} km
             </span>
-          </motion.button>
+          </button>
         ))}
-      </motion.div>
+      </div>
     </div>
   )
 }

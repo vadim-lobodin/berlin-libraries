@@ -5,7 +5,7 @@ import LibraryDetail from "./LibraryDetail"
 import dynamic from 'next/dynamic'
 import { useState, useEffect, useMemo } from 'react'
 import { useUserLocation } from '../hooks/useUserLocation'
-import { motion } from 'motion/react'
+import { motion, AnimatePresence } from 'motion/react'
 import libraries from "../data/libraries.json"
 import { Library } from "../types/library"
 import { calculateDistance, BERLIN_CENTER } from "../lib/library-utils"
@@ -65,31 +65,42 @@ export default function LibraryExplorer() {
           statusTick={statusTick}
         />
       </motion.div>
-      <motion.div
-        className="absolute left-1 right-1 bottom-1 md:left-2 md:top-2 md:bottom-2 w-[calc(100%-8px)] md:w-1/3 md:max-w-md bg-background/80 backdrop-blur-sm overflow-hidden rounded-t-lg md:rounded-lg shadow-lg h-1/2 md:h-auto"
-        initial={{ opacity: 0, scale: 0.95, y: 30 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        transition={{
-          duration: 0.8,
-          ease: [0.25, 0.1, 0.25, 1],
-          scale: { type: "spring", visualDuration: 0.8, bounce: 0.2 },
-          y: { type: "spring", visualDuration: 0.8, bounce: 0.15 },
-        }}
-      >
-        {selectedEntry ? (
-          <LibraryDetail
-            library={selectedEntry.library}
-            distance={selectedEntry.distance}
-            onBack={handleBack}
-          />
-        ) : (
-          <LibraryList
-            setLibraryCoordinates={setLibraryCoordinates}
-            setSelectedLibraryId={setSelectedLibraryId}
-            userLocation={userLocation}
-          />
-        )}
-      </motion.div>
+      <div className="absolute left-1 right-1 bottom-1 md:left-2 md:top-2 md:bottom-2 w-[calc(100%-8px)] md:w-1/3 md:max-w-md h-1/2 md:h-auto bg-background/80 backdrop-blur-sm overflow-hidden rounded-t-lg md:rounded-lg shadow-lg">
+        <AnimatePresence mode="popLayout">
+          {selectedEntry ? (
+            <motion.div
+              key="detail"
+              className="absolute inset-0"
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -30 }}
+              transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+            >
+              <LibraryDetail
+                library={selectedEntry.library}
+                distance={selectedEntry.distance}
+                onBack={handleBack}
+              />
+            </motion.div>
+          ) : (
+            <motion.div
+              key="list"
+              className="absolute inset-0"
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -30 }}
+              transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+            >
+              <LibraryList
+                setLibraryCoordinates={setLibraryCoordinates}
+                setSelectedLibraryId={setSelectedLibraryId}
+                userLocation={userLocation}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
+        <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-background/90 to-transparent pointer-events-none rounded-b-lg" />
+      </div>
       {error && (
         <motion.div
           className="absolute top-0 left-0 right-0 bg-red-500 text-white p-2 text-center"

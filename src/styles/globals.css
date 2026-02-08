@@ -90,11 +90,6 @@
   height: 100%;
 }
 
-/* Dark theme styles for Mapbox */
-.dark .mapboxgl-canvas {
-  filter: brightness(0.8) invert(1) contrast(1.2) hue-rotate(180deg) saturate(1.2);
-}
-
 .dark .mapboxgl-popup-content {
   background-color: #333;
   color: #fff;

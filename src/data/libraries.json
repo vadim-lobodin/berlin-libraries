@@ -29,7 +29,8 @@
     "professionalAtmosphere": 5,
     "ventilation": 4,
     "cellReception": 4,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Staatsbibliothek%20zu%2CPotsdamer%20Stra%C3%9Fe%2033%2C%2010785"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Staatsbibliothek%20zu%2CPotsdamer%20Stra%C3%9Fe%2033%2C%2010785",
+    "website": "https://staatsbibliothek-berlin.de"
   },
   {
     "id": 2,
@@ -61,7 +62,8 @@
     "professionalAtmosphere": 4,
     "ventilation": 3,
     "cellReception": 4,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Amerika-Gedenkbibliothek%2CBl%C3%BCcherpl.%201%2C%2010961"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Amerika-Gedenkbibliothek%2CBl%C3%BCcherpl.%201%2C%2010961",
+    "website": "https://www.zlb.de"
   },
   {
     "id": 3,
@@ -93,7 +95,8 @@
     "professionalAtmosphere": 5,
     "ventilation": 4,
     "cellReception": 4,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Zentral-%20und%20Landesbibliothek%2CBreite%20Str.%2030-36%2C%2010178"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Zentral-%20und%20Landesbibliothek%2CBreite%20Str.%2030-36%2C%2010178",
+    "website": "https://www.zlb.de"
   },
   {
     "id": 4,
@@ -125,7 +128,8 @@
     "professionalAtmosphere": 5,
     "ventilation": 4,
     "cellReception": 4,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Universit%C3%A4tsbibliothek%20der%20Humboldt-Universit%C3%A4t%2CUnter%20den%20Linden%206%2C%2010099"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Universit%C3%A4tsbibliothek%20der%20Humboldt-Universit%C3%A4t%2CUnter%20den%20Linden%206%2C%2010099",
+    "website": "https://www.ub.hu-berlin.de"
   },
   {
     "id": 5,
@@ -157,7 +161,8 @@
     "professionalAtmosphere": 5,
     "ventilation": 4,
     "cellReception": 4,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Philologische%20Bibliothek%20der%20Freien%20Universit%C3%A4t%2CHabelschwerdter%20Allee%2045%2C%2014195"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Philologische%20Bibliothek%20der%20Freien%20Universit%C3%A4t%2CHabelschwerdter%20Allee%2045%2C%2014195",
+    "website": "https://www.fu-berlin.de/sites/philbib"
   },
   {
     "id": 6,
@@ -189,7 +194,8 @@
     "professionalAtmosphere": 4,
     "ventilation": 3,
     "cellReception": 4,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Stadtbibliothek%20Friedrichshain-Kreuzberg%2CGr%C3%BCnberger%20Str.%2054%2C%2010245"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Stadtbibliothek%20Friedrichshain-Kreuzberg%2CGr%C3%BCnberger%20Str.%2054%2C%2010245",
+    "website": "https://www.berlin.de/stadtbibliothek-friedrichshain-kreuzberg"
   },
   {
     "id": 7,
@@ -221,7 +227,8 @@
     "professionalAtmosphere": 4,
     "ventilation": 3,
     "cellReception": 4,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Stadtbibliothek%20Mitte%20-%20Philipp-Schaeffer-Bibliothek%2CBrunnenstra%C3%9Fe%20181%2C%2010119"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Stadtbibliothek%20Mitte%20-%20Philipp-Schaeffer-Bibliothek%2CBrunnenstra%C3%9Fe%20181%2C%2010119",
+    "website": "https://www.berlin.de/stadtbibliothek-mitte"
   },
   {
     "id": 8,
@@ -253,7 +260,8 @@
     "professionalAtmosphere": 3,
     "ventilation": 3,
     "cellReception": 4,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Stadtbibliothek%20Pankow%2Cer%20Allee%2015%2C%2013088"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Stadtbibliothek%20Pankow%2Cer%20Allee%2015%2C%2013088",
+    "website": "https://www.berlin.de/stadtbibliothek-pankow"
   },
   {
     "id": 9,
@@ -285,7 +293,8 @@
     "professionalAtmosphere": 4,
     "ventilation": 3,
     "cellReception": 4,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Stadtbibliothek%20Charlottenburg-Wilmersdorf%2COtto-Suhr-Allee%2096%2C%2010585"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Stadtbibliothek%20Charlottenburg-Wilmersdorf%2COtto-Suhr-Allee%2096%2C%2010585",
+    "website": "https://www.berlin.de/stadtbibliothek-charlottenburg-wilmersdorf"
   },
   {
     "id": 12,
@@ -317,7 +326,8 @@
     "professionalAtmosphere": 3,
     "ventilation": 3,
     "cellReception": 4,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Bruno-L%C3%B6sche-Bibliothek%2CPerleberger%20Str.%2033%2C%2010559"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Bruno-L%C3%B6sche-Bibliothek%2CPerleberger%20Str.%2033%2C%2010559",
+    "website": "https://www.berlin.de/stadtbibliothek-mitte"
   },
   {
     "id": 13,
@@ -349,7 +359,8 @@
     "professionalAtmosphere": 3,
     "ventilation": 3,
     "cellReception": 3,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Bibliothek%20am%20Luisenbad%2CBadstra%C3%9Fe%2039%2C%2013357"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Bibliothek%20am%20Luisenbad%2CBadstra%C3%9Fe%2039%2C%2013357",
+    "website": "https://www.berlin.de/stadtbibliothek-mitte"
   },
   {
     "id": 14,
@@ -381,7 +392,8 @@
     "professionalAtmosphere": 4,
     "ventilation": 3,
     "cellReception": 4,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Bezirkszentralbibliothek%20Pablo%20Neruda%2CFrankfurter%20Allee%2014A%2C%2010247"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Bezirkszentralbibliothek%20Pablo%20Neruda%2CFrankfurter%20Allee%2014A%2C%2010247",
+    "website": "https://www.berlin.de/stadtbibliothek-friedrichshain-kreuzberg"
   },
   {
     "id": 15,
@@ -413,7 +425,8 @@
     "professionalAtmosphere": 3,
     "ventilation": 3,
     "cellReception": 3,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Heinrich-B%C3%B6ll-Bibliothek%2CGreifswalder%20Str.%2087%2C%2010409"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Heinrich-B%C3%B6ll-Bibliothek%2CGreifswalder%20Str.%2087%2C%2010409",
+    "website": "https://www.berlin.de/stadtbibliothek-pankow"
   },
   {
     "id": 16,
@@ -445,7 +458,8 @@
     "professionalAtmosphere": 3,
     "ventilation": 3,
     "cellReception": 3,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Kurt-Tucholsky-Bibliothek%2CEsmarchstra%C3%9Fe%2018%2C%2010407"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Kurt-Tucholsky-Bibliothek%2CEsmarchstra%C3%9Fe%2018%2C%2010407",
+    "website": "https://www.berlin.de/stadtbibliothek-pankow"
   },
   {
     "id": 17,
@@ -477,7 +491,8 @@
     "professionalAtmosphere": 3,
     "ventilation": 3,
     "cellReception": 3,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Hansabibliothek%2CAltonaer%20Str.%2015%2C%2010557"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Hansabibliothek%2CAltonaer%20Str.%2015%2C%2010557",
+    "website": "https://www.berlin.de/stadtbibliothek-mitte"
   },
   {
     "id": 18,
@@ -509,7 +524,8 @@
     "professionalAtmosphere": 3,
     "ventilation": 3,
     "cellReception": 3,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Tiergarten-Bibliothek%2CTurmstra%C3%9Fe%2075%2C%2010551"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Tiergarten-Bibliothek%2CTurmstra%C3%9Fe%2075%2C%2010551",
+    "website": "https://www.berlin.de/stadtbibliothek-mitte"
   },
   {
     "id": 20,
@@ -541,7 +557,8 @@
     "professionalAtmosphere": 3,
     "ventilation": 3,
     "cellReception": 3,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Familienbibliothek%20am%20Kotti%2CAdalbertstra%C3%9Fe%202%2C%2010999"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Familienbibliothek%20am%20Kotti%2CAdalbertstra%C3%9Fe%202%2C%2010999",
+    "website": "https://www.berlin.de/stadtbibliothek-friedrichshain-kreuzberg"
   },
   {
     "id": 23,
@@ -573,7 +590,8 @@
     "professionalAtmosphere": 3,
     "ventilation": 3,
     "cellReception": 3,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Bibliothek%20am%20Wasserturm%2CPrenzlauer%20Allee%20227/228%2C%2010405"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Bibliothek%20am%20Wasserturm%2CPrenzlauer%20Allee%20227/228%2C%2010405",
+    "website": "https://www.berlin.de/stadtbibliothek-pankow"
   },
   {
     "id": 25,
@@ -605,7 +623,8 @@
     "professionalAtmosphere": 3,
     "ventilation": 3,
     "cellReception": 3,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Wolfdietrich-Schnurre-Bibliothek%2CBizetstra%C3%9Fe%2041%2C%2013088"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Wolfdietrich-Schnurre-Bibliothek%2CBizetstra%C3%9Fe%2041%2C%2013088",
+    "website": "https://www.berlin.de/stadtbibliothek-pankow"
   },
   {
     "id": 26,
@@ -637,7 +656,8 @@
     "professionalAtmosphere": 3,
     "ventilation": 3,
     "cellReception": 3,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Dietrich-Bonhoeffer-Bibliothek%2CBrandenburgische%20Str.%202%2C%2010713"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Dietrich-Bonhoeffer-Bibliothek%2CBrandenburgische%20Str.%202%2C%2010713",
+    "website": "https://www.berlin.de/stadtbibliothek-charlottenburg-wilmersdorf"
   },
   {
     "id": 27,
@@ -669,7 +689,8 @@
     "professionalAtmosphere": 3,
     "ventilation": 3,
     "cellReception": 3,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Heinrich-Schulz-Bibliothek%2CHauptstra%C3%9Fe%2040%2C%2010827"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Heinrich-Schulz-Bibliothek%2CHauptstra%C3%9Fe%2040%2C%2010827",
+    "website": "https://www.berlin.de/stadtbibliothek-tempelhof-schoeneberg"
   },
   {
     "id": 28,
@@ -701,7 +722,8 @@
     "professionalAtmosphere": 3,
     "ventilation": 3,
     "cellReception": 3,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Stadtteilbibliothek%20Halemweg%2CHalemweg%2018%2C%2013627"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Stadtteilbibliothek%20Halemweg%2CHalemweg%2018%2C%2013627",
+    "website": "https://www.berlin.de/stadtbibliothek-charlottenburg-wilmersdorf"
   },
   {
     "id": 29,
@@ -733,7 +755,8 @@
     "professionalAtmosphere": 4,
     "ventilation": 3,
     "cellReception": 4,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Bezirkszentralbibliothek%20Spandau%2CCarl-Schurz-Stra%C3%9Fe%2013%2C%2013597"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Bezirkszentralbibliothek%20Spandau%2CCarl-Schurz-Stra%C3%9Fe%2013%2C%2013597",
+    "website": "https://www.berlin.de/stadtbibliothek-spandau"
   },
   {
     "id": 30,
@@ -765,7 +788,8 @@
     "professionalAtmosphere": 3,
     "ventilation": 3,
     "cellReception": 3,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Stadtteilbibliothek%20Falkenhagener%20Feld%2CWesterwaldstra%C3%9Fe%209%2C%2013589"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Stadtteilbibliothek%20Falkenhagener%20Feld%2CWesterwaldstra%C3%9Fe%209%2C%2013589",
+    "website": "https://www.berlin.de/stadtbibliothek-spandau"
   },
   {
     "id": 31,
@@ -797,7 +821,8 @@
     "professionalAtmosphere": 3,
     "ventilation": 3,
     "cellReception": 3,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Stadtteilbibliothek%20Heerstra%C3%9Fe%2CObstallee%2022%20F%2C%2013593"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Stadtteilbibliothek%20Heerstra%C3%9Fe%2CObstallee%2022%20F%2C%2013593",
+    "website": "https://www.berlin.de/stadtbibliothek-spandau"
   },
   {
     "id": 32,
@@ -829,7 +854,8 @@
     "professionalAtmosphere": 3,
     "ventilation": 3,
     "cellReception": 3,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Bibliothek%20Kladow%2CSakrower%20Landstra%C3%9Fe%202%2C%2014089"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Bibliothek%20Kladow%2CSakrower%20Landstra%C3%9Fe%202%2C%2014089",
+    "website": "https://www.berlin.de/stadtbibliothek-spandau"
   },
   {
     "id": 33,
@@ -861,7 +887,8 @@
     "professionalAtmosphere": 4,
     "ventilation": 3,
     "cellReception": 4,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Ingeborg-Drewitz-Bibliothek%2CGrunewaldstra%C3%9Fe%203%2C%2012165"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Ingeborg-Drewitz-Bibliothek%2CGrunewaldstra%C3%9Fe%203%2C%2012165",
+    "website": "https://www.berlin.de/stadtbibliothek-steglitz-zehlendorf"
   },
   {
     "id": 34,
@@ -893,7 +920,8 @@
     "professionalAtmosphere": 3,
     "ventilation": 3,
     "cellReception": 3,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Gottfried-Benn-Bibliothek%2CKonarskistra%C3%9Fe%206%2C%2012163"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Gottfried-Benn-Bibliothek%2CKonarskistra%C3%9Fe%206%2C%2012163",
+    "website": "https://www.berlin.de/stadtbibliothek-steglitz-zehlendorf"
   },
   {
     "id": 36,
@@ -925,7 +953,8 @@
     "professionalAtmosphere": 3,
     "ventilation": 3,
     "cellReception": 3,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Stadtteilbibliothek%20Lankwitz%2CBruchwitzstra%C3%9Fe%2037%2C%2012247"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Stadtteilbibliothek%20Lankwitz%2CBruchwitzstra%C3%9Fe%2037%2C%2012247",
+    "website": "https://www.berlin.de/stadtbibliothek-steglitz-zehlendorf"
   },
   {
     "id": 37,
@@ -957,7 +986,8 @@
     "professionalAtmosphere": 4,
     "ventilation": 3,
     "cellReception": 4,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Eva-Maria-Buch-Haus%2CG%C3%B6tzstra%C3%9Fe%208/10/12%2C%2012099"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Eva-Maria-Buch-Haus%2CG%C3%B6tzstra%C3%9Fe%208/10/12%2C%2012099",
+    "website": "https://www.berlin.de/stadtbibliothek-tempelhof-schoeneberg"
   },
   {
     "id": 38,
@@ -989,7 +1019,8 @@
     "professionalAtmosphere": 3,
     "ventilation": 3,
     "cellReception": 3,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Gertrud-Kolmar-Bibliothek%2CPallasstra%C3%9Fe%2027%2C%2010781"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Gertrud-Kolmar-Bibliothek%2CPallasstra%C3%9Fe%2027%2C%2010781",
+    "website": "https://www.berlin.de/stadtbibliothek-tempelhof-schoeneberg"
   },
   {
     "id": 39,
@@ -1021,7 +1052,8 @@
     "professionalAtmosphere": 3,
     "ventilation": 3,
     "cellReception": 3,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Stadtteilbibliothek%20Friedenau%2CNiedstra%C3%9Fe%201-2%2C%2012159"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Stadtteilbibliothek%20Friedenau%2CNiedstra%C3%9Fe%201-2%2C%2012159",
+    "website": "https://www.berlin.de/stadtbibliothek-tempelhof-schoeneberg"
   },
   {
     "id": 40,
@@ -1053,7 +1085,8 @@
     "professionalAtmosphere": 3,
     "ventilation": 3,
     "cellReception": 3,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Bibliothek%20am%20Bundesplatz%2CBundesallee%2087%2C%2012161"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Bibliothek%20am%20Bundesplatz%2CBundesallee%2087%2C%2012161",
+    "website": "https://www.berlin.de/stadtbibliothek-charlottenburg-wilmersdorf"
   },
   {
     "id": 41,
@@ -1085,7 +1118,8 @@
     "professionalAtmosphere": 4,
     "ventilation": 3,
     "cellReception": 4,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Helene-Nathan-Bibliothek%2CKarl-Marx-Stra%C3%9Fe%2066%2C%2012043"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Helene-Nathan-Bibliothek%2CKarl-Marx-Stra%C3%9Fe%2066%2C%2012043",
+    "website": "https://www.berlin.de/stadtbibliothek-neukoelln"
   },
   {
     "id": 43,
@@ -1117,7 +1151,8 @@
     "professionalAtmosphere": 3,
     "ventilation": 3,
     "cellReception": 3,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Stadtteilbibliothek%20Britz%2CGutschmidtstra%C3%9Fe%2033%2C%2012359"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Stadtteilbibliothek%20Britz%2CGutschmidtstra%C3%9Fe%2033%2C%2012359",
+    "website": "https://www.berlin.de/stadtbibliothek-neukoelln"
   },
   {
     "id": 44,
@@ -1149,7 +1184,8 @@
     "professionalAtmosphere": 4,
     "ventilation": 3,
     "cellReception": 4,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Mittelpunktbibliothek%20K%C3%B6penick%2CAlter%20Markt%202%2C%2012555"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Mittelpunktbibliothek%20K%C3%B6penick%2CAlter%20Markt%202%2C%2012555",
+    "website": "https://www.berlin.de/stadtbibliothek-treptow-koepenick"
   },
   {
     "id": 45,
@@ -1181,7 +1217,8 @@
     "professionalAtmosphere": 3,
     "ventilation": 3,
     "cellReception": 3,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Stadtbibliothek%20Friedrichshagen%2CB%C3%B6lschestra%C3%9Fe%2087%2C%2012587"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Stadtbibliothek%20Friedrichshagen%2CB%C3%B6lschestra%C3%9Fe%2087%2C%2012587",
+    "website": "https://www.berlin.de/stadtbibliothek-treptow-koepenick"
   },
   {
     "id": 46,
@@ -1213,7 +1250,8 @@
     "professionalAtmosphere": 4,
     "ventilation": 3,
     "cellReception": 4,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Stadt-%20und%20Regionalbibliothek%20Treptow%2CMichael-Br%C3%BCckner-Stra%C3%9Fe%209%2C%2012439"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Stadt-%20und%20Regionalbibliothek%20Treptow%2CMichael-Br%C3%BCckner-Stra%C3%9Fe%209%2C%2012439",
+    "website": "https://www.berlin.de/stadtbibliothek-treptow-koepenick"
   },
   {
     "id": 47,
@@ -1245,7 +1283,8 @@
     "professionalAtmosphere": 3,
     "ventilation": 3,
     "cellReception": 3,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Bibliothek%20Baumschulenweg%2CKiefholzstra%C3%9Fe%20275%2C%2012437"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Bibliothek%20Baumschulenweg%2CKiefholzstra%C3%9Fe%20275%2C%2012437",
+    "website": "https://www.berlin.de/stadtbibliothek-treptow-koepenick"
   },
   {
     "id": 48,
@@ -1277,7 +1316,8 @@
     "professionalAtmosphere": 3,
     "ventilation": 3,
     "cellReception": 3,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Mark-Twain-Bibliothek%2CMarzahner%20Promenade%2052-54%2C%2012679"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Mark-Twain-Bibliothek%2CMarzahner%20Promenade%2052-54%2C%2012679",
+    "website": "https://www.berlin.de/stadtbibliothek-marzahn-hellersdorf"
   },
   {
     "id": 49,
@@ -1309,7 +1349,8 @@
     "professionalAtmosphere": 3,
     "ventilation": 3,
     "cellReception": 3,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Heinrich-von-Kleist-Bibliothek%2CHavemannstra%C3%9Fe%2017B%2C%2012689"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Heinrich-von-Kleist-Bibliothek%2CHavemannstra%C3%9Fe%2017B%2C%2012689",
+    "website": "https://www.berlin.de/stadtbibliothek-marzahn-hellersdorf"
   },
   {
     "id": 50,
@@ -1341,7 +1382,8 @@
     "professionalAtmosphere": 3,
     "ventilation": 3,
     "cellReception": 3,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Biesdorf-Bibliothek%2CAlt-Biesdorf%2055%2C%2012683"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Biesdorf-Bibliothek%2CAlt-Biesdorf%2055%2C%2012683",
+    "website": "https://www.berlin.de/stadtbibliothek-marzahn-hellersdorf"
   },
   {
     "id": 51,
@@ -1373,7 +1415,8 @@
     "professionalAtmosphere": 3,
     "ventilation": 3,
     "cellReception": 3,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Kaulsdorf-Bibliothek%2CCecilienstra%C3%9Fe%20232%2C%2012619"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Kaulsdorf-Bibliothek%2CCecilienstra%C3%9Fe%20232%2C%2012619",
+    "website": "https://www.berlin.de/stadtbibliothek-marzahn-hellersdorf"
   },
   {
     "id": 52,
@@ -1405,7 +1448,8 @@
     "professionalAtmosphere": 4,
     "ventilation": 3,
     "cellReception": 4,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Anna-Seghers-Bibliothek%2CPrerower%20Platz%202%2C%2013051"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Anna-Seghers-Bibliothek%2CPrerower%20Platz%202%2C%2013051",
+    "website": "https://www.berlin.de/stadtbibliothek-lichtenberg"
   },
   {
     "id": 53,
@@ -1437,7 +1481,8 @@
     "professionalAtmosphere": 3,
     "ventilation": 3,
     "cellReception": 3,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Bodo-Uhse-Bibliothek%2CErich-Kurz-Stra%C3%9Fe%209%2C%2010319"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Bodo-Uhse-Bibliothek%2CErich-Kurz-Stra%C3%9Fe%209%2C%2010319",
+    "website": "https://www.berlin.de/stadtbibliothek-lichtenberg"
   },
   {
     "id": 54,
@@ -1469,7 +1514,8 @@
     "professionalAtmosphere": 3,
     "ventilation": 3,
     "cellReception": 3,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Anton-Saefkow-Bibliothek%2CAnton-Saefkow-Platz%2014%2C%2010369"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Anton-Saefkow-Bibliothek%2CAnton-Saefkow-Platz%2014%2C%2010369",
+    "website": "https://www.berlin.de/stadtbibliothek-lichtenberg"
   },
   {
     "id": 56,
@@ -1501,7 +1547,8 @@
     "professionalAtmosphere": 4,
     "ventilation": 3,
     "cellReception": 4,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Humboldt-Bibliothek%2CKarolinenstra%C3%9Fe%2019%2C%2013507"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Humboldt-Bibliothek%2CKarolinenstra%C3%9Fe%2019%2C%2013507",
+    "website": "https://www.berlin.de/stadtbibliothek-reinickendorf"
   },
   {
     "id": 57,
@@ -1533,7 +1580,8 @@
     "professionalAtmosphere": 3,
     "ventilation": 3,
     "cellReception": 3,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Stadtteilbibliothek%20Reinickendorf-Ost%2CSch%C3%B6nholzer%20Stra%C3%9Fe%209%2C%2013187"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Stadtteilbibliothek%20Reinickendorf-Ost%2CSch%C3%B6nholzer%20Stra%C3%9Fe%209%2C%2013187",
+    "website": "https://www.berlin.de/stadtbibliothek-reinickendorf"
   },
   {
     "id": 58,
@@ -1565,7 +1613,8 @@
     "professionalAtmosphere": 3,
     "ventilation": 3,
     "cellReception": 3,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Stadtteilbibliothek%20M%C3%A4rkisches%20Viertel%2CWilhelmsruher%20Damm%20142%20C%2C%2013439"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Stadtteilbibliothek%20M%C3%A4rkisches%20Viertel%2CWilhelmsruher%20Damm%20142%20C%2C%2013439",
+    "website": "https://www.berlin.de/stadtbibliothek-reinickendorf"
   },
   {
     "id": 59,
@@ -1597,7 +1646,8 @@
     "professionalAtmosphere": 3,
     "ventilation": 3,
     "cellReception": 3,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Bibliothek%20am%20Sch%C3%A4fersee%2CStargardtstra%C3%9Fe%2011-13%2C%2013407"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Bibliothek%20am%20Sch%C3%A4fersee%2CStargardtstra%C3%9Fe%2011-13%2C%2013407",
+    "website": "https://www.berlin.de/stadtbibliothek-reinickendorf"
   },
   {
     "id": 60,
@@ -1629,7 +1679,8 @@
     "professionalAtmosphere": 4,
     "ventilation": 4,
     "cellReception": 4,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Ibero-Amerikanisches%20Institut%2CPotsdamer%20Stra%C3%9Fe%2037%2C%2010785"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Ibero-Amerikanisches%20Institut%2CPotsdamer%20Stra%C3%9Fe%2037%2C%2010785",
+    "website": "https://www.iai.spk-berlin.de"
   },
   {
     "id": 61,
@@ -1661,7 +1712,8 @@
     "professionalAtmosphere": 4,
     "ventilation": 4,
     "cellReception": 4,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Bibliothek%20des%20J%C3%BCdischen%20Museums%2CLindenstra%C3%9Fe%209-14%2C%2010969"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Bibliothek%20des%20J%C3%BCdischen%20Museums%2CLindenstra%C3%9Fe%209-14%2C%2010969",
+    "website": "https://www.jmberlin.de/bibliothek"
   },
   {
     "id": 62,
@@ -1693,7 +1745,8 @@
     "professionalAtmosphere": 4,
     "ventilation": 3,
     "cellReception": 4,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Stiftung%20Neue%20Synagoge%20Berlin-%20Centrum%20Judaicum%20Library%2COranienburger%20Stra%C3%9Fe%2028-30%2C%2010117"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Stiftung%20Neue%20Synagoge%20Berlin-%20Centrum%20Judaicum%20Library%2COranienburger%20Stra%C3%9Fe%2028-30%2C%2010117",
+    "website": "https://www.centrumjudaicum.de"
   },
   {
     "id": 63,
@@ -1725,7 +1778,8 @@
     "professionalAtmosphere": 4,
     "ventilation": 4,
     "cellReception": 4,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Amerika-Haus%20Bibliothek%2CHardenbergstra%C3%9Fe%2022-24%2C%2010623"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Amerika-Haus%20Bibliothek%2CHardenbergstra%C3%9Fe%2022-24%2C%2010623",
+    "website": "https://www.amerikahaus.de"
   },
   {
     "id": 64,
@@ -1757,6 +1811,7 @@
     "professionalAtmosphere": 4,
     "ventilation": 4,
     "cellReception": 4,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Goethe-Institut%20Library%2CNeue%20Sch%C3%B6nhauser%20Stra%C3%9Fe%2020%2C%2010178"
+    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Goethe-Institut%20Library%2CNeue%20Sch%C3%B6nhauser%20Stra%C3%9Fe%2020%2C%2010178",
+    "website": "https://www.goethe.de/berlin"
   }
 ]

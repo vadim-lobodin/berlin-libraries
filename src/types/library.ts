@@ -26,4 +26,5 @@ export interface Library {
   ventilation: number
   cellReception: number
   googlemaps?: string
+  website?: string
 }
