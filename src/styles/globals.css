@@ -6,65 +6,39 @@
 
 @layer base {
   :root {
-    --background: 350 100% 98%;
-    --foreground: 350 50% 10%;
+    /* Warm beige palette from reference */
+    --background: 36 11% 87%;
+    --foreground: 0 0% 4%;
 
-    --card: 350 100% 98%;
-    --card-foreground: 350 50% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 4%;
 
-    --popover: 350 100% 98%;
-    --popover-foreground: 350 50% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 4%;
 
-    --primary: 350 85% 60%;
-    --primary-foreground: 350 100% 98%;
+    --primary: 0 0% 4%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 350 85% 96%;
-    --secondary-foreground: 350 50% 10%;
+    --secondary: 36 6% 92%;
+    --secondary-foreground: 0 0% 4%;
 
-    --muted: 350 50% 96%;
-    --muted-foreground: 350 50% 45%;
+    --muted: 36 6% 92%;
+    --muted-foreground: 0 0% 53%;
 
-    --accent: 350 85% 96%;
-    --accent-foreground: 350 50% 10%;
+    --accent: 36 6% 92%;
+    --accent-foreground: 0 0% 4%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 350 85% 85%;
-    --input: 350 85% 85%;
-    --ring: 350 85% 60%;
+    --border: 0 0% 92%;
+    --input: 0 0% 92%;
+    --ring: 0 0% 4%;
 
-    --radius: 0.5rem;
-  }
+    --radius: 32px;
 
-  .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
+    --shadow-soft: 0 20px 40px -10px rgba(0,0,0,0.08);
+    --shadow-hover: 0 30px 60px -12px rgba(0,0,0,0.12);
   }
 }
 
@@ -75,52 +49,22 @@
   body {
     @apply bg-background text-foreground;
   }
-}
-
-@layer components {
-  /* Add this new class */
-  .accordion-icon-opacity [data-state] svg {
-    @apply opacity-50;
+  h1, h2, h3 {
+    font-weight: 750;
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+  }
+  p {
+    letter-spacing: -0.01em;
+    line-height: 1.5;
   }
 }
 
-/* Add this at the end of your globals.css file */
 .mapboxgl-map {
   width: 100%;
   height: 100%;
 }
 
-.dark .mapboxgl-popup-content {
-  background-color: #333;
-  color: #fff;
-}
-
-.dark .mapboxgl-popup-tip {
-  border-top-color: #333;
-  border-bottom-color: #333;
-}
-
-.dark .mapboxgl-ctrl-attrib {
-  background-color: rgba(0, 0, 0, 0.5);
-  color: #fff;
-}
-
-/* Add these new styles at the end of the file */
-.no-chevron {
-  cursor: pointer;
-}
-
-.no-chevron::after {
-  display: none !important;
-}
-
-/* Override any existing styles that might be adding the chevron */
-[data-state="open"] > .no-chevron::after,
-[data-state="closed"] > .no-chevron::after {
-  display: none !important;
-}
-
-/* Add these new styles at the end of the file */
 .mapboxgl-ctrl-bottom-left {
   display: none;
 }
@@ -143,10 +87,10 @@
 
 @layer utilities {
   .scrollbar-hide {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
   .scrollbar-hide::-webkit-scrollbar {
-    display: none;  /* Chrome, Safari and Opera */
+    display: none;
   }
 }

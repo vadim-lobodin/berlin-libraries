@@ -64,8 +64,9 @@ export default function LibraryExplorer() {
           setSelectedLibraryId={setSelectedLibraryId}
           statusTick={statusTick}
         />
+        <div className="absolute inset-0 bg-[#E2DFD9]/20 pointer-events-none" />
       </motion.div>
-      <div className="absolute left-1 right-1 bottom-1 md:left-2 md:top-2 md:bottom-2 w-[calc(100%-8px)] md:w-1/3 md:max-w-md h-1/2 md:h-auto bg-background/80 backdrop-blur-sm overflow-hidden rounded-t-lg md:rounded-lg shadow-lg">
+      <div className="absolute left-4 right-4 bottom-4 md:left-10 md:top-10 md:bottom-10 w-[calc(100%-32px)] md:w-1/3 md:max-w-md h-1/2 md:h-auto bg-card overflow-hidden rounded-[32px] border border-white/40" style={{ boxShadow: 'var(--shadow-soft)' }}>
         <AnimatePresence mode="popLayout">
           {selectedEntry ? (
             <motion.div
@@ -99,7 +100,7 @@ export default function LibraryExplorer() {
             </motion.div>
           )}
         </AnimatePresence>
-        <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-background/90 to-transparent pointer-events-none rounded-b-lg" />
+        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-card to-transparent pointer-events-none rounded-b-[32px]" />
       </div>
       {error && (
         <motion.div

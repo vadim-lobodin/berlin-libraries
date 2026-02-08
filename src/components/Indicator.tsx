@@ -20,10 +20,10 @@ const Indicator: React.FC<IndicatorProps> = ({ value, max }) => {
         case 1:
           return 'bg-red-500';
         default:
-          return 'bg-gray-700';
+          return 'bg-gray-300';
       }
     }
-    return 'bg-gray-700';
+    return 'bg-gray-300';
   };
 
   return (

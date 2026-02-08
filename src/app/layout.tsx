@@ -1,16 +1,15 @@
 import "@/styles/globals.css"
 
 import type { Metadata, Viewport } from "next"
-import { Space_Grotesk } from "next/font/google"
+import { Inter } from "next/font/google"
 
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
-import { ThemeProvider } from "@/components/theme-provider"
 
-const spaceGrotesk = Space_Grotesk({ 
+const inter = Inter({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-space-grotesk",
+  variable: "--font-inter",
 })
 
 interface RootLayoutProps {
@@ -61,26 +60,19 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: "black",
+  themeColor: "#E2DFD9",
 }
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en" suppressHydrationWarning className={spaceGrotesk.variable}>
+    <html lang="en" suppressHydrationWarning className={inter.variable}>
       <head />
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased"
         )}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem={false}
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+        {children}
       </body>
     </html>
   )

@@ -3,8 +3,6 @@
 import { useState, useEffect } from "react"
 import libraries from "../data/libraries.json"
 import { Library } from "../types/library"
-import LogoSVG from "../media/logotype.svg"
-import Image from "next/image"
 import { calculateDistance, BERLIN_CENTER } from "../lib/library-utils"
 
 interface LibraryListProps {
@@ -36,14 +34,12 @@ export default function LibraryList({
   }, [userLocation]);
 
   return (
-    <div className="w-full h-full bg-background/80 text-foreground overflow-y-auto scrollbar-hide">
-      <div className="p-4 hidden md:block sticky top-0 z-10 bg-background/80 backdrop-blur-sm">
-        <Image
-          src={LogoSVG}
-          alt="Logo"
-          width={140}
-          height={46}
-        />
+    <div className="w-full h-full bg-card text-card-foreground overflow-y-auto scrollbar-hide">
+      <div className="px-6 pt-6 pb-3">
+        <h1 className="text-[2rem]">Libraries</h1>
+        <p className="text-[#555] text-[1.1rem] mt-2 font-normal leading-[1.4]">
+          Berlin&apos;s best workspaces for focused work.
+        </p>
       </div>
       <div>
         {sortedLibraries.map(({ library, distance }) => (
@@ -53,10 +49,10 @@ export default function LibraryList({
               setLibraryCoordinates(library.coordinates as [number, number])
               setSelectedLibraryId(library.id)
             }}
-            className="w-full px-4 py-2 md:py-4 hover:bg-accent hover:text-accent-foreground font-light flex justify-between items-center border-b border-border text-left"
+            className="w-full px-6 py-3.5 hover:bg-[#f8f8f6] flex justify-between items-center border-b border-[#f0f0f0] text-left transition-colors"
           >
-            <span className="text-sm md:text-base">{library.name}</span>
-            <span className="text-gray-500 text-xs md:text-sm ml-2 flex-shrink-0">
+            <span className="text-[0.9rem] font-semibold tracking-[-0.01em]">{library.name}</span>
+            <span className="text-[#888] text-[0.85rem] font-mono tracking-[0.05em] ml-2 flex-shrink-0">
               {distance.toFixed(1)} km
             </span>
           </button>
