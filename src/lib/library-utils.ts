@@ -1,4 +1,4 @@
-import { format, parse, isWithinInterval, subHours } from "date-fns"
+import { format, parse, isWithinInterval, subHours, addDays } from "date-fns"
 
 // Berlin center coordinates [lng, lat] (Mapbox format)
 export const BERLIN_CENTER: [number, number] = [13.404954, 52.520008]
@@ -37,6 +37,59 @@ export function getLibraryStatus(workingHours: {
     })
   ) {
     return "Opens Soon"
+  }
+
+  return "Closed"
+}
+
+const DAYS = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"] as const
+
+function fmtTime(t: string): string {
+  const padded = t.includes(":") ? t.padStart(5, "0") : t
+  if (t === "24:00") return "midnight"
+  const parsed = parse(padded, "HH:mm", new Date())
+  return format(parsed, "ha").toLowerCase()
+}
+
+export function getStatusLabel(workingHours: {
+  [key: string]: string
+}): string {
+  const status = getLibraryStatus(workingHours)
+  const now = new Date()
+  const dayOfWeek = format(now, "EEEE").toLowerCase()
+  const todayHours = workingHours[dayOfWeek]
+
+  if (status === "Open" || status === "Closes Soon") {
+    const closeTime = todayHours.split(" - ")[1]
+    return `Open, Closes ${fmtTime(closeTime)}`
+  }
+
+  // Closed or Opens Soon — find next opening
+  const todayIdx = DAYS.indexOf(dayOfWeek as typeof DAYS[number])
+
+  // Check if today still has an opening ahead
+  if (todayHours !== "Closed") {
+    const openTime = todayHours.split(" - ")[0]
+    const padded = openTime.includes(":") ? openTime.padStart(5, "0") : openTime
+    const openDateTime = parse(padded, "HH:mm", now)
+    if (now < openDateTime) {
+      if (status === "Opens Soon") {
+        return `Opens Soon, ${fmtTime(openTime)}`
+      }
+      return `Closed, Opens ${fmtTime(openTime)}`
+    }
+  }
+
+  // Look at upcoming days
+  for (let i = 1; i <= 7; i++) {
+    const nextDay = DAYS[(todayIdx + i) % 7]
+    const hours = workingHours[nextDay]
+    if (hours !== "Closed") {
+      const openTime = hours.split(" - ")[0]
+      const nextDate = addDays(now, i)
+      const dayLabel = format(nextDate, "EEE")
+      return `Closed, Opens ${dayLabel} ${fmtTime(openTime)}`
+    }
   }
 
   return "Closed"

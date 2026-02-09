@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic'
 import { useState, useEffect, useMemo } from 'react'
 import { useUserLocation } from '../hooks/useUserLocation'
 import { motion, AnimatePresence } from 'motion/react'
+import CloseLarge from '@carbon/icons-react/lib/CloseLarge'
 import libraries from "../data/libraries.json"
 import { Library } from "../types/library"
 import { calculateDistance, BERLIN_CENTER } from "../lib/library-utils"
@@ -19,7 +20,25 @@ export default function LibraryExplorer() {
   const [libraryCoordinates, setLibraryCoordinates] = useState<[number, number] | null>(null)
   const [selectedLibraryId, setSelectedLibraryId] = useState<number | null>(null)
   const [statusTick, setStatusTick] = useState(0)
-  const { userLocation, error } = useUserLocation()
+  const [favorites, setFavorites] = useState<Set<number>>(new Set())
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('library-favorites')
+      if (saved) setFavorites(new Set(JSON.parse(saved)))
+    } catch {}
+  }, [])
+  const { userLocation } = useUserLocation()
+
+  const toggleFavorite = (id: number) => {
+    setFavorites(prev => {
+      const next = new Set(prev)
+      if (next.has(id)) next.delete(id)
+      else next.add(id)
+      localStorage.setItem('library-favorites', JSON.stringify(Array.from(next)))
+      return next
+    })
+  }
 
   // Refresh library statuses every 60 seconds
   useEffect(() => {
@@ -66,52 +85,59 @@ export default function LibraryExplorer() {
         />
         <div className="absolute inset-0 bg-[#E2DFD9]/20 pointer-events-none" />
       </motion.div>
-      <div className="absolute left-4 right-4 bottom-4 md:left-10 md:top-10 md:bottom-10 w-[calc(100%-32px)] md:w-1/3 md:max-w-md h-1/2 md:h-auto bg-card overflow-hidden rounded-[32px] border border-white/40" style={{ boxShadow: 'var(--shadow-soft)' }}>
-        <AnimatePresence mode="popLayout">
-          {selectedEntry ? (
-            <motion.div
-              key="detail"
-              className="absolute inset-0"
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -30 }}
-              transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-            >
-              <LibraryDetail
-                library={selectedEntry.library}
-                distance={selectedEntry.distance}
-                onBack={handleBack}
-              />
-            </motion.div>
-          ) : (
-            <motion.div
-              key="list"
-              className="absolute inset-0"
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -30 }}
-              transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-            >
-              <LibraryList
-                setLibraryCoordinates={setLibraryCoordinates}
-                setSelectedLibraryId={setSelectedLibraryId}
-                userLocation={userLocation}
-              />
-            </motion.div>
-          )}
-        </AnimatePresence>
-        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-card to-transparent pointer-events-none rounded-b-[32px]" />
-      </div>
-      {error && (
-        <motion.div
-          className="absolute top-0 left-0 right-0 bg-red-500 text-white p-2 text-center"
-          initial={{ y: -50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ type: "spring", damping: 20 }}
-        >
-          {error}
-        </motion.div>
-      )}
+      <AnimatePresence mode="wait">
+        {selectedEntry ? (
+          <motion.div
+            key="detail"
+            className="absolute left-4 right-4 bottom-4 md:left-5 md:top-5 md:bottom-5 w-[calc(100%-32px)] md:w-1/3 md:max-w-md h-1/2 md:h-auto bg-card overflow-hidden rounded-[32px] border border-white/40"
+            style={{ boxShadow: 'var(--shadow-hover)', transformOrigin: 'center center' }}
+            initial={{ opacity: 0, y: -10, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1, transition: { duration: 0.3, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] } }}
+            exit={{ opacity: 0, y: 10, scale: 0.98, transition: { duration: 0.2, ease: [0.25, 0.46, 0.45, 0.94] } }}
+          >
+            <LibraryDetail
+              library={selectedEntry.library}
+              distance={selectedEntry.distance}
+              onBack={handleBack}
+              isFavorite={favorites.has(selectedEntry.library.id)}
+              onToggleFavorite={() => toggleFavorite(selectedEntry.library.id)}
+            />
+            <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-card to-transparent pointer-events-none rounded-b-[32px]" />
+          </motion.div>
+        ) : (
+          <motion.div
+            key="list"
+            className="absolute left-4 right-4 bottom-4 md:left-5 md:top-5 md:bottom-5 w-[calc(100%-32px)] md:w-1/3 md:max-w-md h-1/2 md:h-auto bg-card overflow-hidden rounded-[32px] border border-white/40"
+            style={{ boxShadow: 'var(--shadow-soft)', transformOrigin: 'center center' }}
+            initial={{ opacity: 0, y: -10, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1, transition: { duration: 0.3, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] } }}
+            exit={{ opacity: 0, y: 10, scale: 0.98, transition: { duration: 0.2, ease: [0.25, 0.46, 0.45, 0.94] } }}
+          >
+            <LibraryList
+              setLibraryCoordinates={setLibraryCoordinates}
+              setSelectedLibraryId={setSelectedLibraryId}
+              userLocation={userLocation}
+              favorites={favorites}
+            />
+            <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-card to-transparent pointer-events-none rounded-b-[32px]" />
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {selectedEntry && (
+          <motion.button
+            onClick={handleBack}
+            className="absolute md:left-[calc(min(33.333%,28rem)+2.5rem)] md:top-5 right-5 bottom-[calc(50%+1.75rem)] md:bottom-auto w-12 h-12 flex items-center justify-center bg-white/80 backdrop-blur-sm hover:bg-white rounded-full transition-colors"
+            style={{ boxShadow: 'var(--shadow-soft)' }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
+          >
+            <CloseLarge size={24} />
+          </motion.button>
+        )}
+      </AnimatePresence>
     </>
   )
 }

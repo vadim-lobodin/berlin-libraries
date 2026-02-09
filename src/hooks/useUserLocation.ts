@@ -3,7 +3,6 @@ import { calculateDistance, BERLIN_CENTER } from '../lib/library-utils';
 
 export function useUserLocation() {
   const [userLocation, setUserLocation] = useState<[number, number] | null>(null);
-  const [error, setError] = useState<string | null>(null);
 
   const getUserLocation = useCallback(() => {
     if ("geolocation" in navigator) {
@@ -18,14 +17,11 @@ export function useUserLocation() {
             setUserLocation(BERLIN_CENTER);
           }
         },
-        (error) => {
-          console.error("Error getting user location:", error);
-          setError("Unable to retrieve your location");
+        () => {
           setUserLocation(BERLIN_CENTER);
         }
       );
     } else {
-      setError("Geolocation is not supported by this browser");
       setUserLocation(BERLIN_CENTER);
     }
   }, []);
@@ -34,5 +30,5 @@ export function useUserLocation() {
     getUserLocation();
   }, [getUserLocation]);
 
-  return { userLocation, error };
+  return { userLocation };
 }

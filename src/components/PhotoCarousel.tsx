@@ -6,7 +6,7 @@ import { motion } from "motion/react"
 const PHOTO_COUNT = 5
 const OFFSET = 4       // % shift per card in the stack
 const SCALE_STEP = 0.05
-const DIM_STEP = 0.15
+const OPACITIES = [1, 0.55, 0.40, 0.10, 0.05]
 
 interface PhotoCarouselProps {
   libraryId: number
@@ -54,7 +54,7 @@ export default function PhotoCarousel({ libraryId }: PhotoCarouselProps) {
   if (!loaded) {
     return (
       <div
-        className="relative w-full rounded-lg bg-muted/30 animate-pulse"
+        className="relative w-full rounded-[20px] bg-muted/30 animate-pulse"
         style={{ paddingBottom: `${75 + (PHOTO_COUNT - 1) * OFFSET}%` }}
       />
     )
@@ -71,14 +71,14 @@ export default function PhotoCarousel({ libraryId }: PhotoCarouselProps) {
         return (
           <motion.div
             key={card.id}
-            className="absolute left-0 w-full overflow-hidden rounded-lg"
+            className="absolute left-0 w-full overflow-hidden rounded-[20px]"
             style={{ aspectRatio: "4/3" }}
             layout
             initial={false}
             animate={{
               top: `${cardIndex * OFFSET}%`,
               scale: 1 - cardIndex * SCALE_STEP,
-              filter: `brightness(${Math.max(0.1, 1 - cardIndex * DIM_STEP)})`,
+              opacity: OPACITIES[cardIndex] ?? 0.05,
               zIndex: cards.length - i,
             }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}

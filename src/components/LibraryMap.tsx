@@ -22,10 +22,11 @@ interface LibraryMapProps {
 function createCircleMarker(status: LibraryStatus | string, isSelected: boolean) {
   const el = document.createElement('div');
   el.className = 'marker';
-  el.style.width = isSelected ? '12px' : '10px';
-  el.style.height = isSelected ? '12px' : '10px';
+  el.style.width = isSelected ? '14px' : '10px';
+  el.style.height = isSelected ? '14px' : '10px';
   el.style.borderRadius = '50%';
   el.style.cursor = 'pointer';
+  el.style.transition = 'width 0.15s ease, height 0.15s ease, border 0.15s ease, box-shadow 0.15s ease';
 
   if (typeof status === 'string' && status.startsWith('#')) {
     el.style.backgroundColor = status;
@@ -34,8 +35,9 @@ function createCircleMarker(status: LibraryStatus | string, isSelected: boolean)
   }
 
   if (isSelected) {
-    el.style.border = '3px solid white';
+    el.style.border = '3.5px solid white';
     el.style.boxSizing = 'content-box';
+    el.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.35)';
   }
   return el;
 }
@@ -45,29 +47,34 @@ function applyStatusColor(el: HTMLElement, status: LibraryStatus) {
   el.style.backgroundColor = '';
   switch (status) {
     case 'Open':
-      el.style.backgroundColor = '#13DE83';
+      el.style.backgroundColor = '#1a1a1a';
       break;
     case 'Closed':
-      el.style.backgroundColor = '#8D8D8D';
+      el.style.backgroundColor = '#b5b5b5';
       break;
     case 'Opens Soon':
-      el.style.background = 'linear-gradient(to right, #8D8D8D 50%, #13DE83 50%)';
+      el.style.background = 'linear-gradient(to right, #b5b5b5 50%, #1a1a1a 50%)';
       break;
     case 'Closes Soon':
-      el.style.backgroundColor = '#FFA500';
+      el.style.backgroundColor = '#1a1a1a';
       break;
   }
 }
 
 function applySelectionStyle(el: HTMLElement, isSelected: boolean) {
-  el.style.width = isSelected ? '12px' : '10px';
-  el.style.height = isSelected ? '12px' : '10px';
+  el.style.width = isSelected ? '14px' : '10px';
+  el.style.height = isSelected ? '14px' : '10px';
+  el.style.transition = 'width 0.15s ease, height 0.15s ease, border 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease';
   if (isSelected) {
-    el.style.border = '3px solid white';
+    el.style.backgroundColor = '#FF0000';
+    el.style.background = '#FF0000';
+    el.style.border = '3.5px solid white';
     el.style.boxSizing = 'content-box';
+    el.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.35)';
   } else {
     el.style.border = '';
     el.style.boxSizing = '';
+    el.style.boxShadow = '';
   }
 }
 
@@ -208,7 +215,9 @@ export default function LibraryMap({
 
     const prevId = prevSelectedIdRef.current
     if (prevId !== null && markersRef.current[prevId]) {
+      const prevLib = libraries.find(l => l.id === prevId)
       applySelectionStyle(markersRef.current[prevId].getElement(), false)
+      if (prevLib) applyStatusColor(markersRef.current[prevId].getElement(), getLibraryStatus(prevLib.workingHours))
     }
     if (selectedLibraryId !== null && markersRef.current[selectedLibraryId]) {
       applySelectionStyle(markersRef.current[selectedLibraryId].getElement(), true)

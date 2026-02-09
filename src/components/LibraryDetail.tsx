@@ -1,80 +1,105 @@
 "use client"
 
 import { Library } from "../types/library"
-import { X } from "lucide-react"
+import Close from "@carbon/icons-react/lib/Close"
+import Cursor_2 from "@carbon/icons-react/lib/Cursor_2"
+import Wikis from "@carbon/icons-react/lib/Wikis"
+import Star from "@carbon/icons-react/lib/Star"
+import StarFilled from "@carbon/icons-react/lib/StarFilled"
 import Indicator from "./Indicator"
 import PhotoCarousel from "./PhotoCarousel"
 import { motion, AnimatePresence } from "motion/react"
-import { getLibraryStatus } from "../lib/library-utils"
+import { getStatusLabel } from "../lib/library-utils"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/tooltip"
 
 interface LibraryDetailProps {
   library: Library
   distance: number
   onBack: () => void
+  isFavorite: boolean
+  onToggleFavorite: () => void
 }
 
 const renderInfoItem = (label: string, value: string | number | React.ReactNode) => (
-  <>
-    <h3 className="text-[0.85rem] font-mono text-[#888] tracking-[0.05em] uppercase mt-5 mb-1">{label}</h3>
-    <p className="text-[0.9rem] font-medium leading-[1.5] tracking-[-0.01em]">{value}</p>
-  </>
+  <div className="pt-4 pb-3">
+    <h3 className="text-[0.8rem] font-mono font-normal text-[#888] tracking-[0.05em] uppercase mb-2.5">{label}</h3>
+    <p className="text-[1rem] font-medium leading-[1.1] tracking-[-0.01em]">{value}</p>
+  </div>
 )
 
-export default function LibraryDetail({ library, distance, onBack }: LibraryDetailProps) {
+const renderRow = (left: React.ReactNode, right: React.ReactNode) => (
+  <div className="grid grid-cols-2 border-b border-[#f0f0f0] -mx-6 px-6">
+    <div className="pr-3">{left}</div>
+    <div className="pl-3">{right}</div>
+  </div>
+)
+
+export default function LibraryDetail({ library, distance, onBack, isFavorite, onToggleFavorite }: LibraryDetailProps) {
   return (
     <div className="w-full h-full flex flex-col bg-card text-card-foreground">
-      <div className="flex items-center justify-between px-6 py-5 border-b border-[#f0f0f0] flex-shrink-0">
-        <h2 className="text-[1.1rem] truncate flex-1">
-          {library.name}
-        </h2>
-        <button onClick={onBack} className="w-8 h-8 flex items-center justify-center hover:bg-[#f4f4f4] rounded-full flex-shrink-0 ml-2 transition-all">
-          <X className="w-4 h-4" />
-        </button>
-      </div>
 
       <AnimatePresence mode="wait">
         <motion.div
           key={library.id}
-          className="flex-1 overflow-y-auto scrollbar-hide px-6 py-4"
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 10 }}
-          transition={{ duration: 0.21 }}
+          className="flex-1 overflow-y-auto scrollbar-hide px-6 pt-6 pb-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
-          <span className="font-mono text-[0.85rem] text-[#888] tracking-[0.05em]">{distance.toFixed(1)} KM AWAY</span>
-          <div className="mt-4">
-            <PhotoCarousel key={library.id} libraryId={library.id} />
+          <div className="hidden md:block">
+            <PhotoCarousel key={`desktop-${library.id}`} libraryId={library.id} />
           </div>
-          <div className="flex flex-wrap mt-2">
-            <div className="w-1/2 pr-3">
-              {renderInfoItem("Address", library.address)}
-              {renderInfoItem("Status", getLibraryStatus(library.workingHours))}
-              {renderInfoItem("Conference", library.conferenceAreas)}
-              {renderInfoItem("Cafe", library.cafe)}
-              {renderInfoItem("Food Nearby", library.foodOptionsNearby)}
-              {renderInfoItem("Lockers", library.lockers)}
-              {renderInfoItem("Meeting Rooms", library.meetingRooms)}
-              {renderInfoItem("Phone Policy", library.phoneCallPolicy)}
-              {library.timeLimits && renderInfoItem("Time Limits", library.timeLimits)}
+          <h2 className="text-[2rem] font-semibold leading-[1.15] mt-1 pb-5" style={{ letterSpacing: '-0.02em' }}>{library.name}</h2>
+          <div className="grid grid-cols-2 pb-6 -mx-6 px-6">
+            <div className="pr-3">
+              <p className="text-[1.15rem] font-medium leading-[1.3] tracking-[-0.01em]">{library.address}</p>
             </div>
-            <div className="w-1/2 pl-3">
-              {renderInfoItem("Workspace", <Indicator value={library.workspaceSetup} max={5} />)}
-              {renderInfoItem("Power", <Indicator value={library.powerOutlets} max={5} />)}
-              {renderInfoItem("Ventilation", <Indicator value={library.ventilation} max={5} />)}
-              {renderInfoItem("Wifi", <Indicator value={library.wifiQuality} max={5} />)}
-              {renderInfoItem("Atmosphere", <Indicator value={library.professionalAtmosphere} max={5} />)}
-              {renderInfoItem("Cell Signal", <Indicator value={library.cellReception} max={5} />)}
-              {renderInfoItem("Hours", (
-                <ul className="space-y-0.5">
-                  {Object.entries(library.workingHours).map(([day, hours]) => (
-                    <li key={day} className="text-[0.9rem] capitalize leading-[1.5] tracking-[-0.01em]">
-                      {day}: {hours}
-                    </li>
-                  ))}
-                </ul>
-              ))}
-            </div>
+            <TooltipProvider delayDuration={300}>
+              <div className="flex gap-3 pl-3">
+                {library.googlemaps && (
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <a href={library.googlemaps} target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-black rounded-full flex items-center justify-center hover:bg-black/80 transition-colors text-white">
+                        <Cursor_2 size={24} style={{ transform: 'scaleX(-1) translateX(1px)' }} />
+                      </a>
+                    </TooltipTrigger>
+                    <TooltipContent>Get Directions</TooltipContent>
+                  </Tooltip>
+                )}
+                {library.website && (
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <a href={library.website} target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-[#f4f4f4] rounded-full flex items-center justify-center hover:bg-[#e8e8e8] transition-colors">
+                        <Wikis size={24} />
+                      </a>
+                    </TooltipTrigger>
+                    <TooltipContent>Website</TooltipContent>
+                  </Tooltip>
+                )}
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <button onClick={onToggleFavorite} className="w-12 h-12 bg-[#f4f4f4] rounded-full flex items-center justify-center hover:bg-[#e8e8e8] transition-colors">
+                      {isFavorite ? <StarFilled size={24} /> : <Star size={24} />}
+                    </button>
+                  </TooltipTrigger>
+                  <TooltipContent>{isFavorite ? "Remove Favorite" : "Add Favorite"}</TooltipContent>
+                </Tooltip>
+              </div>
+            </TooltipProvider>
           </div>
+          <div className="md:hidden mb-6">
+            <PhotoCarousel key={`mobile-${library.id}`} libraryId={library.id} />
+          </div>
+          <div className="border-b border-[#f0f0f0] -mx-6" />
+          {renderRow(renderInfoItem("Distance", `${distance.toFixed(1)} km`), renderInfoItem("Workspace", <Indicator value={library.workspaceSetup} max={5} />))}
+          {renderRow(renderInfoItem("Status", getStatusLabel(library.workingHours)), renderInfoItem("Power", <Indicator value={library.powerOutlets} max={5} />))}
+          {renderRow(renderInfoItem("Conference", library.conferenceAreas), renderInfoItem("Ventilation", <Indicator value={library.ventilation} max={5} />))}
+          {renderRow(renderInfoItem("Cafe", library.cafe), renderInfoItem("Wifi", <Indicator value={library.wifiQuality} max={5} />))}
+          {renderRow(renderInfoItem("Food Nearby", library.foodOptionsNearby), renderInfoItem("Atmosphere", <Indicator value={library.professionalAtmosphere} max={5} />))}
+          {renderRow(renderInfoItem("Lockers", library.lockers), renderInfoItem("Cell Signal", <Indicator value={library.cellReception} max={5} />))}
+          {renderRow(renderInfoItem("Meeting Rooms", library.meetingRooms), renderInfoItem("Phone Policy", library.phoneCallPolicy))}
+          {library.timeLimits && renderRow(renderInfoItem("Time Limits", library.timeLimits), <div />)}
         </motion.div>
       </AnimatePresence>
     </div>

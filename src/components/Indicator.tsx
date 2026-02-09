@@ -7,23 +7,7 @@ interface IndicatorProps {
 
 const Indicator: React.FC<IndicatorProps> = ({ value, max }) => {
   const getColor = (index: number) => {
-    if (index < value) {
-      switch (value) {
-        case 5:
-          return 'bg-green-500';
-        case 4:
-          return 'bg-lime-500'; // Updated to lime for 4/5
-        case 3:
-          return 'bg-yellow-400';
-        case 2:
-          return 'bg-orange-500';
-        case 1:
-          return 'bg-red-500';
-        default:
-          return 'bg-gray-300';
-      }
-    }
-    return 'bg-gray-300';
+    return index < value ? 'bg-black' : 'bg-gray-300';
   };
 
   return (
