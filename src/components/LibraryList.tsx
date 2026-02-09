@@ -81,7 +81,7 @@ export default function LibraryList({
     <div className="w-full h-full bg-card text-card-foreground overflow-y-auto scrollbar-hide">
       <div className="sticky top-0 z-10 bg-card px-6 pt-6 pb-5 border-b border-[#f0f0f0]">
         <div className="flex items-center justify-between">
-          <img src="/logotype.svg" alt="LIBRA" className="h-7" style={{ filter: 'brightness(0)' }} />
+          <img src="/libraries/logotype.svg" alt="LIBRA" className="h-7" style={{ filter: 'brightness(0)' }} />
           <button
             onClick={() => setFiltersOpen(v => !v)}
             className="w-12 h-12 rounded-full bg-[#f4f4f4] flex items-center justify-center hover:bg-[#e8e8e8] transition-colors"
