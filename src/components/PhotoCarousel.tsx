@@ -35,7 +35,7 @@ function usePreloadImages(srcs: string[]) {
 }
 
 export default function PhotoCarousel({ libraryId }: PhotoCarouselProps) {
-  const photos = Array.from({ length: PHOTO_COUNT }, (_, i) => `/photos/${libraryId}_${i + 1}.jpg`)
+  const photos = Array.from({ length: PHOTO_COUNT }, (_, i) => `/libraries/photos/${libraryId}_${i + 1}.jpg`)
   const loaded = usePreloadImages(photos)
 
   const [cards, setCards] = useState(() =>
