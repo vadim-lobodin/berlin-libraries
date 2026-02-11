@@ -67,6 +67,16 @@ export default function LibraryExplorer() {
     setSelectedLibraryId(null)
   }
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && selectedLibraryId !== null) {
+        handleBack()
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [selectedLibraryId])
+
   return (
     <>
       <motion.div

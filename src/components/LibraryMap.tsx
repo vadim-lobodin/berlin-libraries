@@ -209,8 +209,12 @@ export default function LibraryMap({
     if (selectedLibraryId !== null && markersRef.current[selectedLibraryId]) {
       applySelectionStyle(markersRef.current[selectedLibraryId].getElement(), true)
     }
+    if (prevId !== null && selectedLibraryId === null && map.current) {
+      const center = userLocation || [13.405, 52.52]
+      map.current.flyTo({ center: center as [number, number], zoom: 11 })
+    }
     prevSelectedIdRef.current = selectedLibraryId
-  }, [selectedLibraryId, mapLoaded])
+  }, [selectedLibraryId, mapLoaded, userLocation])
 
   useEffect(() => {
     if (map.current && libraryCoordinates) {
