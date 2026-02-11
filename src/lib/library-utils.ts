@@ -95,6 +95,34 @@ export function getStatusLabel(workingHours: {
   return "Closed"
 }
 
+// Library color by type
+const LIBRARY_COLORS: Record<number, string> = {
+  // Flagship (orange) — major state/central libraries
+  1: '#FF722D', 2: '#FF722D', 3: '#FF722D',
+  // Academic (yellow) — university libraries
+  4: '#FEED6B', 5: '#FEED6B',
+  // Cultural (pink) — special institution / museum libraries
+  60: '#FA8FD3', 61: '#FA8FD3', 62: '#FA8FD3', 63: '#FA8FD3', 64: '#FA8FD3',
+  // District hub (green) — larger district central libraries
+  6: '#76C880', 7: '#76C880', 9: '#76C880', 14: '#76C880', 29: '#76C880',
+  33: '#76C880', 37: '#76C880', 41: '#76C880', 44: '#76C880', 46: '#76C880',
+  52: '#76C880', 56: '#76C880',
+  // Neighborhood (purple) — Pankow/Prenzlauer cluster
+  8: '#C69EF4', 15: '#C69EF4', 16: '#C69EF4', 23: '#C69EF4', 25: '#C69EF4',
+}
+
+export function getLibraryColor(id: number): string {
+  return LIBRARY_COLORS[id] || '#A7C0E9' // default: blue (small neighborhood)
+}
+
+export function getLibraryColorLight(id: number): string {
+  const hex = getLibraryColor(id).replace('#', '')
+  const r = Math.round(parseInt(hex.substring(0, 2), 16) * 0.2 + 255 * 0.8)
+  const g = Math.round(parseInt(hex.substring(2, 4), 16) * 0.2 + 255 * 0.8)
+  const b = Math.round(parseInt(hex.substring(4, 6), 16) * 0.2 + 255 * 0.8)
+  return `rgb(${r}, ${g}, ${b})`
+}
+
 function deg2rad(deg: number): number {
   return deg * (Math.PI / 180)
 }

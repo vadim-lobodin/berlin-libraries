@@ -93,7 +93,6 @@ export default function LibraryExplorer() {
           setSelectedLibraryId={setSelectedLibraryId}
           statusTick={statusTick}
         />
-        <div className="absolute inset-0 bg-[#E2DFD9]/20 pointer-events-none" />
       </motion.div>
       <AnimatePresence mode="wait">
         {selectedEntry ? (

@@ -66,7 +66,7 @@ export default function LibraryList({
   return (
     <div className="w-full h-full flex flex-col gap-3">
       {/* Top card – logo / search */}
-      <div className="bg-[#1C3386] text-white rounded-[24px] px-6 pt-5 pb-4" style={{ boxShadow: 'var(--shadow-soft)' }}>
+      <div className="bg-black text-white rounded-[18px] px-6 pt-5 pb-4" style={{ boxShadow: 'var(--shadow-soft)' }}>
         <div className="flex items-center justify-between h-12">
           <AnimatePresence mode="wait" initial={false}>
             {searchOpen ? (
@@ -98,13 +98,13 @@ export default function LibraryList({
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
               >
-                <img src="/libraries/logotype.svg" alt="Berlin Library Guide" className="h-10" />
+                <img src="/libraries/logotype.svg" alt="Berlin Library Guide" className="h-10" style={{ filter: 'brightness(0) invert(1)' }} />
               </motion.div>
             )}
           </AnimatePresence>
           <button
             onClick={() => searchOpen ? handleCloseSearch() : setSearchOpen(true)}
-            className="w-12 h-12 -mr-2 rounded-full flex-shrink-0 flex items-center justify-center hover:bg-white/10 transition-colors"
+            className="w-12 h-12 -mr-2 rounded-full flex-shrink-0 flex items-center justify-center hover:bg-white/15 transition-colors"
           >
             {searchOpen ? <Close size={28} /> : <Search size={28} />}
           </button>
@@ -112,7 +112,7 @@ export default function LibraryList({
       </div>
 
       {/* Bottom card – library items */}
-      <div className="relative bg-card rounded-[24px] border border-white/40 flex-1 min-h-0 overflow-hidden text-[#1C3386]" style={{ boxShadow: 'var(--shadow-soft)' }}>
+      <div className="relative bg-card rounded-[18px] border border-white/40 flex-1 min-h-0 overflow-hidden text-black" style={{ boxShadow: 'var(--shadow-soft)' }}>
         <div className="h-full overflow-y-auto scrollbar-hide">
           {sortedLibraries.map(({ library, distance }) => (
             <button
@@ -124,7 +124,7 @@ export default function LibraryList({
               className="w-full px-6 py-4 hover:bg-[#f8f8f6] flex justify-between items-center border-b border-[#f0f0f0] text-left transition-colors"
             >
               <span className="text-[1rem] font-semibold tracking-[-0.01em] flex items-center gap-1.5">
-                {favorites.has(library.id) && <StarFilled size={14} className="flex-shrink-0" style={{ color: '#1C3386' }} />}
+                {favorites.has(library.id) && <StarFilled size={14} className="flex-shrink-0" style={{ color: '#000000' }} />}
                 {library.name}
               </span>
               <span className="text-[#888] text-[0.85rem] font-mono tracking-[0.05em] ml-2 flex-shrink-0">
@@ -133,7 +133,7 @@ export default function LibraryList({
             </button>
           ))}
         </div>
-        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-card to-transparent pointer-events-none rounded-b-[24px]" />
+        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-card to-transparent pointer-events-none rounded-b-[18px]" />
       </div>
     </div>
   )

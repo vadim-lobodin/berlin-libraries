@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react"
 import mapboxgl from "mapbox-gl"
 import "mapbox-gl/dist/mapbox-gl.css"
 import libraries from "../data/libraries.json"
-import { getLibraryStatus, type LibraryStatus } from "../lib/library-utils"
+import { getLibraryStatus, getLibraryColor, type LibraryStatus } from "../lib/library-utils"
 
 const mapboxToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN || ""
 
@@ -19,19 +19,21 @@ interface LibraryMapProps {
   statusTick: number
 }
 
-function createCircleMarker(status: LibraryStatus | string, isSelected: boolean) {
+function createCircleMarker(status: LibraryStatus | string, isSelected: boolean, libraryId?: number) {
   const el = document.createElement('div');
   el.className = 'marker';
-  el.style.width = isSelected ? '14px' : '10px';
-  el.style.height = isSelected ? '14px' : '10px';
+  el.style.width = isSelected ? '15px' : '11px';
+  el.style.height = isSelected ? '15px' : '11px';
   el.style.borderRadius = '50%';
   el.style.cursor = 'pointer';
   el.style.transition = 'width 0.15s ease, height 0.15s ease, border 0.15s ease, box-shadow 0.15s ease';
+  el.style.border = '1.5px solid white';
+  el.style.boxSizing = 'content-box';
 
   if (typeof status === 'string' && status.startsWith('#')) {
     el.style.backgroundColor = status;
   } else {
-    applyStatusColor(el, status as LibraryStatus);
+    applyStatusColor(el, status as LibraryStatus, libraryId ?? 0);
   }
 
   if (isSelected) {
@@ -42,19 +44,20 @@ function createCircleMarker(status: LibraryStatus | string, isSelected: boolean)
   return el;
 }
 
-function applyStatusColor(el: HTMLElement, status: LibraryStatus) {
+function applyStatusColor(el: HTMLElement, status: LibraryStatus, libraryId: number) {
   el.style.background = '';
   el.style.backgroundColor = '';
-  el.style.backgroundColor = status === 'Closed' ? '#c0c0c0' : '#1C3386';
+  el.style.backgroundColor = status === 'Closed' ? '#c0c0c0' : getLibraryColor(libraryId);
 }
 
-function applySelectionStyle(el: HTMLElement, isSelected: boolean) {
-  el.style.width = isSelected ? '14px' : '10px';
-  el.style.height = isSelected ? '14px' : '10px';
+function applySelectionStyle(el: HTMLElement, isSelected: boolean, libraryId?: number) {
+  el.style.width = isSelected ? '15px' : '11px';
+  el.style.height = isSelected ? '15px' : '11px';
   el.style.transition = 'width 0.15s ease, height 0.15s ease, border 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease';
-  if (isSelected) {
-    el.style.backgroundColor = '#1C3386';
-    el.style.background = '#1C3386';
+  if (isSelected && libraryId !== undefined) {
+    const color = getLibraryColor(libraryId);
+    el.style.backgroundColor = color;
+    el.style.background = color;
     el.style.border = '3.5px solid white';
     el.style.boxSizing = 'content-box';
     el.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.25)';
@@ -112,6 +115,12 @@ export default function LibraryMap({
         })
 
         map.current.on("style.load", () => {
+          // Make background and land white
+          if (map.current!.getLayer('land')) {
+            map.current!.setPaintProperty('land', 'background-color', '#ffffff');
+          }
+          map.current!.setPaintProperty('background', 'background-color', '#ffffff');
+
           if (map.current!.getLayer('building')) {
             map.current!.removeLayer('building');
           }
@@ -169,7 +178,7 @@ export default function LibraryMap({
 
     libraries.forEach((library) => {
       const status = getLibraryStatus(library.workingHours)
-      const el = createCircleMarker(status, false)
+      const el = createCircleMarker(status, false, library.id)
       el.style.animation = `markerFadeIn 1.4s ease-out both`
 
       el.addEventListener('click', () => {
@@ -192,7 +201,7 @@ export default function LibraryMap({
     libraries.forEach((library) => {
       const marker = markersRef.current[library.id]
       if (!marker) return
-      applyStatusColor(marker.getElement(), getLibraryStatus(library.workingHours))
+      applyStatusColor(marker.getElement(), getLibraryStatus(library.workingHours), library.id)
     })
   }, [statusTick, mapLoaded])
 
@@ -203,11 +212,11 @@ export default function LibraryMap({
     const prevId = prevSelectedIdRef.current
     if (prevId !== null && markersRef.current[prevId]) {
       const prevLib = libraries.find(l => l.id === prevId)
-      applySelectionStyle(markersRef.current[prevId].getElement(), false)
-      if (prevLib) applyStatusColor(markersRef.current[prevId].getElement(), getLibraryStatus(prevLib.workingHours))
+      applySelectionStyle(markersRef.current[prevId].getElement(), false, prevId)
+      if (prevLib) applyStatusColor(markersRef.current[prevId].getElement(), getLibraryStatus(prevLib.workingHours), prevId)
     }
     if (selectedLibraryId !== null && markersRef.current[selectedLibraryId]) {
-      applySelectionStyle(markersRef.current[selectedLibraryId].getElement(), true)
+      applySelectionStyle(markersRef.current[selectedLibraryId].getElement(), true, selectedLibraryId)
     }
     if (prevId !== null && selectedLibraryId === null && map.current) {
       const center = userLocation || [13.405, 52.52]

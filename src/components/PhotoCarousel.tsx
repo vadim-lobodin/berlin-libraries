@@ -42,7 +42,7 @@ export default function PhotoCarousel({ libraryId }: PhotoCarouselProps) {
         return (
           <motion.div
             key={card.id}
-            className="absolute left-0 w-full overflow-hidden rounded-[20px]"
+            className="absolute left-0 w-full overflow-hidden rounded-[14px]"
             style={{ aspectRatio: "4/3" }}
             layout
             initial={{ opacity: 0, y: 15, scale: 1 - cardIndex * SCALE_STEP }}

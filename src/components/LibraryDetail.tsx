@@ -9,7 +9,7 @@ import StarFilled from "@carbon/icons-react/lib/StarFilled"
 import Indicator from "./Indicator"
 import PhotoCarousel from "./PhotoCarousel"
 import { motion, AnimatePresence } from "motion/react"
-import { getStatusLabel } from "../lib/library-utils"
+import { getStatusLabel, getLibraryColor } from "../lib/library-utils"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/tooltip"
 
 interface LibraryDetailProps {
@@ -47,7 +47,7 @@ export default function LibraryDetail({ library, distance, onBack, isFavorite, o
           transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
           {/* Top card – photo, title, address, buttons */}
-          <div className="bg-[#1C3386] text-white rounded-[24px] px-6 pt-6 pb-6 overflow-hidden" style={{ boxShadow: 'var(--shadow-hover)' }}>
+          <div className="text-black rounded-[18px] px-6 pt-6 pb-6 overflow-hidden" style={{ boxShadow: 'var(--shadow-hover)', backgroundColor: getLibraryColor(library.id) }}>
             <div className="hidden md:block">
               <PhotoCarousel key={`desktop-${library.id}`} libraryId={library.id} />
             </div>
@@ -61,7 +61,7 @@ export default function LibraryDetail({ library, distance, onBack, isFavorite, o
                   {library.googlemaps && (
                     <Tooltip>
                       <TooltipTrigger asChild>
-                        <a href={library.googlemaps} target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-white rounded-full flex items-center justify-center hover:bg-white/80 transition-colors text-[#1C3386]">
+                        <a href={library.googlemaps} target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-white rounded-full flex items-center justify-center hover:bg-white/80 transition-colors text-black">
                           <Cursor_2 size={24} style={{ transform: 'scaleX(-1) translateX(1px)' }} />
                         </a>
                       </TooltipTrigger>
@@ -71,7 +71,7 @@ export default function LibraryDetail({ library, distance, onBack, isFavorite, o
                   {library.website && (
                     <Tooltip>
                       <TooltipTrigger asChild>
-                        <a href={library.website} target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-white/15 rounded-full flex items-center justify-center hover:bg-white/25 transition-colors">
+                        <a href={library.website} target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-white/40 rounded-full flex items-center justify-center hover:bg-white/60 transition-colors">
                           <Wikis size={24} />
                         </a>
                       </TooltipTrigger>
@@ -80,7 +80,7 @@ export default function LibraryDetail({ library, distance, onBack, isFavorite, o
                   )}
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <button onClick={onToggleFavorite} className="w-12 h-12 bg-white/15 rounded-full flex items-center justify-center hover:bg-white/25 transition-colors">
+                      <button onClick={onToggleFavorite} className="w-12 h-12 bg-white/40 rounded-full flex items-center justify-center hover:bg-white/60 transition-colors">
                         {isFavorite ? <StarFilled size={24} /> : <Star size={24} />}
                       </button>
                     </TooltipTrigger>
@@ -95,7 +95,7 @@ export default function LibraryDetail({ library, distance, onBack, isFavorite, o
           </div>
 
           {/* Bottom card – info grid */}
-          <div className="relative bg-card text-[#1C3386] rounded-[24px] border border-white/40 flex-1 min-h-0 overflow-hidden" style={{ boxShadow: 'var(--shadow-soft)' }}>
+          <div className="relative bg-card text-black rounded-[18px] border border-white/40 flex-1 min-h-0 overflow-hidden" style={{ boxShadow: 'var(--shadow-soft)' }}>
             <div className="h-full overflow-y-auto scrollbar-hide px-6 pb-4">
               {renderRow(renderInfoItem("Distance", `${distance.toFixed(1)} km`), renderInfoItem("Workspace", <Indicator value={library.workspaceSetup} max={5} />))}
               {renderRow(renderInfoItem("Status", getStatusLabel(library.workingHours)), renderInfoItem("Power", <Indicator value={library.powerOutlets} max={5} />))}
@@ -106,7 +106,7 @@ export default function LibraryDetail({ library, distance, onBack, isFavorite, o
               {renderRow(renderInfoItem("Meeting Rooms", library.meetingRooms), renderInfoItem("Phone Policy", library.phoneCallPolicy))}
               {library.timeLimits && renderRow(renderInfoItem("Time Limits", library.timeLimits), <div />)}
             </div>
-            <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-card to-transparent pointer-events-none rounded-b-[24px]" />
+            <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-card to-transparent pointer-events-none rounded-b-[18px]" />
           </div>
         </motion.div>
       </AnimatePresence>
