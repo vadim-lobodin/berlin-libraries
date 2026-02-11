@@ -246,7 +246,7 @@ export default function LibraryMap({
 
   return (
     <div className="w-full h-full">
-      <div ref={mapContainer} className="w-full h-full" />
+      <div ref={mapContainer} className="w-full h-full [&_*]:outline-none outline-none" />
     </div>
   )
 }
