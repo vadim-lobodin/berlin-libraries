@@ -66,7 +66,7 @@ export default function LibraryList({
   return (
     <div className="w-full h-full flex flex-col gap-3">
       {/* Top card – logo / search */}
-      <div className="bg-black text-white rounded-[18px] px-6 pt-5 pb-4" style={{ boxShadow: 'var(--shadow-soft)' }}>
+      <div className="bg-black text-white rounded-[18px] px-6 pt-3 pb-3" style={{ boxShadow: 'var(--shadow-soft)' }}>
         <div className="flex items-center justify-between h-12">
           <AnimatePresence mode="wait" initial={false}>
             {searchOpen ? (
