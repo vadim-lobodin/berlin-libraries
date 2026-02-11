@@ -37,28 +37,15 @@ function createCircleMarker(status: LibraryStatus | string, isSelected: boolean)
   if (isSelected) {
     el.style.border = '3.5px solid white';
     el.style.boxSizing = 'content-box';
-    el.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.35)';
+    el.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.25)';
   }
   return el;
 }
 
-function applyStatusColor(el: HTMLElement, status: LibraryStatus) {
+function applyStatusColor(el: HTMLElement, _status: LibraryStatus) {
   el.style.background = '';
   el.style.backgroundColor = '';
-  switch (status) {
-    case 'Open':
-      el.style.backgroundColor = '#1a1a1a';
-      break;
-    case 'Closed':
-      el.style.backgroundColor = '#b5b5b5';
-      break;
-    case 'Opens Soon':
-      el.style.background = 'linear-gradient(to right, #b5b5b5 50%, #1a1a1a 50%)';
-      break;
-    case 'Closes Soon':
-      el.style.backgroundColor = '#1a1a1a';
-      break;
-  }
+  el.style.backgroundColor = '#000000';
 }
 
 function applySelectionStyle(el: HTMLElement, isSelected: boolean) {
@@ -66,11 +53,11 @@ function applySelectionStyle(el: HTMLElement, isSelected: boolean) {
   el.style.height = isSelected ? '14px' : '10px';
   el.style.transition = 'width 0.15s ease, height 0.15s ease, border 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease';
   if (isSelected) {
-    el.style.backgroundColor = '#FF0000';
-    el.style.background = '#FF0000';
+    el.style.backgroundColor = '#1C3386';
+    el.style.background = '#1C3386';
     el.style.border = '3.5px solid white';
     el.style.boxSizing = 'content-box';
-    el.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.35)';
+    el.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.25)';
   } else {
     el.style.border = '';
     el.style.boxSizing = '';

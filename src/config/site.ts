@@ -3,7 +3,7 @@ import { SiteConfig } from "@/types"
 import { env } from "@/env.mjs"
 
 export const siteConfig: SiteConfig = {
-  name: "Libraries of Berlin",
+  name: "Berlin Library Guide",
   author: "redpangilinan",
   description:
     "Next.js 14+ starter template with app router, shadcn/ui, typesafe env, icons and configs setup.",

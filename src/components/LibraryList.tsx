@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useMemo } from "react"
+import { useState, useEffect, useMemo, useRef } from "react"
 import StarFilled from "@carbon/icons-react/lib/StarFilled"
 import Search from "@carbon/icons-react/lib/Search"
 import ChevronDown from "@carbon/icons-react/lib/ChevronDown"
@@ -39,6 +39,7 @@ export default function LibraryList({
   const [search, setSearch] = useState("")
   const [sortMode, setSortMode] = useState<SortMode>("distance")
   const [dropdownOpen, setDropdownOpen] = useState(false)
+  const sortBtnRef = useRef<HTMLButtonElement>(null)
   const [filtersOpen, setFiltersOpen] = useState(false)
 
   const withDistance = useMemo(() => {
@@ -78,13 +79,16 @@ export default function LibraryList({
   }, [withDistance, search, sortMode, favorites])
 
   return (
-    <div className="w-full h-full bg-card text-card-foreground overflow-y-auto scrollbar-hide">
-      <div className="sticky top-0 z-10 bg-card px-6 pt-6 pb-5 border-b border-[#f0f0f0]">
+    <div className="w-full h-full flex flex-col gap-3">
+      {/* Top card – logo + filters */}
+      <div className="bg-[#1C3386] text-white rounded-[24px] px-6 pt-6 pb-5" style={{ boxShadow: 'var(--shadow-soft)' }}>
         <div className="flex items-center justify-between">
-          <img src="/libraries/logotype.svg" alt="LIBRA" className="h-7" style={{ filter: 'brightness(0)' }} />
+          <div className="h-12 flex items-center">
+            <img src="/libraries/logotype.svg" alt="Berlin Library Guide" className="h-7" style={{ filter: 'brightness(0) invert(1)' }} />
+          </div>
           <button
             onClick={() => setFiltersOpen(v => !v)}
-            className="w-12 h-12 rounded-full bg-[#f4f4f4] flex items-center justify-center hover:bg-[#e8e8e8] transition-colors"
+            className="w-12 h-12 rounded-full bg-white/15 flex items-center justify-center hover:bg-white/25 transition-colors"
           >
             {filtersOpen ? <ChevronUp size={24} /> : <ChevronDown size={24} />}
           </button>
@@ -93,71 +97,80 @@ export default function LibraryList({
           {filtersOpen && (
             <motion.div
               initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1, overflow: "visible" }}
-              exit={{ height: 0, opacity: 0, overflow: "hidden" }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
               className="overflow-hidden"
             >
               <div className="flex gap-2 mt-3">
                 <div className="flex-1 relative">
-                  <Search size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-[#888]" />
+                  <Search size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40" />
                   <input
                     type="text"
                     placeholder="Search"
                     value={search}
                     onChange={e => setSearch(e.target.value)}
-                    className="w-full h-12 pl-11 pr-5 rounded-full bg-[#f4f4f4] text-[1rem] font-medium tracking-[-0.01em] placeholder:text-[#aaa] outline-none focus:ring-1 focus:ring-black/10 transition-shadow"
+                    className="w-full h-12 pl-11 pr-5 rounded-full bg-white/15 text-[1rem] font-medium tracking-[-0.01em] placeholder:text-white/40 outline-none focus:ring-1 focus:ring-white/20 transition-shadow"
                   />
                 </div>
-                <div className="relative">
+                <div>
                   <button
+                    ref={sortBtnRef}
                     onClick={() => setDropdownOpen(v => !v)}
-                    className="h-12 px-5 rounded-full bg-[#f4f4f4] flex items-center gap-1.5 text-[1rem] font-medium tracking-[-0.01em] hover:bg-[#e8e8e8] transition-colors whitespace-nowrap"
+                    className="h-12 px-5 rounded-full bg-white/15 flex items-center gap-1.5 text-[1rem] font-medium tracking-[-0.01em] hover:bg-white/25 transition-colors whitespace-nowrap"
                   >
                     {SORT_LABELS[sortMode]}
                     <ChevronDown size={14} />
                   </button>
-                  {dropdownOpen && (
-                    <>
-                      <div className="fixed inset-0 z-40" onClick={() => setDropdownOpen(false)} />
-                      <div className="absolute right-0 top-12 z-50 bg-white rounded-2xl border border-[#f0f0f0] py-1 min-w-[140px]" style={{ boxShadow: 'var(--shadow-soft)' }}>
-                        {(Object.keys(SORT_LABELS) as SortMode[]).map(mode => (
-                          <button
-                            key={mode}
-                            onClick={() => { setSortMode(mode); setDropdownOpen(false) }}
-                            className={`w-full text-left px-5 py-2.5 text-[1rem] font-medium hover:bg-[#f8f8f6] transition-colors ${sortMode === mode ? 'text-black' : 'text-[#888]'}`}
-                          >
-                            {SORT_LABELS[mode]}
-                          </button>
-                        ))}
-                      </div>
-                    </>
-                  )}
+                  {dropdownOpen && sortBtnRef.current && (() => {
+                    const rect = sortBtnRef.current!.getBoundingClientRect()
+                    return (
+                      <>
+                        <div className="fixed inset-0 z-40" onClick={() => setDropdownOpen(false)} />
+                        <div className="fixed z-50 bg-white rounded-2xl border border-[#f0f0f0] py-1 min-w-[140px]" style={{ boxShadow: 'var(--shadow-soft)', top: rect.bottom + 4, right: window.innerWidth - rect.right }}>
+                          {(Object.keys(SORT_LABELS) as SortMode[]).map(mode => (
+                            <button
+                              key={mode}
+                              onClick={() => { setSortMode(mode); setDropdownOpen(false) }}
+                              className={`w-full text-left px-5 py-2.5 text-[1rem] font-medium hover:bg-[#f8f8f6] transition-colors ${sortMode === mode ? 'text-foreground' : 'text-[#888]'}`}
+                            >
+                              {SORT_LABELS[mode]}
+                            </button>
+                          ))}
+                        </div>
+                      </>
+                    )
+                  })()}
                 </div>
               </div>
             </motion.div>
           )}
         </AnimatePresence>
       </div>
-      <div>
-        {sortedLibraries.map(({ library, distance }) => (
-          <button
-            key={library.id}
-            onClick={() => {
-              setLibraryCoordinates(library.coordinates as [number, number])
-              setSelectedLibraryId(library.id)
-            }}
-            className="w-full px-6 py-3.5 hover:bg-[#f8f8f6] flex justify-between items-center border-b border-[#f0f0f0] text-left transition-colors"
-          >
-            <span className="text-[1rem] font-semibold tracking-[-0.01em] flex items-center gap-1.5">
-              {favorites.has(library.id) && <StarFilled size={14} className="flex-shrink-0" style={{ color: '#FF0000' }} />}
-              {library.name}
-            </span>
-            <span className="text-[#888] text-[0.85rem] font-mono tracking-[0.05em] ml-2 flex-shrink-0">
-              {distance.toFixed(1)} km
-            </span>
-          </button>
-        ))}
+
+      {/* Bottom card – library items */}
+      <div className="relative bg-card rounded-[24px] border border-white/40 flex-1 min-h-0 overflow-hidden text-[#1C3386]" style={{ boxShadow: 'var(--shadow-soft)' }}>
+        <div className="h-full overflow-y-auto scrollbar-hide">
+          {sortedLibraries.map(({ library, distance }) => (
+            <button
+              key={library.id}
+              onClick={() => {
+                setLibraryCoordinates(library.coordinates as [number, number])
+                setSelectedLibraryId(library.id)
+              }}
+              className="w-full px-6 py-3.5 hover:bg-[#f8f8f6] flex justify-between items-center border-b border-[#f0f0f0] text-left transition-colors"
+            >
+              <span className="text-[1rem] font-semibold tracking-[-0.01em] flex items-center gap-1.5">
+                {favorites.has(library.id) && <StarFilled size={14} className="flex-shrink-0" style={{ color: '#1C3386' }} />}
+                {library.name}
+              </span>
+              <span className="text-[#888] text-[0.85rem] font-mono tracking-[0.05em] ml-2 flex-shrink-0">
+                {distance.toFixed(1)} km
+              </span>
+            </button>
+          ))}
+        </div>
+        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-card to-transparent pointer-events-none rounded-b-[24px]" />
       </div>
     </div>
   )

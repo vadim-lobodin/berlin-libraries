@@ -89,8 +89,8 @@ export default function LibraryExplorer() {
         {selectedEntry ? (
           <motion.div
             key="detail"
-            className="absolute left-4 right-4 bottom-4 md:left-5 md:top-5 md:bottom-5 w-[calc(100%-32px)] md:w-1/3 md:max-w-md h-1/2 md:h-auto bg-card overflow-hidden rounded-[32px] border border-white/40"
-            style={{ boxShadow: 'var(--shadow-hover)', transformOrigin: 'center center' }}
+            className="absolute left-4 right-4 bottom-4 md:left-5 md:top-5 md:bottom-5 w-[calc(100%-32px)] md:w-1/3 md:max-w-md h-1/2 md:h-auto flex flex-col gap-3"
+            style={{ transformOrigin: 'center center' }}
             initial={{ opacity: 0, y: -10, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1, transition: { duration: 0.3, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] } }}
             exit={{ opacity: 0, y: 10, scale: 0.98, transition: { duration: 0.2, ease: [0.25, 0.46, 0.45, 0.94] } }}
@@ -102,13 +102,12 @@ export default function LibraryExplorer() {
               isFavorite={favorites.has(selectedEntry.library.id)}
               onToggleFavorite={() => toggleFavorite(selectedEntry.library.id)}
             />
-            <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-card to-transparent pointer-events-none rounded-b-[32px]" />
           </motion.div>
         ) : (
           <motion.div
             key="list"
-            className="absolute left-4 right-4 bottom-4 md:left-5 md:top-5 md:bottom-5 w-[calc(100%-32px)] md:w-1/3 md:max-w-md h-1/2 md:h-auto bg-card overflow-hidden rounded-[32px] border border-white/40"
-            style={{ boxShadow: 'var(--shadow-soft)', transformOrigin: 'center center' }}
+            className="absolute left-4 right-4 bottom-4 md:left-5 md:top-5 md:bottom-5 w-[calc(100%-32px)] md:w-1/3 md:max-w-md h-1/2 md:h-auto flex flex-col gap-3"
+            style={{ transformOrigin: 'center center' }}
             initial={{ opacity: 0, y: -10, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1, transition: { duration: 0.3, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] } }}
             exit={{ opacity: 0, y: 10, scale: 0.98, transition: { duration: 0.2, ease: [0.25, 0.46, 0.45, 0.94] } }}
@@ -119,7 +118,6 @@ export default function LibraryExplorer() {
               userLocation={userLocation}
               favorites={favorites}
             />
-            <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-card to-transparent pointer-events-none rounded-b-[32px]" />
           </motion.div>
         )}
       </AnimatePresence>

@@ -7,7 +7,7 @@ interface IndicatorProps {
 
 const Indicator: React.FC<IndicatorProps> = ({ value, max }) => {
   const getColor = (index: number) => {
-    return index < value ? 'bg-black' : 'bg-gray-300';
+    return index < value ? 'bg-[#1C3386]' : 'bg-gray-300';
   };
 
   return (
