@@ -51,19 +51,13 @@ export default function PhotoCarousel({ libraryId }: PhotoCarouselProps) {
     })
   }
 
-  if (!loaded) {
-    return (
-      <div
-        className="relative w-full rounded-[20px] bg-muted/30 animate-pulse"
-        style={{ paddingBottom: `${75 + (PHOTO_COUNT - 1) * OFFSET}%` }}
-      />
-    )
-  }
-
   return (
-    <div
+    <motion.div
       className="relative w-full"
       style={{ paddingBottom: `${75 + (PHOTO_COUNT - 1) * OFFSET}%` }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: loaded ? 1 : 0 }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
     >
       {cards.map((card, i) => {
         const isFront = i === 0
@@ -103,6 +97,6 @@ export default function PhotoCarousel({ libraryId }: PhotoCarouselProps) {
           </motion.div>
         )
       })}
-    </div>
+    </motion.div>
   )
 }
