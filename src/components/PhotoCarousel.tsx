@@ -2,8 +2,8 @@
 
 import { useState } from "react"
 import { motion } from "motion/react"
+import PHOTO_INDEX from "../data/photo-index"
 
-const PHOTO_COUNT = 5
 const OFFSET = 4       // % shift per card in the stack
 const SCALE_STEP = 0.05
 const OPACITIES = [1, 0.55, 0.40, 0.10, 0.05]
@@ -14,7 +14,8 @@ interface PhotoCarouselProps {
 }
 
 export default function PhotoCarousel({ libraryId }: PhotoCarouselProps) {
-  const photos = Array.from({ length: PHOTO_COUNT }, (_, i) => `/libraries/photos/${libraryId}_${i + 1}.jpg`)
+  const photoNums = PHOTO_INDEX[libraryId] || []
+  const photos = photoNums.map(n => `/libraries/photos/${libraryId}_${n}.jpg`)
 
   const [cards, setCards] = useState(() =>
     photos.map((src, i) => ({ id: i, src }))
@@ -32,7 +33,7 @@ export default function PhotoCarousel({ libraryId }: PhotoCarouselProps) {
   return (
     <div
       className="relative w-full"
-      style={{ paddingBottom: `${75 + (PHOTO_COUNT - 1) * OFFSET}%` }}
+      style={{ paddingBottom: `${75 + (cards.length - 1) * OFFSET}%` }}
     >
       {cards.map((card, i) => {
         const isFront = i === 0
