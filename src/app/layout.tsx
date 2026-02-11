@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     creator: "@_rdev7",
   },
   icons: {
-    icon: "/libraries/favicon.ico",
+    icon: "/libraries/favicon.png",
   },
 }
 
