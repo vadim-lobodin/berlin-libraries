@@ -81,14 +81,14 @@ export default function LibraryList({
   return (
     <div className="w-full h-full flex flex-col gap-3">
       {/* Top card – logo + filters */}
-      <div className="bg-[#1C3386] text-white rounded-[24px] px-6 pt-6 pb-5" style={{ boxShadow: 'var(--shadow-soft)' }}>
+      <div className="bg-[#1C3386] text-white rounded-[24px] px-6 pt-5 pb-4" style={{ boxShadow: 'var(--shadow-soft)' }}>
         <div className="flex items-center justify-between">
           <div className="h-12 flex items-center">
             <img src="/libraries/logotype.svg" alt="Berlin Library Guide" className="h-7" style={{ filter: 'brightness(0) invert(1)' }} />
           </div>
           <button
             onClick={() => setFiltersOpen(v => !v)}
-            className="w-12 h-12 rounded-full bg-white/15 flex items-center justify-center hover:bg-white/25 transition-colors"
+            className="w-12 h-12 rounded-full flex items-center justify-center hover:bg-white/10 transition-colors"
           >
             {filtersOpen ? <ChevronUp size={24} /> : <ChevronDown size={24} />}
           </button>
@@ -158,7 +158,7 @@ export default function LibraryList({
                 setLibraryCoordinates(library.coordinates as [number, number])
                 setSelectedLibraryId(library.id)
               }}
-              className="w-full px-6 py-3.5 hover:bg-[#f8f8f6] flex justify-between items-center border-b border-[#f0f0f0] text-left transition-colors"
+              className="w-full px-6 py-4 hover:bg-[#f8f8f6] flex justify-between items-center border-b border-[#f0f0f0] text-left transition-colors"
             >
               <span className="text-[1rem] font-semibold tracking-[-0.01em] flex items-center gap-1.5">
                 {favorites.has(library.id) && <StarFilled size={14} className="flex-shrink-0" style={{ color: '#1C3386' }} />}

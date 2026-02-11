@@ -45,7 +45,7 @@ function createCircleMarker(status: LibraryStatus | string, isSelected: boolean)
 function applyStatusColor(el: HTMLElement, _status: LibraryStatus) {
   el.style.background = '';
   el.style.backgroundColor = '';
-  el.style.backgroundColor = '#000000';
+  el.style.backgroundColor = '#1C3386';
 }
 
 function applySelectionStyle(el: HTMLElement, isSelected: boolean) {
@@ -228,7 +228,7 @@ export default function LibraryMap({
       }
 
       userMarkerRef.current = new mapboxgl.Marker({
-        element: createCircleMarker('#0000FF', false),
+        element: createCircleMarker('#FFFFFF', false),
         anchor: 'center'
       })
         .setLngLat(userLocation)
