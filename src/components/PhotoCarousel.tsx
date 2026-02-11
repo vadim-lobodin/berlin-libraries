@@ -1,42 +1,20 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { motion } from "motion/react"
 
 const PHOTO_COUNT = 5
 const OFFSET = 4       // % shift per card in the stack
 const SCALE_STEP = 0.05
 const OPACITIES = [1, 0.55, 0.40, 0.10, 0.05]
+const STAGGER = 0.06   // seconds between each card appearing
 
 interface PhotoCarouselProps {
   libraryId: number
 }
 
-function usePreloadImages(srcs: string[]) {
-  const [loaded, setLoaded] = useState(false)
-
-  useEffect(() => {
-    let cancelled = false
-    const promises = srcs.map(
-      src => new Promise<void>((resolve) => {
-        const img = new window.Image()
-        img.onload = () => resolve()
-        img.onerror = () => resolve() // don't block on missing images
-        img.src = src
-      })
-    )
-    Promise.all(promises).then(() => {
-      if (!cancelled) setLoaded(true)
-    })
-    return () => { cancelled = true }
-  }, [srcs])
-
-  return loaded
-}
-
 export default function PhotoCarousel({ libraryId }: PhotoCarouselProps) {
   const photos = Array.from({ length: PHOTO_COUNT }, (_, i) => `/libraries/photos/${libraryId}_${i + 1}.jpg`)
-  const loaded = usePreloadImages(photos)
 
   const [cards, setCards] = useState(() =>
     photos.map((src, i) => ({ id: i, src }))
@@ -52,30 +30,34 @@ export default function PhotoCarousel({ libraryId }: PhotoCarouselProps) {
   }
 
   return (
-    <motion.div
+    <div
       className="relative w-full"
       style={{ paddingBottom: `${75 + (PHOTO_COUNT - 1) * OFFSET}%` }}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: loaded ? 1 : 0 }}
-      transition={{ duration: 0.4, ease: "easeOut" }}
     >
       {cards.map((card, i) => {
         const isFront = i === 0
         const cardIndex = i
+        // Cards appear from back to front: last card first, front card last
+        const appearDelay = i * STAGGER
         return (
           <motion.div
             key={card.id}
             className="absolute left-0 w-full overflow-hidden rounded-[20px]"
             style={{ aspectRatio: "4/3" }}
             layout
-            initial={false}
+            initial={{ opacity: 0, y: 15, scale: 1 - cardIndex * SCALE_STEP }}
             animate={{
               top: `${cardIndex * OFFSET}%`,
               scale: 1 - cardIndex * SCALE_STEP,
               opacity: OPACITIES[cardIndex] ?? 0.05,
+              y: 0,
               zIndex: cards.length - i,
             }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            transition={{
+              type: "spring", stiffness: 300, damping: 30,
+              opacity: { delay: appearDelay, duration: 0.5, ease: "easeOut" },
+              y: { delay: appearDelay, duration: 0.5, ease: "easeOut" },
+            }}
             drag={isFront ? "y" : false}
             dragConstraints={{ top: 0, bottom: 0 }}
             dragMomentum={false}
@@ -97,6 +79,6 @@ export default function PhotoCarousel({ libraryId }: PhotoCarouselProps) {
           </motion.div>
         )
       })}
-    </motion.div>
+    </div>
   )
 }
