@@ -44,10 +44,10 @@ function createCircleMarker(status: LibraryStatus | string, isSelected: boolean,
   return el;
 }
 
-function applyStatusColor(el: HTMLElement, status: LibraryStatus, libraryId: number) {
+function applyStatusColor(el: HTMLElement, _status: LibraryStatus, libraryId: number) {
   el.style.background = '';
   el.style.backgroundColor = '';
-  el.style.backgroundColor = status === 'Closed' ? '#c0c0c0' : getLibraryColor(libraryId);
+  el.style.backgroundColor = getLibraryColor(libraryId);
 }
 
 function applySelectionStyle(el: HTMLElement, isSelected: boolean, libraryId?: number) {

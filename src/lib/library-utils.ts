@@ -95,24 +95,33 @@ export function getStatusLabel(workingHours: {
   return "Closed"
 }
 
-// Library color by type
+// Library colors — mixed across types for visual variety
+const COLORS = ['#FF7050', '#FA8FD3', '#FEEE86', '#76C880', '#98B0FF', '#D3ADFF'] as const
+
 const LIBRARY_COLORS: Record<number, string> = {
-  // Flagship (orange) — major state/central libraries
-  1: '#FF722D', 2: '#FF722D', 3: '#FF722D',
-  // Academic (yellow) — university libraries
-  4: '#FEED6B', 5: '#FEED6B',
-  // Cultural (pink) — special institution / museum libraries
-  60: '#FA8FD3', 61: '#FA8FD3', 62: '#FA8FD3', 63: '#FA8FD3', 64: '#FA8FD3',
-  // District hub (green) — larger district central libraries
-  6: '#76C880', 7: '#76C880', 9: '#76C880', 14: '#76C880', 29: '#76C880',
-  33: '#76C880', 37: '#76C880', 41: '#76C880', 44: '#76C880', 46: '#76C880',
-  52: '#76C880', 56: '#76C880',
-  // Neighborhood (purple) — Pankow/Prenzlauer cluster
-  8: '#C69EF4', 15: '#C69EF4', 16: '#C69EF4', 23: '#C69EF4', 25: '#C69EF4',
+  1: '#D3ADFF', 2: '#FF7050', 3: '#FEEE86',
+  4: '#98B0FF', 5: '#FA8FD3',
+  6: '#76C880', 7: '#D3ADFF', 8: '#D3ADFF',
+  9: '#FA8FD3', 12: '#FF7050', 13: '#98B0FF',
+  14: '#76C880', 15: '#D3ADFF', 16: '#FA8FD3',
+  17: '#FEEE86', 18: '#76C880', 20: '#FF7050',
+  23: '#98B0FF', 25: '#FA8FD3', 26: '#D3ADFF',
+  27: '#FEEE86', 28: '#76C880', 29: '#98B0FF',
+  30: '#FF7050', 31: '#FA8FD3', 32: '#D3ADFF',
+  33: '#76C880', 34: '#FEEE86', 36: '#98B0FF',
+  37: '#FF7050', 38: '#FA8FD3', 39: '#D3ADFF',
+  40: '#76C880', 41: '#FEEE86', 43: '#FF7050',
+  44: '#98B0FF', 45: '#FA8FD3', 46: '#FEEE86',
+  47: '#D3ADFF', 48: '#76C880', 49: '#FF7050',
+  50: '#FA8FD3', 51: '#98B0FF', 52: '#FEEE86',
+  53: '#D3ADFF', 54: '#76C880', 56: '#FF7050',
+  57: '#FA8FD3', 58: '#98B0FF', 59: '#FEEE86',
+  60: '#D3ADFF', 61: '#76C880', 62: '#FF7050',
+  63: '#FA8FD3', 64: '#98B0FF',
 }
 
 export function getLibraryColor(id: number): string {
-  return LIBRARY_COLORS[id] || '#A7C0E9' // default: blue (small neighborhood)
+  return LIBRARY_COLORS[id] || COLORS[id % COLORS.length]
 }
 
 export function getLibraryColorLight(id: number): string {

@@ -54,14 +54,20 @@ export default function LibraryDetail({ library, distance, onBack, isFavorite, o
             <h2 className="text-[1.75rem] font-semibold leading-[1.15] -mt-3 pb-5" style={{ letterSpacing: '-0.02em' }}>{library.name}</h2>
             <div className="grid grid-cols-2 -mx-6 px-6">
               <div className="pr-3">
-                <p className="text-[1.15rem] font-medium leading-[1.3] tracking-[-0.01em]">{library.address}</p>
+                <p className="text-[1.15rem] font-medium leading-[1.3] tracking-[-0.01em]">
+                  {(() => {
+                    const match = library.address.match(/^(.+),\s*(\d{5}.*)$/)
+                    if (match) return <>{match[1]}<br />{match[2]}</>
+                    return library.address
+                  })()}
+                </p>
               </div>
               <TooltipProvider delayDuration={300}>
                 <div className="flex gap-3 pl-3">
                   {library.googlemaps && (
                     <Tooltip>
                       <TooltipTrigger asChild>
-                        <a href={library.googlemaps} target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-white rounded-full flex items-center justify-center hover:bg-white/80 transition-colors text-black">
+                        <a href={library.googlemaps} target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-black rounded-full flex items-center justify-center hover:bg-black/80 transition-colors text-white">
                           <Cursor_2 size={24} style={{ transform: 'scaleX(-1) translateX(1px)' }} />
                         </a>
                       </TooltipTrigger>
