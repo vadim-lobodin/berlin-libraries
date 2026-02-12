@@ -51,7 +51,7 @@ export default function LibraryDetail({ library, distance, onBack, isFavorite, o
             <div className="hidden md:block">
               <PhotoCarousel key={`desktop-${library.id}`} libraryId={library.id} />
             </div>
-            <h2 className="text-[1.75rem] font-semibold leading-[1.15] -mt-3 pb-5" style={{ letterSpacing: '-0.02em' }}>{library.name}</h2>
+            <h2 className="text-[1.75rem] font-semibold leading-[1.15] mt-1 pb-5" style={{ letterSpacing: '-0.02em' }}>{library.name}</h2>
             <div className="grid grid-cols-2 -mx-6 px-6">
               <div className="pr-3">
                 <p className="text-[1.15rem] font-medium leading-[1.3] tracking-[-0.01em]">

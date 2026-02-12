@@ -76,7 +76,7 @@ export default function LibraryList({
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 20 }}
-                transition={{ duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
+                transition={{ duration: 0.12, ease: [0.25, 0.46, 0.45, 0.94] }}
                 onAnimationComplete={() => searchInputRef.current?.focus()}
               >
                 <input
@@ -96,7 +96,7 @@ export default function LibraryList({
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+                transition={{ duration: 0.12, ease: [0.25, 0.46, 0.45, 0.94] }}
               >
                 <img src="/libraries/logotype.svg" alt="Berlin Library Guide" className="h-10" style={{ filter: 'brightness(0) invert(1)' }} />
               </motion.div>

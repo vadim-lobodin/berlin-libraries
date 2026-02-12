@@ -1716,39 +1716,6 @@
     "website": "https://www.jmberlin.de/bibliothek"
   },
   {
-    "id": 62,
-    "name": "Stiftung Neue Synagoge Berlin- Centrum Judaicum Library",
-    "address": "Oranienburger Straße 28-30, 10117 ",
-    "workingHours": {
-      "monday": "10:00 - 18:00",
-      "tuesday": "10:00 - 18:00",
-      "wednesday": "10:00 - 18:00",
-      "thursday": "10:00 - 18:00",
-      "friday": "10:00 - 14:00",
-      "saturday": "Closed",
-      "sunday": "Closed"
-    },
-    "coordinates": [
-      13.3939,
-      52.5247
-    ],
-    "workspaceSetup": 4,
-    "wifiQuality": 3,
-    "powerOutlets": 3,
-    "conferenceAreas": "Limited",
-    "cafe": "No",
-    "foodOptionsNearby": "Many",
-    "lockers": "Yes",
-    "meetingRooms": "No",
-    "timeLimits": "",
-    "phoneCallPolicy": "Designated areas",
-    "professionalAtmosphere": 4,
-    "ventilation": 3,
-    "cellReception": 4,
-    "googlemaps": "https://www.google.com/maps/dir/?api=1&destination=Stiftung%20Neue%20Synagoge%20Berlin-%20Centrum%20Judaicum%20Library%2COranienburger%20Stra%C3%9Fe%2028-30%2C%2010117",
-    "website": "https://www.centrumjudaicum.de"
-  },
-  {
     "id": 63,
     "name": "Amerika-Haus Bibliothek",
     "address": "Hardenbergstraße 22-24, 10623 ",

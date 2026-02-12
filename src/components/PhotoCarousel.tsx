@@ -32,7 +32,7 @@ export default function PhotoCarousel({ libraryId }: PhotoCarouselProps) {
 
   return (
     <div
-      className="relative w-full"
+      className="relative w-full overflow-hidden"
       style={{ paddingBottom: `${75 + (cards.length - 1) * OFFSET}%` }}
     >
       {cards.map((card, i) => {

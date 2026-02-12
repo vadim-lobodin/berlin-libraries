@@ -116,7 +116,7 @@ const LIBRARY_COLORS: Record<number, string> = {
   50: '#FA8FD3', 51: '#98B0FF', 52: '#FEEE86',
   53: '#D3ADFF', 54: '#76C880', 56: '#FF7050',
   57: '#FA8FD3', 58: '#98B0FF', 59: '#FEEE86',
-  60: '#D3ADFF', 61: '#76C880', 62: '#FF7050',
+  60: '#D3ADFF', 61: '#76C880',
   63: '#FA8FD3', 64: '#98B0FF',
 }
 
