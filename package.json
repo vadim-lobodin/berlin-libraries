@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "format": "pnpm prettier ./src --write",
-    "format:check": "pnpm prettier ./src --check"
+    "format:check": "pnpm prettier ./src --check",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@carbon/icons-react": "11.74.0",
@@ -44,6 +46,7 @@
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.14",
     "tailwindcss": "^3.4.3",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "vitest": "4.0.18"
   }
 }
