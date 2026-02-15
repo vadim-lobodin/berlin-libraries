@@ -183,9 +183,9 @@ describe("getStatusLabel", () => {
 
 describe("getLibraryColor", () => {
   it("returns mapped color for known IDs", () => {
-    expect(getLibraryColor(1)).toBe("#D3ADFF")
-    expect(getLibraryColor(2)).toBe("#FF7050")
-    expect(getLibraryColor(5)).toBe("#FA8FD3")
+    expect(getLibraryColor(1)).toBe("#DCBBFF")
+    expect(getLibraryColor(2)).toBe("#FF937B")
+    expect(getLibraryColor(5)).toBe("#FFAEE2")
   })
 
   it("returns fallback color for unmapped IDs", () => {

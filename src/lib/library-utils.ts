@@ -96,32 +96,46 @@ export function getStatusLabel(workingHours: {
 }
 
 // Library colors — mixed across types for visual variety
-const COLORS = ['#FF7050', '#FA8FD3', '#FEEE86', '#76C880', '#98B0FF', '#D3ADFF'] as const
+const COLORS = ['#FF937B', '#FFAEE2', '#FFD391', '#8CE1BD', '#B3C5FF', '#DCBBFF'] as const
 
 const LIBRARY_COLORS: Record<number, string> = {
-  1: '#D3ADFF', 2: '#FF7050', 3: '#FEEE86',
-  4: '#98B0FF', 5: '#FA8FD3',
-  6: '#76C880', 7: '#D3ADFF', 8: '#D3ADFF',
-  9: '#FA8FD3', 12: '#FF7050', 13: '#98B0FF',
-  14: '#76C880', 15: '#D3ADFF', 16: '#FA8FD3',
-  17: '#FEEE86', 18: '#76C880', 20: '#FF7050',
-  23: '#98B0FF', 25: '#FA8FD3', 26: '#D3ADFF',
-  27: '#FEEE86', 28: '#76C880', 29: '#98B0FF',
-  30: '#FF7050', 31: '#FA8FD3', 32: '#D3ADFF',
-  33: '#76C880', 34: '#FEEE86', 36: '#98B0FF',
-  37: '#FF7050', 38: '#FA8FD3', 39: '#D3ADFF',
-  40: '#76C880', 41: '#FEEE86', 43: '#FF7050',
-  44: '#98B0FF', 45: '#FA8FD3', 46: '#FEEE86',
-  47: '#D3ADFF', 48: '#76C880', 49: '#FF7050',
-  50: '#FA8FD3', 51: '#98B0FF', 52: '#FEEE86',
-  53: '#D3ADFF', 54: '#76C880', 56: '#FF7050',
-  57: '#FA8FD3', 58: '#98B0FF', 59: '#FEEE86',
-  60: '#D3ADFF', 61: '#76C880',
-  63: '#FA8FD3', 64: '#98B0FF',
+  1: '#DCBBFF', 2: '#FF937B', 3: '#FFD391',
+  4: '#B3C5FF', 5: '#FFAEE2',
+  6: '#8CE1BD', 7: '#DCBBFF', 8: '#DCBBFF',
+  9: '#FFAEE2', 12: '#FF937B', 13: '#B3C5FF',
+  14: '#8CE1BD', 15: '#DCBBFF', 16: '#FFAEE2',
+  17: '#FFD391', 18: '#8CE1BD', 20: '#FF937B',
+  23: '#B3C5FF', 25: '#FFAEE2', 26: '#DCBBFF',
+  27: '#FFD391', 28: '#8CE1BD', 29: '#B3C5FF',
+  30: '#FF937B', 31: '#FFAEE2', 32: '#DCBBFF',
+  33: '#8CE1BD', 34: '#FFD391', 36: '#B3C5FF',
+  37: '#FF937B', 38: '#FFAEE2', 39: '#DCBBFF',
+  40: '#8CE1BD', 41: '#FFD391', 43: '#FF937B',
+  44: '#B3C5FF', 45: '#FFAEE2', 46: '#FFD391',
+  47: '#DCBBFF', 48: '#8CE1BD', 49: '#FF937B',
+  50: '#FFAEE2', 51: '#B3C5FF', 52: '#FFD391',
+  53: '#DCBBFF', 54: '#8CE1BD', 56: '#FF937B',
+  57: '#FFAEE2', 58: '#B3C5FF', 59: '#FFD391',
+  60: '#DCBBFF', 61: '#8CE1BD',
+  63: '#FFAEE2', 64: '#B3C5FF',
 }
 
 export function getLibraryColor(id: number): string {
   return LIBRARY_COLORS[id] || COLORS[id % COLORS.length]
+}
+
+const PIN_COLORS: Record<string, string> = {
+  '#8CE1BD': '#14BC94',
+  '#FFD391': '#FFC85B',
+  '#FF937B': '#FF7151',
+  '#B3C5FF': '#89A5FF',
+  '#FFAEE2': '#FF80E4',
+  '#DCBBFF': '#C695FF',
+}
+
+export function getLibraryPinColor(id: number): string {
+  const bg = getLibraryColor(id)
+  return PIN_COLORS[bg] || bg
 }
 
 export function getLibraryColorLight(id: number): string {

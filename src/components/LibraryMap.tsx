@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react"
 import mapboxgl from "mapbox-gl"
 import "mapbox-gl/dist/mapbox-gl.css"
 import libraries from "../data/libraries.json"
-import { getLibraryStatus, getLibraryColor, type LibraryStatus } from "../lib/library-utils"
+import { getLibraryStatus, getLibraryPinColor, type LibraryStatus } from "../lib/library-utils"
 
 const mapboxToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN || ""
 
@@ -47,7 +47,7 @@ function createCircleMarker(status: LibraryStatus | string, isSelected: boolean,
 function applyStatusColor(el: HTMLElement, _status: LibraryStatus, libraryId: number) {
   el.style.background = '';
   el.style.backgroundColor = '';
-  el.style.backgroundColor = getLibraryColor(libraryId);
+  el.style.backgroundColor = getLibraryPinColor(libraryId);
 }
 
 function applySelectionStyle(el: HTMLElement, isSelected: boolean, libraryId?: number) {
@@ -55,7 +55,7 @@ function applySelectionStyle(el: HTMLElement, isSelected: boolean, libraryId?: n
   el.style.height = isSelected ? '15px' : '11px';
   el.style.transition = 'width 0.15s ease, height 0.15s ease, border 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease';
   if (isSelected && libraryId !== undefined) {
-    const color = getLibraryColor(libraryId);
+    const color = getLibraryPinColor(libraryId);
     el.style.backgroundColor = color;
     el.style.background = color;
     el.style.border = '3.5px solid white';
